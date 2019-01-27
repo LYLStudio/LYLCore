@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,7 +47,7 @@
     <Compile Include="ThreadResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LYLStudio.Core.csproj">
+    <ProjectReference Include="..\LYLStudio.Core\LYLStudio.Core.csproj">
       <Project>{58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98}</Project>
       <Name>LYLStudio.Core</Name>
     </ProjectReference>
