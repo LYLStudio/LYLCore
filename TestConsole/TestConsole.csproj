@@ -50,13 +50,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj">
+      <Project>{45de7042-15c7-4066-a57e-6facbddfd0c5}</Project>
+      <Name>LYLStudio.Core.Threading</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYLStudio.Core\LYLStudio.Core.csproj">
       <Project>{58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98}</Project>
       <Name>LYLStudio.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LYLStudio.Core\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj">
-      <Project>{45de7042-15c7-4066-a57e-6facbddfd0c5}</Project>
-      <Name>LYLStudio.Core.Threading</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

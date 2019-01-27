@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.CoreTests", "..\L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "..\TestConsole\TestConsole.csproj", "{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.Core.Threading", "LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj", "{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.Core.Threading", "..\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj", "{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
