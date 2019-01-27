@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.Core", "LYLStudio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.CoreTests", "..\LYLStudio.CoreTests\LYLStudio.CoreTests.csproj", "{B4A0D965-3BA3-46BB-9353-F2126BA795C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "..\TestConsole\TestConsole.csproj", "{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.Core.Threading", "LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj", "{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B4A0D965-3BA3-46BB-9353-F2126BA795C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4A0D965-3BA3-46BB-9353-F2126BA795C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4A0D965-3BA3-46BB-9353-F2126BA795C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EC9AB1-CFD0-4977-84D2-669F37F6C56D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
