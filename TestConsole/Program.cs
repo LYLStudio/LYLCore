@@ -18,13 +18,11 @@ namespace TestConsole
     class Program
     {
         static void Main(string[] args)
-        {
-            IResult result = new Result();
-            OperatorEventArgs operatorEventArgs = new OperatorEventArgs(result);
-            
-            IThreadOperator<MyStruct> op1 = new ThreadOperator<MyStruct>("thread01", ThreadPriority.Normal, 100);
-            IThreadOperator<object[]> op2 = new ThreadOperator<object[]>("thread02", ThreadPriority.Normal, 150);
-
+        {            
+            IThreadOperator<MyStruct> op1 = new ThreadOperator<MyStruct>("thread01", ThreadPriority.Normal, 10);
+            IThreadOperator<object[]> op2 = new ThreadOperator<object[]>("thread02", ThreadPriority.Normal, 15);
+            op1.OperationOccurred += OnOperationOccurred;
+            op2.OperationOccurred += OnOperationOccurred;
             for (int i = 0; i < 100; i++)
             {
                 op1.Enqueue(new Anything<MyStruct>() 
@@ -32,6 +30,7 @@ namespace TestConsole
                     Parameters = new MyStruct { Name = op1.Id, Value = i },
                     Callback = o =>
                     {
+                        if(o.Value == 44) throw new Exception("xxxxx");
                         Console.WriteLine($"{o.Name}\t{o.Value}");
                     }
                 });
@@ -44,12 +43,18 @@ namespace TestConsole
                     Parameters = new object[] { op2.Id, i },
                     Callback = objs =>
                     {
+                        if ((int)objs[1] == 90) throw new Exception("xxxxx");
                         Console.WriteLine($"{objs[0]}\t{objs[1]}");
                     }
                 });
             }
 
             Console.ReadLine();
+        }
+
+        private static void OnOperationOccurred(object sender, OperatorEventArgs e)
+        {
+            Console.WriteLine($"{e.EventTime}|{e.HasError}|{e.EventResult.Error.StackTrace}");
         }
     }
 }

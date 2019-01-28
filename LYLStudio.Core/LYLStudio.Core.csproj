@@ -45,10 +45,6 @@
     <Compile Include="EventArgsBase.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
-    <Compile Include="Threading\IAnything.cs" />
-    <Compile Include="Threading\IThreadOperator.cs" />
-    <Compile Include="Threading\OperatorEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

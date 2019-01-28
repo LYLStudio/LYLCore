@@ -45,18 +45,21 @@ namespace LYLStudio.Core.Threading
         {
             while (true && !_isDisposed)
             {
+                T payload = default(T);
+
                 if (!_queueList[ThreadPriority.Highest].IsEmpty)
                 {
                     try
                     {
                         if (_queueList[ThreadPriority.Highest].TryDequeue(out IAnything<T> anything))
                         {
+                            payload = anything.Parameters;
                             anything.Callback(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
                     {
-                        ErrorProcess(ex);
+                        ErrorProcess(ex, payload);
                     }
                 }
                 else if (!_queueList[ThreadPriority.AboveNormal].IsEmpty)
@@ -65,12 +68,13 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.AboveNormal].TryDequeue(out IAnything<T> anything))
                         {
+                            payload = anything.Parameters;
                             anything.Callback(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
                     {
-                        ErrorProcess(ex);
+                        ErrorProcess(ex, payload);
                     }
                 }
                 else if (!_queueList[ThreadPriority.Normal].IsEmpty)
@@ -79,12 +83,13 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.Normal].TryDequeue(out IAnything<T> anything))
                         {
+                            payload = anything.Parameters;
                             anything.Callback(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
                     {
-                        ErrorProcess(ex);
+                        ErrorProcess(ex, payload);
                     }
                 }
                 else if (!_queueList[ThreadPriority.BelowNormal].IsEmpty)
@@ -93,12 +98,13 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.BelowNormal].TryDequeue(out IAnything<T> anything))
                         {
+                            payload = anything.Parameters;
                             anything.Callback(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
                     {
-                        ErrorProcess(ex);
+                        ErrorProcess(ex, payload);
                     }
                 }
                 else if (!_queueList[ThreadPriority.Lowest].IsEmpty)
@@ -107,49 +113,31 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.Lowest].TryDequeue(out IAnything<T> anything))
                         {
+                            payload = anything.Parameters;
                             anything.Callback(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
                     {
-                        ErrorProcess(ex);
+                        ErrorProcess(ex, payload);
                     }
                 }
                 else
                 {
                     _resetEvent.WaitOne();
-                }
-
-
-                //if (queue.IsEmpty)
-                //{
-                //    autoReset.WaitOne();
-                //}
-                //else
-                //{
-                //    try
-                //    {
-                //        if (queue.TryDequeue(out IAnything anything))
-                //        {
-                //            anything.Callback(anything.Parameters);
-                //        }
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        OnOperationMsgOccured(this, new OperationEventArgs(ex));
-                //    }
-                //}
+                }              
 
                 _resetEvent.WaitOne(Sleep);
             }
         }
 
-        private void ErrorProcess(Exception ex)
+        private void ErrorProcess(Exception ex, T payload = default(T))
         {
             ThreadResult<T> result = new ThreadResult<T>(true)
             {
                 Message = ex.Message,
-                Error = ex
+                Error = ex,
+                Payload = payload
             };
 
             OnOperationOccured(this, new OperatorEventArgs(result));
@@ -159,7 +147,7 @@ namespace LYLStudio.Core.Threading
         {
             if (_isDisposed)
             {                
-                ErrorProcess(new Exception("Instance Disposed"));                
+                ErrorProcess(new Exception("Instance Disposed"), anything.Parameters);                
                 return;
             }
 
@@ -170,7 +158,7 @@ namespace LYLStudio.Core.Threading
             }
             catch (Exception ex)
             {
-                ErrorProcess(ex);
+                ErrorProcess(ex,anything.Parameters);
             }
         }
 

@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anything.cs" />
+    <Compile Include="IAnything.cs" />
+    <Compile Include="IThreadOperator.cs" />
+    <Compile Include="OperatorEventArgs.cs" />
     <Compile Include="ThreadOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadResult.cs" />

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LYLStudio.Core.Threading
+﻿namespace LYLStudio.Core.Threading
 {
     public class OperatorEventArgs : EventArgsBase
     {
