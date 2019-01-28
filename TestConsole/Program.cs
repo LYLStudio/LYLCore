@@ -20,63 +20,56 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            IDistributeOperator<MyStruct> distributeOperator = new DistributeOperator<MyStruct>("dis");
-            distributeOperator.OperationOccurred += OnOperationOccurred;
-            distributeOperator.Initialize(4);
+            //IOperator<MyStruct> op = new SequenceOperator<MyStruct>("op1");
+            //op.OperationOccurred += OnOperationOccurred;
+
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    if (i % 2 == 0)
+            //    {
+            //        op.Enqueue(new Anything<MyStruct>(new MyStruct() { Name = op.Id, Value = i })
+            //        {
+            //            Callback = o => {
+            //                Console.WriteLine($"{o.Name}\t{o.Value}");
+            //            }
+            //        });
+            //    }
+            //    else
+            //    {
+            //        op.Enqueue(new Anything<MyStruct>(new MyStruct() { Name = op.Id, Value = i })
+            //        {
+            //            Callback = o => {
+            //                Console.WriteLine($"{o.Name}\t{o.Value}");
+            //            }
+            //        });
+            //    }
+            //}
+
+            IOperator<MyStruct> disOp = new DistributeOperator<MyStruct>("disOp");
+            disOp.OperationOccurred += OnOperationOccurred;
+            (disOp as IDistributeOperator<MyStruct>).Initialize();
 
             for (int i = 0; i < 100; i++)
             {
-                distributeOperator.Enqueue(new Anything<MyStruct>()
+                if (i % 2 == 0)
                 {
-                    Parameters = new MyStruct() {  Name = distributeOperator.Id, Value = i},
-                    Callback = o => {
-                        //if (o.Value == 43) throw new Exception("xxxxx");
-                        Console.WriteLine($"{o.Name}\t{o.Value}");                       
-                    }
-                });
-            }
-
-            for (int i = 100; i < 200; i++)
-            {
-                distributeOperator.Enqueue(new Anything<MyStruct>()
+                    disOp.Enqueue(new Anything<MyStruct>(new MyStruct() { Name = disOp.Id, Value = i })
+                    {
+                        Callback = o => {
+                            Console.WriteLine($"{o.Name}\t{o.Value}");
+                        }
+                    });
+                }
+                else
                 {
-                    Parameters = new MyStruct() { Name = distributeOperator.Id, Value = i },
-                    Callback = o => {
-                        //if (o.Value == 43) throw new Exception("xxxxx");
-                        Console.WriteLine($"{o.Name}\t{o.Value}");
-                    }
-                }, ThreadPriority.Highest);
+                    disOp.Enqueue(new Anything<MyStruct>(new MyStruct() { Name = disOp.Id, Value = i })
+                    {
+                        Callback = o => {
+                            Console.WriteLine($"{o.Name}\t{o.Value}");
+                        }
+                    });
+                }
             }
-
-            //ISequenceOperator<MyStruct> op1 = new SequenceOperator<MyStruct>("thread01", ThreadPriority.Normal, 10);
-            //ISequenceOperator<object[]> op2 = new SequenceOperator<object[]>("thread02", ThreadPriority.Normal, 15);
-            //op1.OperationOccurred += OnOperationOccurred;
-            //op2.OperationOccurred += OnOperationOccurred;
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    op1.Enqueue(new Anything<MyStruct>() 
-            //    {
-            //        Parameters = new MyStruct { Name = op1.Id, Value = i },
-            //        Callback = o =>
-            //        {
-            //            if(o.Value == 44) throw new Exception("xxxxx");
-            //            Console.WriteLine($"{o.Name}\t{o.Value}");
-            //        }
-            //    });
-            //}
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    op2.Enqueue(new Anything<object[]>()
-            //    {
-            //        Parameters = new object[] { op2.Id, i },
-            //        Callback = objs =>
-            //        {
-            //            if ((int)objs[1] == 90) throw new Exception("xxxxx");
-            //            Console.WriteLine($"{objs[0]}\t{objs[1]}");
-            //        }
-            //    });
-            //}
 
             Console.ReadLine();
         }

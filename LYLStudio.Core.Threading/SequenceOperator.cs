@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace LYLStudio.Core.Threading
 {
-    public class SequenceOperator<T> : ISequenceOperator<T>, IDisposable
+    public class SequenceOperator<T> : IOperator<T>, IDisposable
     {
         private bool _isDisposed = false;
         private AutoResetEvent _resetEvent;

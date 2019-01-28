@@ -45,7 +45,7 @@
     <Compile Include="DistributeOperator.cs" />
     <Compile Include="Interfaces\IAnything.cs" />
     <Compile Include="Interfaces\IDistributeOperator.cs" />
-    <Compile Include="Interfaces\ISequenceOperator.cs" />
+    <Compile Include="Interfaces\IOperator.cs" />
     <Compile Include="OperatorEventArgs.cs" />
     <Compile Include="SequenceOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

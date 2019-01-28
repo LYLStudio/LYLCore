@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace LYLStudio.Core.Threading
 {
-    public interface ISequenceOperator<T>
+    public interface IOperator<T>
     {
         string Id { get; }
 

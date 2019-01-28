@@ -8,7 +8,7 @@ namespace LYLStudio.Core.Threading
     {
         private int _distributeNumber;
 
-        public IDictionary<int, ISequenceOperator<T>> SequenceOperators { get; protected set; }
+        public IDictionary<int, IOperator<T>> SequenceOperators { get; protected set; }
         public string Id { get; }
         public ThreadPriority Priority { get; }
         public int Sleep { get; set; }
@@ -26,10 +26,10 @@ namespace LYLStudio.Core.Threading
 
         public void Initialize(int threadCount = 4)
         {
-            SequenceOperators = new Dictionary<int, ISequenceOperator<T>>(threadCount);
+            SequenceOperators = new Dictionary<int, IOperator<T>>(threadCount);
             for (int i = 0; i < threadCount; i++)
             {
-                ISequenceOperator<T> sequenceOperator = new SequenceOperator<T>($"{Id}{i}", Priority, Sleep);
+                IOperator<T> sequenceOperator = new SequenceOperator<T>($"{Id}{i}", Priority, Sleep);
                 sequenceOperator.OperationOccurred += SequenceOperator_OperationOccurred;
                 SequenceOperators.Add(i, sequenceOperator);
             }
