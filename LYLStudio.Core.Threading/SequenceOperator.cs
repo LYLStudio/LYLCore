@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace LYLStudio.Core.Threading
 {
-    public class ThreadOperator<T> : IThreadOperator<T>, IDisposable
+    public class SequenceOperator<T> : ISequenceOperator<T>, IDisposable
     {
         private bool _isDisposed = false;
         private AutoResetEvent _resetEvent;
@@ -18,7 +18,7 @@ namespace LYLStudio.Core.Threading
 
         public event EventHandler<OperatorEventArgs> OperationOccurred;
 
-        public ThreadOperator(string id, ThreadPriority priority, int sleep)
+        public SequenceOperator(string id, ThreadPriority priority = ThreadPriority.Normal, int sleep = 1)
         {
             Id = id;
             Priority = priority;

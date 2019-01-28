@@ -42,10 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anything.cs" />
-    <Compile Include="IAnything.cs" />
-    <Compile Include="IThreadOperator.cs" />
+    <Compile Include="DistributeOperator.cs" />
+    <Compile Include="Interfaces\IAnything.cs" />
+    <Compile Include="Interfaces\IDistributeOperator.cs" />
+    <Compile Include="Interfaces\ISequenceOperator.cs" />
     <Compile Include="OperatorEventArgs.cs" />
-    <Compile Include="ThreadOperator.cs" />
+    <Compile Include="SequenceOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadResult.cs" />
   </ItemGroup>
