@@ -33,8 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\LYLStudio.Core\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\LYLStudio.Core\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,13 +52,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TestModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TestModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TestModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Models\TestModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\TestModel.edmx.diagram">
+      <DependentUpon>TestModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LYLStudio.Core.Data\LYLStudio.Core.Data.csproj">
+      <Project>{d094a106-b64e-4390-a5fd-85e0aef848b6}</Project>
+      <Name>LYLStudio.Core.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj">
       <Project>{45de7042-15c7-4066-a57e-6facbddfd0c5}</Project>
       <Name>LYLStudio.Core.Threading</Name>
@@ -58,6 +97,26 @@
       <Project>{58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98}</Project>
       <Name>LYLStudio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LYLStudio.Service.Data.EntityFramework\LYLStudio.Service.Data.EntityFramework.csproj">
+      <Project>{47b4ba35-d2c6-48a4-9cdb-697ff3417e7c}</Project>
+      <Name>LYLStudio.Service.Data.EntityFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\TestModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestModel.Context.cs</LastGenOutput>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\TestModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestModel.edmx</DependentUpon>
+      <LastGenOutput>TestModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
