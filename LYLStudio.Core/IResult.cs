@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LYLStudio.Core
 {
@@ -10,17 +7,23 @@ namespace LYLStudio.Core
     {
         Guid Id { get; }
 
-        bool IsSuccess { get; set; }
-
         string Message { get; set; }
 
         Exception Error { get; set; }
+
+        bool IsSuccess { get; set; }
+
+        object Payload { get; set; }
+
+        IList<IResult> InnerResults { get; }
     }
 
-    public interface IResult<T> : IResult
-    {
-        T Payload { get; set; }
+    //public interface IResult<T> : IResult
+    //{
+    //    bool IsSuccess { get; set; }
 
-        IList<IResult<T>> InnerResults { get; }
-    }   
+    //    T Payload { get; set; }
+
+    //    IList<IResult<T>> InnerResults { get; }
+    //}   
 }
