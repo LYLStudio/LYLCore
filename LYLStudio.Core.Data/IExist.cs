@@ -3,10 +3,9 @@ using System.Linq.Expressions;
 
 namespace LYLStudio.Core.Data
 {
-    public interface IExist<TResult>
-        where TResult : IResult, new()
+    public interface IExist
     {
-        TResult IsExist<T>(params object[] keyValues) where T : class;
-        TResult IsExist<T>(Expression<Func<T, bool>> predicate) where T : class;
+        bool IsExist<T>(params object[] keyValues) where T : class;
+        bool IsExist<T>(Expression<Func<T, bool>> predicate) where T : class;
     }
 }

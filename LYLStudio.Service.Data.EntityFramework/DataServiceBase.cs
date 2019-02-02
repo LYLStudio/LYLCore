@@ -150,94 +150,356 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public virtual TResult Fetch<T>(params object[] keyValues) where T : class
+        public virtual T Fetch<T>(params object[] keyValues) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            T entity = default(T);
+
+            try
+            {
+                entity = Context.Set<T>().Find(keyValues);
+                result.Payload = entity;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entity;
         }
 
-        public virtual TResult Fetch<T>(Expression<Func<T, bool>> predicate) where T : class
+        public virtual T Fetch<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            T entity = default(T);
+
+            try
+            {
+                entity = Context.Set<T>().FirstOrDefault(predicate);
+                result.Payload = entity;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entity;
         }
 
-        public virtual TResult FetchList<T>(Expression<Func<T, bool>> predicate) where T : class
+        public virtual IEnumerable<T> FetchList<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            IQueryable<T> entities = null;
+
+            try
+            {
+                entities = Context.Set<T>().Where(predicate);
+                result.Payload = entities;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entities;
         }
 
-        public virtual TResult FetchAll<T>() where T : class
+        public virtual IEnumerable<T> FetchAll<T>() where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            IQueryable<T> entities = null;
+
+            try
+            {
+                entities = Context.Set<T>().AsQueryable();
+                result.Payload = entities;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entities;
         }
 
         public virtual TResult Update<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                var state = Context.Entry(entity).State = EntityState.Modified;
+                var changed = Context.SaveChanges();
+                result.IsSuccess = changed != 0;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
         }
 
-        public virtual TResult IsExist<T>(params object[] keyValues) where T : class
+        public virtual bool IsExist<T>(params object[] keyValues) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                result.IsSuccess = Context.Set<T>().Find(keyValues) != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result.IsSuccess;
         }
 
-        public virtual TResult IsExist<T>(Expression<Func<T, bool>> predicate) where T : class
+        public virtual bool IsExist<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                result.IsSuccess = Context.Set<T>().FirstOrDefault() != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result.IsSuccess;
         }
 
-        public Task<TResult> CreateAsync<T>(params T[] entities)
+        public async Task<T> FetchAsync<T>(params object[] keyValues) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            T entity = default(T);
+
+            try
+            {
+                entity = await Context.Set<T>().FindAsync(keyValues);
+                result.Payload = entity;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entity;
         }
 
-        public Task<TResult> FetchAsync<T>(params object[] keyValues) where T : class
+        public async Task<T> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+            T entity = default(T);
+
+            try
+            {
+                entity = await Context.Set<T>().FirstOrDefaultAsync();
+                result.Payload = entity;
+                result.IsSuccess = result.Payload != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return entity;
+        }       
+
+        public async Task<TResult> UpdateAsync<T>(T entity) where T : class
+        {
+            TResult result = new TResult();
+
+            try
+            {
+                var state = Context.Entry(entity).State = EntityState.Modified;
+                var changed = await Context.SaveChangesAsync();
+                result.IsSuccess = changed != 0;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
         }
 
-        public Task<TResult> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        public async Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                T obj = await Context.Set<T>().FindAsync(keyValues);
+                if (obj != null)
+                {
+                    result.Payload = Context.Set<T>().Remove(obj);
+                    var changed = await Context.SaveChangesAsync();
+                }
+
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
         }
 
-        public Task<TResult> FetchListAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        public async Task<TResult> DeleteAsync<T>(params T[] entities) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                result.Payload = Context.Set<T>().RemoveRange(entities);
+                var changed = await Context.SaveChangesAsync();
+
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
         }
 
-        public Task<TResult> FetchAllAsync<T>() where T : class
+        public async Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                var dbSet = Context.Set<T>();
+                result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
+                var changed =await Context.SaveChangesAsync();
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
         }
 
-        public Task<TResult> UpdateAsync<T>(T entity) where T : class
+        public async Task<bool> IsExistAsync<T>(params object[] keyValues) where T : class
         {
-            throw new NotImplementedException();
+            TResult result = new TResult();
+
+            try
+            {
+                T obj =await Context.Set<T>().FindAsync(keyValues);
+                result.IsSuccess = obj != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result.IsSuccess;
         }
 
-        public Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues)
+        public async Task<bool> IsExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            throw new NotImplementedException();
-        }
+            TResult result = new TResult();
 
-        public Task<TResult> DeleteAsync<T>(params T[] entities)
-        {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                T obj = await Context.Set<T>().FirstOrDefaultAsync();
+                result.IsSuccess = obj != null;
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
 
-        public Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> IsExistAsync<T>(params object[] keyValues) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> IsExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class
-        {
-            throw new NotImplementedException();
+            return result.IsSuccess;
         }
     }
 
