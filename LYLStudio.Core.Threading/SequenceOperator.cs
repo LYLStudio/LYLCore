@@ -133,7 +133,7 @@ namespace LYLStudio.Core.Threading
 
         private void ErrorProcess(Exception ex, T payload = default(T))
         {
-            ThreadResult<T> result = new ThreadResult<T>(true)
+            IResult result = new ThreadResult(true)
             {
                 Message = ex.Message,
                 Error = ex,
