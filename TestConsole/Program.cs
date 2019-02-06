@@ -10,8 +10,8 @@ using LYLStudio.Core;
 using LYLStudio.Core.Data;
 using LYLStudio.Core.Logging;
 using LYLStudio.Core.Threading;
-using LYLStudio.Service.Data.EntityFramework;
 
+using TestConsole.Services;
 using TestConsole.Models;
 
 namespace TestConsole
@@ -20,8 +20,8 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            DataManager dataManager = new DataManager { Log = (log) => { Console.WriteLine(log.Replace("\r\n", "")); } };
-            dataManager.DataServiceEventOccurred += (o, e) => { Console.WriteLine($"{e.EventTime}|{e.HasError}|{e.EventResult.Error?.StackTrace}"); };
+            TestDataService  testDataService = new TestDataService { Log = (log) => { Console.WriteLine(log.Replace("\r\n", "")); } };
+            testDataService.DataServiceEventOccurred += (o, e) => { Console.WriteLine($"{e.EventTime}|{e.HasError}|{e.EventResult.Error?.StackTrace}"); };
 
             List<Account> accounts4Create = new List<Account>
             {
@@ -30,7 +30,7 @@ namespace TestConsole
                 new Account() { Id = 3, Name = "cccc" }
             };
 
-            dataManager.Create(accounts4Create.ToArray());
+            testDataService.Create(accounts4Create.ToArray());
 
             //List<Account> accounts4Delete = new List<Account>
             //{
@@ -39,7 +39,7 @@ namespace TestConsole
 
             //IEnumerable<Account> accounts4Delete = dataManager.Context.Accounts;
             
-            dataManager.DeleteByKey<Account>(1, "aaaa");
+            testDataService.DeleteByKey<Account>(1, "aaaa");
 
             //var account = dataManager.Context.Accounts.First();
             //dataManager.Delete(account);
@@ -48,16 +48,6 @@ namespace TestConsole
         }
     }
 
-    public class DataManager : DataServiceBase<DataAccessResult, TestEntities>
-    {
-        private TestEntities _context;
-        public override TestEntities Context => _context ?? (_context = new TestEntities());
-
-        public override Action<string> Log
-        {
-            get => Context.Database.Log;
-            set => Context.Database.Log = value;
-        }
-    }
+   
 
 }

@@ -27,10 +27,31 @@ namespace LYLStudio.Service.Data.EntityFramework
             DataServiceEventOccurred?.Invoke(sender, eventArgs);
         }
 
+        #region IDisposable Support
+        private bool _disposedValue = false; // 偵測多餘的呼叫
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    DataServiceEventOccurred -= OnDataServiceEventOccurred;
+                    Context?.Dispose();                   
+                }
+
+                // TODO: 釋放非受控資源 (非受控物件) 並覆寫下方的完成項。
+                // TODO: 將大型欄位設為 null。
+
+                _disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
         }
+        #endregion
 
         public virtual TResult Create<T>(params T[] entities) where T : class
         {
@@ -311,7 +332,49 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result.IsSuccess;
         }
 
-        public async Task<T> FetchAsync<T>(params object[] keyValues) where T : class
+        public virtual async Task<TResult> CreateAsync<T>(params T[] entities) where T : class
+        {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+
+            TResult result = new TResult();
+
+            try
+            {
+                result.Payload = Context.Set<T>().AddRange(entities);
+                var changes = await Context.SaveChangesAsync();
+
+                result.IsSuccess = true;
+            }
+            catch (DbUpdateException ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+
+                foreach (var item in ex.Entries.Select(o => (T)o.Entity))
+                    result.InnerResults.Add(new TResult() { Payload = item });
+            }
+            catch (DbEntityValidationException ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+
+                foreach (var item in ex.EntityValidationErrors.Select(o => o))
+                    result.InnerResults.Add(new TResult() { Payload = item });
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex;
+                result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
+            }
+
+            return result;
+        }
+
+        public virtual async Task<T> FetchAsync<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
             T entity = default(T);
@@ -335,7 +398,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return entity;
         }
 
-        public async Task<T> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        public virtual async Task<T> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             TResult result = new TResult();
             T entity = default(T);
@@ -357,9 +420,9 @@ namespace LYLStudio.Service.Data.EntityFramework
             }
 
             return entity;
-        }       
+        }
 
-        public async Task<TResult> UpdateAsync<T>(T entity) where T : class
+        public virtual async Task<TResult> UpdateAsync<T>(T entity) where T : class
         {
             TResult result = new TResult();
 
@@ -382,7 +445,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public async Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
+        public virtual async Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
 
@@ -410,7 +473,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public async Task<TResult> DeleteAsync<T>(params T[] entities) where T : class
+        public virtual async Task<TResult> DeleteAsync<T>(params T[] entities) where T : class
         {
             TResult result = new TResult();
 
@@ -434,7 +497,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public async Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
+        public virtual async Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
         {
             TResult result = new TResult();
 
@@ -458,7 +521,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public async Task<bool> IsExistAsync<T>(params object[] keyValues) where T : class
+        public virtual async Task<bool> IsExistAsync<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
 
@@ -480,7 +543,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result.IsSuccess;
         }
 
-        public async Task<bool> IsExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        public virtual async Task<bool> IsExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             TResult result = new TResult();
 
@@ -501,6 +564,7 @@ namespace LYLStudio.Service.Data.EntityFramework
 
             return result.IsSuccess;
         }
+
     }
 
 }

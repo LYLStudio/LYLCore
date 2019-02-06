@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LYLStudio.Core.Data
 {
     public interface IDataAccessAsync<TResult> 
-        : IFatchAsync, IUpdateAsync<TResult>, IDeleteAsync<TResult>, IExistAsync
+        :ICreateAsync<TResult>, IFatchAsync, IUpdateAsync<TResult>, IDeleteAsync<TResult>, IExistAsync
         where TResult : IResult, new()
     {
 
