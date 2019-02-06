@@ -72,7 +72,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\TestDataService.cs" />
+    <Compile Include="Services\TestModelDataService.cs" />
+    <Compile Include="Services\TestModelDataServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

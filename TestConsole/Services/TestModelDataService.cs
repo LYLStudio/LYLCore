@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using LYLStudio.Service.Data.EntityFramework;
+
 using TestConsole.Models;
 
 namespace TestConsole.Services
 {
-    public class TestDataService : DataServiceBase<DataAccessResult, TestEntities>
+    public class TestModelDataService : DataServiceBase<DataAccessResult, TestEntities>
     {
         private TestEntities _context;
         public override TestEntities Context => _context ?? (_context = new TestEntities());
@@ -17,8 +15,6 @@ namespace TestConsole.Services
         {
             get => Context.Database.Log;
             set => Context.Database.Log = value;
-        }
-
-        
+        }     
     }
 }
