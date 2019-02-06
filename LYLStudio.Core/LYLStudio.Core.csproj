@@ -44,7 +44,7 @@
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="EventArgsBase.cs" />
     <Compile Include="IResult.cs" />
-    <Compile Include="Logging\EmptyLogger.cs" />
+    <Compile Include="Logging\LoggerBase.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILogItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

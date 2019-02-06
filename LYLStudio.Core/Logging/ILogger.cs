@@ -1,7 +1,11 @@
-﻿namespace LYLStudio.Core.Logging
+﻿using System;
+
+namespace LYLStudio.Core.Logging
 {
-    public interface ILogger
+    public interface ILogger<T>
     {
-        void Log(ILogItem logItem);
+        Action<T> LogCallback { get; set; }
+
+        void Log(T logItem);
     }
 }
