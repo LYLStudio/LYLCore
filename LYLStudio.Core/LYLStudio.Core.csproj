@@ -49,6 +49,7 @@
     <Compile Include="Logging\ILogItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultBase.cs" />
+    <Compile Include="Structures\GroupEnumerable.cs" />
     <Compile Include="Structures\INode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
