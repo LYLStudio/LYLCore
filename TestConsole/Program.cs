@@ -10,15 +10,18 @@ using TestConsole.Services;
 namespace TestConsole
 {
     class Program
-    {        
+    {
+        private static string _pathLogFile;
         static void Main(string[] args)
         {
+            _pathLogFile = Properties.Settings.Default.PATH_LOG_FILE;
+
             LogginService<ILogItem> logger = new LogginService<ILogItem>(new SequenceOperator<ILogItem>(nameof(LogginService<ILogItem>)))
             {
                 LogCallback = (logItem) =>
                 {
                     string logString = $"{logItem.Time}|{logItem.Category}|{logItem.Priority}|{logItem.Message}";
-                    using (var sw = new StreamWriter(new FileStream("log.txt", FileMode.Append)))
+                    using (var sw = new StreamWriter(new FileStream(_pathLogFile, FileMode.Append)))
                     {
                         sw.WriteLine(logString);                        
                         sw.Close();

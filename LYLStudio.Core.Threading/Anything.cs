@@ -16,5 +16,10 @@ namespace LYLStudio.Core.Threading
         {
             Parameters = parameters;
         }
+
+        public Anything(T parameters, Action<T> callback) : this(parameters)
+        {
+            Callback = callback;
+        }
     }
 }

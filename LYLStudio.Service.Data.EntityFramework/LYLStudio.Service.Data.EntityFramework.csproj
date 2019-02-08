@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="DataAccessResult.cs" />
     <Compile Include="DataServiceBase.cs" />
+    <Compile Include="DbContextFactory.cs" />
     <Compile Include="IDataService.cs" />
+    <Compile Include="IDbContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
