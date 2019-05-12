@@ -5,12 +5,12 @@ namespace LYLStudio.Core
     public static class DateTimeExtensions
     {
         public static string ToTimeFormated(this DateTime dateTime, string format = "HHmmss")
-        {            
+        {
             return dateTime.ToString(format);
         }
 
         public static string ToDateFormated(this DateTime dateTime, string format = "yyyyMMdd")
-        {            
+        {
             return dateTime.ToString(format);
         }
 
@@ -35,7 +35,7 @@ namespace LYLStudio.Core
                     break;
                 case FastFormatType.DT15:
                     result = dateTime.ToString("yyyyMMddTHHmmss");
-                    break;                
+                    break;
             }
 
             return result;
@@ -60,8 +60,8 @@ namespace LYLStudio.Core
             Normal,
             T6,
             D8,
-            DT15,            
-        }       
+            DT15,
+        }
     }
 
 }
