@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-
+using LYLStudio.Core;
 using TestConsole.Models;
 
 namespace TestConsole.Services
@@ -9,6 +10,7 @@ namespace TestConsole.Services
     public class TestModelDataServiceTest
     {
         TestModelDataService _dataService = null;
+
         public TestModelDataServiceTest()
         {
             _dataService = new TestModelDataService { Log = (log) => { Console.WriteLine(log.Replace("\r\n", "")); } };
@@ -59,6 +61,26 @@ namespace TestConsole.Services
             var e1 = _dataService.IsExist<Account>(3, "cccc");
             if (e1)
                 _dataService.Delete<Account>(o => o.Id > 0);
+        }
+
+        public void SomethingProcess()
+        {
+
+            var result = _dataService.SomethingProcess();
+
+            if (result.IsSuccess)
+            {
+                if (result.Payload is Account account)
+                {
+                    OnAccountChanged(account);
+                }
+            }
+        }
+
+        public EventHandler<Account> AccountChanged;
+        private void OnAccountChanged(Account account)
+        {
+            AccountChanged?.Invoke(this, account);
         }
     }
 

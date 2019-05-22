@@ -23,7 +23,7 @@ namespace TestConsole
                     string logString = $"{logItem.Time}|{logItem.Category}|{logItem.Priority}|{logItem.Message}";
                     using (var sw = new StreamWriter(new FileStream(_pathLogFile, FileMode.Append)))
                     {
-                        sw.WriteLine(logString);                        
+                        sw.WriteLine(logString);
                         sw.Close();
                     }
 
@@ -32,9 +32,15 @@ namespace TestConsole
             };
 
             logger.Log(new LogItem("Start!!"));
-            
-            TestModelDataServiceTest dataServiceTest = new TestModelDataServiceTest();
 
+            TestModelDataServiceTest dataServiceTest = new TestModelDataServiceTest();
+            dataServiceTest.AccountChanged += (o, e) =>
+            {
+                if (e is Account account)
+                {
+                    Console.WriteLine($"{account.Id}:{account.Data}");
+                }
+            };
             dataServiceTest.Create();
 
             dataServiceTest.Fetch();
@@ -50,6 +56,6 @@ namespace TestConsole
             Console.ReadLine();
         }
     }
-    
+
 
 }
