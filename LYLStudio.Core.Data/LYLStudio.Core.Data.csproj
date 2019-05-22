@@ -52,6 +52,8 @@
     <Compile Include="IExistAsync.cs" />
     <Compile Include="IFatch.cs" />
     <Compile Include="IFatchAsync.cs" />
+    <Compile Include="ISave.cs" />
+    <Compile Include="ISaveAsync.cs" />
     <Compile Include="IUpdate.cs" />
     <Compile Include="IUpdateAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

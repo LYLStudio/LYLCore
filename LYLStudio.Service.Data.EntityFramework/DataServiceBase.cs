@@ -37,7 +37,7 @@ namespace LYLStudio.Service.Data.EntityFramework
                 if (disposing)
                 {
                     DataServiceEventOccurred -= OnDataServiceEventOccurred;
-                    Context?.Dispose();                   
+                    Context?.Dispose();
                 }
 
                 // TODO: 釋放非受控資源 (非受控物件) 並覆寫下方的完成項。
@@ -62,9 +62,9 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                var changes = Context.SaveChanges();
+                var changes = Save();
 
-                result.IsSuccess = true;
+                result.IsSuccess = changes == entities.Count();
             }
             catch (DbUpdateException ex)
             {
@@ -98,17 +98,16 @@ namespace LYLStudio.Service.Data.EntityFramework
         public virtual TResult DeleteByKey<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
-            
+
             try
             {
                 T obj = Context.Set<T>().Find(keyValues);
-                if(obj != null)
+                if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    var  changed = Context.SaveChanges();
+                    var changes = Save();
+                    result.IsSuccess = changes == 1;
                 }
-
-                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
@@ -123,16 +122,16 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result;
         }
 
-        public virtual TResult Delete<T>(params T[] entities) where T: class
+        public virtual TResult Delete<T>(params T[] entities) where T : class
         {
             TResult result = new TResult();
 
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                var changed = Context.SaveChanges();
+                var changes = Save();
 
-                result.IsSuccess = true;
+                result.IsSuccess = changes == entities.Count();
             }
             catch (Exception ex)
             {
@@ -154,9 +153,10 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var dbSet = Context.Set<T>();
+                var count = dbSet.Where(predicate).Count();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                var changed = Context.SaveChanges();
-                result.IsSuccess = true;
+                var changes = Save();
+                result.IsSuccess = changes == count;
             }
             catch (Exception ex)
             {
@@ -174,7 +174,7 @@ namespace LYLStudio.Service.Data.EntityFramework
         public virtual T Fetch<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
-            T entity = default(T);
+            T entity = default;
 
             try
             {
@@ -198,7 +198,7 @@ namespace LYLStudio.Service.Data.EntityFramework
         public virtual T Fetch<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             TResult result = new TResult();
-            T entity = default(T);
+            T entity = default;
 
             try
             {
@@ -274,8 +274,8 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                var changed = Context.SaveChanges();
-                result.IsSuccess = changed != 0;
+                var changes = Save();
+                result.IsSuccess = changes != 0;
             }
             catch (Exception ex)
             {
@@ -341,9 +341,9 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                var changes = await Context.SaveChangesAsync();
+                var changes = await SaveAsync();
 
-                result.IsSuccess = true;
+                result.IsSuccess = changes == entities.Count();
             }
             catch (DbUpdateException ex)
             {
@@ -377,7 +377,7 @@ namespace LYLStudio.Service.Data.EntityFramework
         public virtual async Task<T> FetchAsync<T>(params object[] keyValues) where T : class
         {
             TResult result = new TResult();
-            T entity = default(T);
+            T entity = default;
 
             try
             {
@@ -401,7 +401,7 @@ namespace LYLStudio.Service.Data.EntityFramework
         public virtual async Task<T> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             TResult result = new TResult();
-            T entity = default(T);
+            T entity = default;
 
             try
             {
@@ -429,8 +429,8 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                var changed = await Context.SaveChangesAsync();
-                result.IsSuccess = changed != 0;
+                var changes = await SaveAsync();
+                result.IsSuccess = changes != 0;
             }
             catch (Exception ex)
             {
@@ -455,10 +455,9 @@ namespace LYLStudio.Service.Data.EntityFramework
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    var changed = await Context.SaveChangesAsync();
+                    var changes = await SaveAsync();
+                    result.IsSuccess = changes == 1;
                 }
-
-                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
@@ -480,9 +479,9 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                var changed = await Context.SaveChangesAsync();
+                var changes = await SaveAsync();
 
-                result.IsSuccess = true;
+                result.IsSuccess = changes == 1;
             }
             catch (Exception ex)
             {
@@ -504,9 +503,11 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var dbSet = Context.Set<T>();
+
+                var count = await dbSet.Where(predicate).CountAsync();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                var changed =await Context.SaveChangesAsync();
-                result.IsSuccess = true;
+                var changes = await SaveAsync();
+                result.IsSuccess = changes == count;
             }
             catch (Exception ex)
             {
@@ -527,7 +528,7 @@ namespace LYLStudio.Service.Data.EntityFramework
 
             try
             {
-                T obj =await Context.Set<T>().FindAsync(keyValues);
+                T obj = await Context.Set<T>().FindAsync(keyValues);
                 result.IsSuccess = obj != null;
             }
             catch (Exception ex)
@@ -565,6 +566,15 @@ namespace LYLStudio.Service.Data.EntityFramework
             return result.IsSuccess;
         }
 
+        public virtual int Save()
+        {
+            return Context.SaveChanges();
+        }
+
+        public virtual Task<int> SaveAsync()
+        {
+            return Context.SaveChangesAsync();
+        }
     }
 
 }
