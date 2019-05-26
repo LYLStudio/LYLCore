@@ -44,6 +44,7 @@
     <Compile Include="Configuration\IConfigItem.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Helper\DateTimeExtensions.cs" />
+    <Compile Include="Helper\FileIOHelper.cs" />
     <Compile Include="Helper\MathCompareExtensions.cs" />
     <Compile Include="EventArgsBase.cs" />
     <Compile Include="Helper\ExceptionExtensions.cs" />
