@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LYLStudio.Core
+namespace LYLStudio.Core.Helper
 {
     public static class DateTimeExtensions
     {
