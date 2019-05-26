@@ -21,12 +21,10 @@ namespace LYLStudio.Core.Helper
 
         public static string ToFastFormat(this DateTime dateTime, FastFormatType fastFormatType)
         {
-            string result = string.Empty;
+            string result;
+
             switch (fastFormatType)
             {
-                case FastFormatType.Normal:
-                    result = dateTime.ToString();
-                    break;
                 case FastFormatType.T6:
                     result = dateTime.ToString("HHmmss");
                     break;
@@ -35,6 +33,9 @@ namespace LYLStudio.Core.Helper
                     break;
                 case FastFormatType.DT15:
                     result = dateTime.ToString("yyyyMMddTHHmmss");
+                    break;
+                default:
+                    result = dateTime.ToString();
                     break;
             }
 
@@ -57,7 +58,6 @@ namespace LYLStudio.Core.Helper
 
         public enum FastFormatType
         {
-            Normal,
             T6,
             D8,
             DT15,
