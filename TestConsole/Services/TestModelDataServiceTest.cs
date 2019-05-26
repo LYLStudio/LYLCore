@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using LYLStudio.Core;
 using TestConsole.Models;
 
@@ -11,7 +9,7 @@ namespace TestConsole.Services
 {
     public class TestModelDataServiceTest
     {
-        TestModelDataService _dataService = null;
+        private readonly TestModelDataService _dataService = null;
 
         public TestModelDataServiceTest()
         {
@@ -28,10 +26,15 @@ namespace TestConsole.Services
                 }
                 Debug.WriteLine(message);
             };
-        }       
+        }
 
         public void Create()
         {
+            using (var svc = new TestModelDataService(true))
+            {
+                var result = svc.Create(new Account() { Id = 4, Name = "dddd" });
+                
+            }
             List<Account> accounts4Create = new List<Account>
             {
                 new Account() { Id = 1, Name = "aaaa" },
@@ -101,7 +104,7 @@ namespace TestConsole.Services
                     pList.Add(p.GetValue(item)?.ToString());
                 }
 
-                Debug.WriteLine(string.Join("|",pList));
+                Debug.WriteLine(string.Join("|", pList));
             }
 
             Debug.WriteLine($"List Data: {fnName} end");

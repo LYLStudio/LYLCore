@@ -29,6 +29,11 @@ namespace TestConsole.Services
 
         }
 
+        public TestModelDataService(bool isSaveChanges) : base(isSaveChanges)
+        {
+
+        }
+
         public DataAccessResult SomethingProcess()
         {
             var result = new DataAccessResult(false);
