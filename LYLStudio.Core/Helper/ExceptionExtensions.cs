@@ -11,7 +11,7 @@ namespace LYLStudio.Core.Helper
             var messages = exception
                 .FromHierarchy(ex => ex.InnerException)
                 .Select(ex => ex.Message);
-            return String.Join(Environment.NewLine, messages);
+            return string.Join(Environment.NewLine, messages);
         }
 
         private static IEnumerable<TSource> FromHierarchy<TSource>(
