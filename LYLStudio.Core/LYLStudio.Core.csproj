@@ -44,8 +44,10 @@
     <Compile Include="Configuration\IConfigItem.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="CoreExtensions\DateTimeExtensions.cs" />
+    <Compile Include="CoreExtensions\MathCompareExtensions.cs" />
     <Compile Include="EventArgsBase.cs" />
     <Compile Include="CoreExtensions\ExceptionExtensions.cs" />
+    <Compile Include="Helper\BinaryStringHelper.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="Logging\LoggerBase.cs" />
     <Compile Include="Logging\ILogger.cs" />
