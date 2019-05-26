@@ -26,5 +26,6 @@ namespace TestConsole.Models
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountAdditional> AccountAdditionals { get; set; }
     }
 }

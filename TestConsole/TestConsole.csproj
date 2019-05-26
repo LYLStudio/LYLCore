@@ -57,6 +57,9 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountAdditional.cs">
+      <DependentUpon>TestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LogItem.cs" />
     <Compile Include="Models\TestModel.Context.cs">
       <AutoGen>True</AutoGen>

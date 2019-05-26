@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using LYLStudio.Core;
 using TestConsole.Models;
 
@@ -16,9 +18,17 @@ namespace TestConsole.Services
             _dataService = new TestModelDataService { Log = (log) => { Console.WriteLine(log.Replace("\r\n", "")); } };
             _dataService.DataServiceEventOccurred += (o, e) =>
             {
-                Console.WriteLine($"{nameof(e.EventTime)}:{e.EventTime}|{nameof(e.EventResult.Payload)}:{e.EventResult.Payload}|{nameof(e.HasError)}:{e.HasError}|{e.EventResult.Error?.StackTrace}");
+                var message = $"{nameof(e.EventTime)}:{e.EventTime}|{nameof(e.EventResult.Payload)}:{e.EventResult.Payload}|{nameof(e.HasError)}:{e.HasError}";
+
+                if (e.HasError)
+                {
+                    var errMessage = e.EventResult.Error.GetaAllMessages();
+                    var errStack = e.EventResult.Error.StackTrace;
+                    message += $"|{errMessage}|{errStack}";
+                }
+                Debug.WriteLine(message);
             };
-        }
+        }       
 
         public void Create()
         {
@@ -38,8 +48,8 @@ namespace TestConsole.Services
             var f3 = _dataService.Fetch<Account>(3, "cccc");
             var f4 = _dataService.Fetch<Account>(o => o.Id == 3);
 
-            var f1List = f1.ToList();
-            var f2List = f2.ToList();
+            ListFetchResult(nameof(f1), f1);
+
         }
 
         public void Update()
@@ -75,6 +85,26 @@ namespace TestConsole.Services
                     OnAccountChanged(account);
                 }
             }
+        }
+
+        private void ListFetchResult<T>(string fnName, IEnumerable<T> srcList)
+        {
+            Debug.WriteLine($"List Data: {fnName} start");
+            var list = new List<string>();
+
+            foreach (var item in srcList)
+            {
+                var properies = item.GetType().GetProperties();
+                var pList = new List<string>();
+                foreach (var p in properies)
+                {
+                    pList.Add(p.GetValue(item)?.ToString());
+                }
+
+                Debug.WriteLine(string.Join("|",pList));
+            }
+
+            Debug.WriteLine($"List Data: {fnName} end");
         }
 
         public EventHandler<Account> AccountChanged;

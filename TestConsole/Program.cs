@@ -41,15 +41,20 @@ namespace TestConsole
                     Console.WriteLine($"{account.Id}:{account.Data}");
                 }
             };
-            dataServiceTest.Create();
 
-            dataServiceTest.Fetch();
+         
 
-            dataServiceTest.Update();
+            //dataServiceTest.Create();
 
-            dataServiceTest.Delete();
+            dataServiceTest.SomethingProcess();
 
-            dataServiceTest.IsExist();
+            //dataServiceTest.Fetch();
+
+            //dataServiceTest.Update();
+
+            //dataServiceTest.Delete();
+
+            //dataServiceTest.IsExist();
 
             logger.Log(new LogItem("End!!"));
 

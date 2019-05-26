@@ -1,5 +1,6 @@
 ﻿using System;
 using LYLStudio.Core;
+using LYLStudio.Core.Data;
 using LYLStudio.Service.Data.EntityFramework;
 
 using TestConsole.Models;
@@ -22,6 +23,11 @@ namespace TestConsole.Services
             get => Context.Database.Log;
             set => Context.Database.Log = value;
         }
+       
+        public TestModelDataService() : base(false)
+        {
+
+        }
 
         public DataAccessResult SomethingProcess()
         {
@@ -29,16 +35,21 @@ namespace TestConsole.Services
 
             try
             {
-                var obj = Fetch<Account>(1);
+                var obj = Fetch<Account>(1, "aaaa");
                 obj.Data = "ttttt";
-                var changes = Save();
-                result.IsSuccess = changes == 1;
-
+                Update(obj);
+                //Create(new Account() { Id = 1, Name = "aaaa", Data = null });
+                Create(new AccountAdditional { Id = obj.Id, Name = obj.Name });
+                Save();
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
+            }
+            finally
+            {
+                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
 

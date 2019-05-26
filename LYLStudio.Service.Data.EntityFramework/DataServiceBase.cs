@@ -20,11 +20,18 @@ namespace LYLStudio.Service.Data.EntityFramework
         public abstract TContext Context { get; }
         public abstract Action<string> Log { get; set; }
 
+        public bool IsCUDBaseMethodsSaveChangesByDefault { get; private set; }
+
         public event EventHandler<DataEventArgs> DataServiceEventOccurred;
 
         protected virtual void OnDataServiceEventOccurred(object sender, DataEventArgs eventArgs)
         {
             DataServiceEventOccurred?.Invoke(sender, eventArgs);
+        }        
+
+        protected DataServiceBase(bool isCUDBaseMethodsSaveChangesByDefault = false)
+        {
+            IsCUDBaseMethodsSaveChangesByDefault = isCUDBaseMethodsSaveChangesByDefault;
         }
 
         #region IDisposable Support
@@ -62,9 +69,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                var changes = Save();
-
-                result.IsSuccess = changes == entities.Count();
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == entities.Count();
             }
             catch (DbUpdateException ex)
             {
@@ -105,8 +110,7 @@ namespace LYLStudio.Service.Data.EntityFramework
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    var changes = Save();
-                    result.IsSuccess = changes == 1;
+                    result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == 1;                   
                 }
             }
             catch (Exception ex)
@@ -129,9 +133,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                var changes = Save();
-
-                result.IsSuccess = changes == entities.Count();
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == entities.Count();
             }
             catch (Exception ex)
             {
@@ -155,8 +157,7 @@ namespace LYLStudio.Service.Data.EntityFramework
                 var dbSet = Context.Set<T>();
                 var count = dbSet.Where(predicate).Count();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                var changes = Save();
-                result.IsSuccess = changes == count;
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == count;
             }
             catch (Exception ex)
             {
@@ -273,9 +274,8 @@ namespace LYLStudio.Service.Data.EntityFramework
 
             try
             {
-                var state = Context.Entry(entity).State = EntityState.Modified;
-                var changes = Save();
-                result.IsSuccess = changes != 0;
+                var state = Context.Entry(entity).State = EntityState.Modified;               
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == 1;
             }
             catch (Exception ex)
             {
@@ -341,9 +341,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                var changes = await SaveAsync();
-
-                result.IsSuccess = changes == entities.Count();
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == entities.Count();              
             }
             catch (DbUpdateException ex)
             {
@@ -429,8 +427,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                var changes = await SaveAsync();
-                result.IsSuccess = changes != 0;
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == 1;
             }
             catch (Exception ex)
             {
@@ -455,8 +452,7 @@ namespace LYLStudio.Service.Data.EntityFramework
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    var changes = await SaveAsync();
-                    result.IsSuccess = changes == 1;
+                    result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == 1;
                 }
             }
             catch (Exception ex)
@@ -479,9 +475,7 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                var changes = await SaveAsync();
-
-                result.IsSuccess = changes == 1;
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == entities.Count();
             }
             catch (Exception ex)
             {
@@ -503,11 +497,9 @@ namespace LYLStudio.Service.Data.EntityFramework
             try
             {
                 var dbSet = Context.Set<T>();
-
                 var count = await dbSet.Where(predicate).CountAsync();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                var changes = await SaveAsync();
-                result.IsSuccess = changes == count;
+                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == count;
             }
             catch (Exception ex)
             {
