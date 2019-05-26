@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LYLStudio.Core.Helper
+namespace LYLStudio.Core
 {
     public static class ExceptionExtensions
     {

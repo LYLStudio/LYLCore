@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace LYLStudio.Core.Helper
+namespace LYLStudio.Core
 {
     public class FileIOHelper
     {

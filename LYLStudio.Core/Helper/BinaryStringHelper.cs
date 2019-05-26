@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace LYLStudio.Core.Helper
+namespace LYLStudio.Core
 {
     public class BinaryStringHelper
     {

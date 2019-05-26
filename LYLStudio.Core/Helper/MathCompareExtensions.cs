@@ -1,4 +1,4 @@
-﻿namespace LYLStudio.Core.Helper
+﻿namespace LYLStudio.Core
 {
     public static class MathCompareExtensions
     {
