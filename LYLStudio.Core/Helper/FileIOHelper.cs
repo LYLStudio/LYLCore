@@ -116,7 +116,7 @@ namespace LYLStudio.Core
             };
         }
 
-        private static void CheckAndCreateDirectory(string path)
+        public static void CheckAndCreateDirectory(string path)
         {
             try
             {
