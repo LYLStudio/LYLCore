@@ -1,37 +1,61 @@
 ﻿using System;
-
+using System.IO;
+using System.Linq;
+using LYLStudio.Core;
 using LYLStudio.Core.Logging;
 using LYLStudio.Core.Threading;
 
 namespace TestConsole.Services
 {
-    public class LogginService<T> : LoggerBase<T>, IDisposable
+    public class LogginService : LoggerBase, IDisposable
     {
-        private IOperator<T> _seqOperator;
+        private readonly IOperator<ILogItem[]> _seqOperator;
 
-        public override Action<T> LogCallback { get; set; }
+        public override TraceLevel TraceLevel { get; set; }
+        public override Action<string, ILogItem[]> Callback { get; set; }
 
-        public LogginService(IOperator<T> seqOperator)
+        public LogginService(IOperator<ILogItem[]> seqOperator, TraceLevel traceLevel = TraceLevel.L1)
         {
             _seqOperator = seqOperator;
+            TraceLevel = traceLevel;
         }
 
-        public LogginService(IOperator<T> seqOperator, Action<T> logCallback) : this(seqOperator)
+        public LogginService(IOperator<ILogItem[]> seqOperator, Action<string, ILogItem[]> callback) : this(seqOperator)
         {
-            LogCallback = logCallback;
+            Callback = callback;
         }
 
-        public override void Log(T logItem)
+        public override void Log(string target, params ILogItem[] logItems)
         {
-            IAnything<T> anything = new Anything<T>(logItem)
+            if (TraceLevel == TraceLevel.L0)
+                return;
+
+            if (Callback != null)
             {
-                Callback = o =>
+                Callback.Invoke(target, logItems);
+            }
+            else
+            {
+                IAnything<ILogItem[]> anything = new Anything<ILogItem[]>()
                 {
-                    LogCallback?.Invoke(o);
-                }
-            };
+                    Parameters = logItems,
+                    Callback = async (o) =>
+                    {
+                        var items = o;
+                        FileIOHelper.CheckAndCreateDirectory(target);
 
-            _seqOperator.Enqueue(anything);
+                        var text = string.Join("\r\n", items.Select(x => $"{x.TimeTicks}|{x.Time}|{x.Id}|{x.Category}|{x.Priority}|{x.Message}"));
+                        text += "\r\n";
+
+                        using (var sw = File.AppendText(target))
+                        {
+                            await sw.WriteAsync(text);
+                            sw.Close();
+                        }
+                    }
+                };
+                _seqOperator.Enqueue(anything);
+            }
         }
 
         public void Dispose()

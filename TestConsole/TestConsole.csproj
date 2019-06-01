@@ -107,6 +107,10 @@
       <Project>{d094a106-b64e-4390-a5fd-85e0aef848b6}</Project>
       <Name>LYLStudio.Core.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LYLStudio.Core.Logging\LYLStudio.Core.Logging.csproj">
+      <Project>{644f146a-3606-4216-bee8-b15cced2f985}</Project>
+      <Name>LYLStudio.Core.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj">
       <Project>{45de7042-15c7-4066-a57e-6facbddfd0c5}</Project>
       <Name>LYLStudio.Core.Threading</Name>

@@ -10,44 +10,31 @@ namespace TestConsole
 {
     class Program
     {
-        private static string _pathLogFile;
+        private static string logTarget;
         static void Main(string[] args)
         {
 
             //Console.WriteLine(BinaryStringHelper.ByteArrayToHexString(new byte[] {1,3,5,6,7, 3, 5, 6, 7, 3, 5, 6, 7, 8, (byte)'a', (byte)'b',77,(byte)'f'  }, 8, " "));
 
 
-            _pathLogFile = Properties.Settings.Default.PATH_LOG_FILE;
+            logTarget = Properties.Settings.Default.PATH_LOG_FILE;
 
-            LogginService<ILogItem> logger = new LogginService<ILogItem>(new SequenceOperator<ILogItem>(nameof(LogginService<ILogItem>)))
-            {
-                LogCallback = (logItem) =>
-                {
-                    string logString = $"{logItem.Time}|{logItem.Category}|{logItem.Priority}|{logItem.Message}";
-                    using (var sw = new StreamWriter(new FileStream(_pathLogFile, FileMode.Append)))
-                    {
-                        sw.WriteLine(logString);
-                        sw.Close();
-                    }
+            LogginService logSvc = new LogginService(new SequenceOperator<ILogItem[]>(nameof(LogginService)));
 
-                    //Console.WriteLine(logString);
-                }
-            };
+            logSvc.Log(logTarget, new LogItem("Start!!"));
 
-            logger.Log(new LogItem("Start!!"));
-
-            TestModelDataServiceTest dataServiceTest = new TestModelDataServiceTest();
-            dataServiceTest.AccountChanged += (o, e) =>
-            {
-                if (e is Account account)
-                {
-                    Console.WriteLine($"{account.Id}:{account.Data}");
-                }
-            };
+            //TestModelDataServiceTest dataServiceTest = new TestModelDataServiceTest();
+            //dataServiceTest.AccountChanged += (o, e) =>
+            //{
+            //    if (e is Account account)
+            //    {
+            //        Console.WriteLine($"{account.Id}:{account.Data}");
+            //    }
+            //};
 
          
 
-            dataServiceTest.Create();
+            //dataServiceTest.Create();
 
             //dataServiceTest.SomethingProcess();
 
@@ -59,7 +46,7 @@ namespace TestConsole
 
             //dataServiceTest.IsExist();
 
-            logger.Log(new LogItem("End!!"));
+            logSvc.Log(logTarget, new LogItem("End!!"));
 
             Console.ReadLine();
         }
