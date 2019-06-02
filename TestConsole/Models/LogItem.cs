@@ -6,8 +6,7 @@ namespace TestConsole.Models
 {
     public class LogItem : ILogItem
     {
-        public long TimeTicks { get; }
-        public DateTime Time { get { return new DateTime(TimeTicks, DateTimeKind.Utc).ToLocalTime(); } }
+        public DateTime Time { get; }
         public Guid Id { get; set; }
         public Category Category { get; set; }
         public Priority Priority { get; set; }
@@ -16,7 +15,7 @@ namespace TestConsole.Models
 
         public LogItem(string message, Category category = Category.Debug, Priority priority = Priority.Low)
         {
-            TimeTicks = DateTime.UtcNow.Ticks;
+            Time = DateTime.Now;
             Id = Guid.NewGuid();
             Category = category;
             Priority = priority;

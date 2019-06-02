@@ -50,6 +50,9 @@
     <Compile Include="Helper\ExceptionExtensions.cs" />
     <Compile Include="Helper\BinaryStringHelper.cs" />
     <Compile Include="IResult.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILogItem.cs" />
+    <Compile Include="Logging\LoggerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultBase.cs" />
     <Compile Include="Structures\GroupEnumerable.cs" />

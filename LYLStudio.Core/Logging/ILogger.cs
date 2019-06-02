@@ -18,5 +18,5 @@ namespace LYLStudio.Core.Logging
         L2 = L1 | 0x0010,
         L3 = L2 | 0x0100,
         L4 = L3 | 0x1000,
-    }
+    } 
 }

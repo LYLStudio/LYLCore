@@ -44,7 +44,7 @@ namespace TestConsole.Services
                         var items = o;
                         FileIOHelper.CheckAndCreateDirectory(target);
 
-                        var text = string.Join("\r\n", items.Select(x => $"{x.TimeTicks}|{x.Time}|{x.Id}|{x.Category}|{x.Priority}|{x.Message}"));
+                        var text = string.Join("\r\n", items.Select(x => $"{x.Time.ToLogFormat()}|{x.Id}|{x.Category}|{x.Priority}|{x.Message}"));
                         text += "\r\n";
 
                         using (var sw = File.AppendText(target))

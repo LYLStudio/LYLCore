@@ -4,7 +4,6 @@ namespace LYLStudio.Core.Logging
 {
     public interface ILogItem
     {
-        long TimeTicks { get; }
         DateTime Time { get; }
         Guid Id { get; set; }
         Category Category { get; set; }
