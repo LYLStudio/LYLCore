@@ -14,7 +14,7 @@ namespace LYLStudio.Core
             return dateTime.ToString(format);
         }
 
-        public static string ToLogFormat(this DateTime dateTime, string format = "yyyyMMddHHmmss.fff")
+        public static string ToLogFormat(this DateTime dateTime, string format = "yyyyMMddHHmmss.fffffff")
         {
             return dateTime.ToString(format);
         }
