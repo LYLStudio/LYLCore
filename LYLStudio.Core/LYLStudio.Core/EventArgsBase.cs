@@ -4,9 +4,6 @@ namespace LYLStudio.Core
 {
     public class EventArgsBase : EventArgs
     {
-        /// <summary>
-        /// UTC Time
-        /// </summary>
         public DateTime EventTime { get; }
 
         public IResult EventResult { get; set; }
@@ -15,7 +12,7 @@ namespace LYLStudio.Core
 
         public EventArgsBase()
         {
-            EventTime = DateTime.UtcNow;            
+            EventTime = DateTime.Now;            
         }
 
         public EventArgsBase(IResult result) : this()
