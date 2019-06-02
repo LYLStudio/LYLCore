@@ -26,8 +26,7 @@ namespace LYLStudio.Core.Data.EF
             {
                 if (disposing)
                 {
-                    if (_context != null)
-                        _context.Dispose();
+                    _context?.Dispose();
                 }
 
                 _disposedValue = true;

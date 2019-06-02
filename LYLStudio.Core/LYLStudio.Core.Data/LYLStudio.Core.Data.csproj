@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataEventArgs.cs" />
     <Compile Include="ICreate.cs" />
     <Compile Include="ICreateAsync.cs" />
     <Compile Include="IDataAccess.cs" />

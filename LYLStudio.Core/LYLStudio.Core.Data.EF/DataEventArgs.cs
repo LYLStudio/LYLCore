@@ -1,4 +1,4 @@
-﻿namespace LYLStudio.Core.Data
+﻿namespace LYLStudio.Core.Data.EF
 {
     public class DataEventArgs : EventArgsBase
     {

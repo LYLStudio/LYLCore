@@ -65,7 +65,10 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == entities.Count();
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = Save() == entities.Count();
+                }
             }
             catch (DbUpdateException ex)
             {
@@ -88,10 +91,6 @@ namespace LYLStudio.Core.Data.EF
                 result.Error = ex;
                 result.Message = ex.Message;
             }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
-            }
 
             return result;
         }
@@ -106,17 +105,16 @@ namespace LYLStudio.Core.Data.EF
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == 1;
+                    if (IsCUDBaseMethodsSaveChangesByDefault)
+                    {
+                        result.IsSuccess = Save() == 1;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -129,16 +127,15 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == entities.Count();
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = Save() == entities.Count();
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -153,16 +150,15 @@ namespace LYLStudio.Core.Data.EF
                 var dbSet = Context.Set<T>();
                 var count = dbSet.Where(predicate).Count();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == count;
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = Save() == count;
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -177,16 +173,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entity = Context.Set<T>().Find(keyValues);
                 result.Payload = entity;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entity;
@@ -201,16 +193,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entity = Context.Set<T>().FirstOrDefault(predicate);
                 result.Payload = entity;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entity;
@@ -225,16 +213,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entities = Context.Set<T>().Where(predicate);
                 result.Payload = entities;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entities;
@@ -249,16 +233,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entities = Context.Set<T>().AsQueryable();
                 result.Payload = entities;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entities;
@@ -271,16 +251,15 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : Save() == 1;
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = Save() == 1;
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -299,10 +278,6 @@ namespace LYLStudio.Core.Data.EF
                 result.Error = ex;
                 result.Message = ex.Message;
             }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
-            }
 
             return result.IsSuccess;
         }
@@ -320,10 +295,6 @@ namespace LYLStudio.Core.Data.EF
                 result.Error = ex;
                 result.Message = ex.Message;
             }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
-            }
 
             return result.IsSuccess;
         }
@@ -337,7 +308,10 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 result.Payload = Context.Set<T>().AddRange(entities);
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == entities.Count();
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = await SaveAsync() == entities.Count();
+                }
             }
             catch (DbUpdateException ex)
             {
@@ -360,10 +334,6 @@ namespace LYLStudio.Core.Data.EF
                 result.Error = ex;
                 result.Message = ex.Message;
             }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
-            }
 
             return result;
         }
@@ -377,16 +347,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entity = await Context.Set<T>().FindAsync(keyValues);
                 result.Payload = entity;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entity;
@@ -401,16 +367,12 @@ namespace LYLStudio.Core.Data.EF
             {
                 entity = await Context.Set<T>().FirstOrDefaultAsync();
                 result.Payload = entity;
-                result.IsSuccess = result.Payload != null;
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return entity;
@@ -423,16 +385,15 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == 1;
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = await SaveAsync() == 1;
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -448,17 +409,16 @@ namespace LYLStudio.Core.Data.EF
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == 1;
+                    if (IsCUDBaseMethodsSaveChangesByDefault)
+                    {
+                        result.IsSuccess = await SaveAsync() == 1;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -471,16 +431,15 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 result.Payload = Context.Set<T>().RemoveRange(entities);
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == entities.Count();
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = await SaveAsync() == entities.Count();
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -495,16 +454,15 @@ namespace LYLStudio.Core.Data.EF
                 var dbSet = Context.Set<T>();
                 var count = await dbSet.Where(predicate).CountAsync();
                 result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                result.IsSuccess = !IsCUDBaseMethodsSaveChangesByDefault ? true : await SaveAsync() == count;
+                if (IsCUDBaseMethodsSaveChangesByDefault)
+                {
+                    result.IsSuccess = await SaveAsync() == count;
+                }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result;
@@ -524,10 +482,6 @@ namespace LYLStudio.Core.Data.EF
                 result.Error = ex;
                 result.Message = ex.Message;
             }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
-            }
 
             return result.IsSuccess;
         }
@@ -545,10 +499,6 @@ namespace LYLStudio.Core.Data.EF
             {
                 result.Error = ex;
                 result.Message = ex.Message;
-            }
-            finally
-            {
-                OnDataServiceEventOccurred(this, new DataEventArgs(result));
             }
 
             return result.IsSuccess;
