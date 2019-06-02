@@ -6,7 +6,7 @@ namespace LYLStudio.Core
 {
     public static class ExceptionExtensions
     {
-        public static string GetaAllMessages(this Exception exception)
+        public static string GetAllMessages(this Exception exception)
         {
             var messages = exception
                 .FromHierarchy(ex => ex.InnerException)
