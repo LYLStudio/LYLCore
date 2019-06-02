@@ -7,7 +7,7 @@
 
         }
 
-        public DataEventArgs(IResult result): base(result)
+        public DataEventArgs(IResult result) : base(result)
         {
 
         }

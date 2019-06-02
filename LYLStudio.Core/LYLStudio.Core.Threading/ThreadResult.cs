@@ -3,6 +3,6 @@
     public class ThreadResult : ResultBase
     {
         public ThreadResult() : base() { }
-        public ThreadResult(bool isSuccess): base(isSuccess) { }
+        public ThreadResult(bool isSuccess) : base(isSuccess) { }
     }
 }

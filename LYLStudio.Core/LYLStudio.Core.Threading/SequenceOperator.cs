@@ -9,8 +9,8 @@ namespace LYLStudio.Core.Threading
     {
         private bool _isDisposed = false;
         private AutoResetEvent _resetEvent;
-        private Dictionary<ThreadPriority, ConcurrentQueue<IAnything<T>>> _queueList;
-        private Thread _thread;
+        private readonly Dictionary<ThreadPriority, ConcurrentQueue<IAnything<T>>> _queueList;
+        private readonly Thread _thread;
 
         public string Id { get; }
         public ThreadPriority Priority { get; }
@@ -125,7 +125,7 @@ namespace LYLStudio.Core.Threading
                 else
                 {
                     _resetEvent.WaitOne();
-                }              
+                }
 
                 _resetEvent.WaitOne(Sleep);
             }
@@ -146,8 +146,8 @@ namespace LYLStudio.Core.Threading
         public void Enqueue(IAnything<T> anything, ThreadPriority priority = ThreadPriority.Normal)
         {
             if (_isDisposed)
-            {                
-                ErrorProcess(new Exception("Instance Disposed"), anything.Parameters);                
+            {
+                ErrorProcess(new Exception("Instance Disposed"), anything.Parameters);
                 return;
             }
 
@@ -158,7 +158,7 @@ namespace LYLStudio.Core.Threading
             }
             catch (Exception ex)
             {
-                ErrorProcess(ex,anything.Parameters);
+                ErrorProcess(ex, anything.Parameters);
             }
         }
 

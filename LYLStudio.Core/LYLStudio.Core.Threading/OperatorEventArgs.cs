@@ -4,11 +4,11 @@
     {
         public OperatorEventArgs() : base()
         {
-            
+
         }
 
         public OperatorEventArgs(IResult result) : base(result)
-        {            
+        {
         }
     }
 }

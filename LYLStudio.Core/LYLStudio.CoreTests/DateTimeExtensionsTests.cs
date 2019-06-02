@@ -1,10 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LYLStudio.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LYLStudio.Core.Tests
 {
@@ -58,7 +53,7 @@ namespace LYLStudio.Core.Tests
         [TestMethod()]
         public void ToAgeTest()
         {
-            DateTime dateTime = new DateTime(1981, 4, 12);           
+            DateTime dateTime = new DateTime(1981, 4, 12);
             DateTime refDateTime = new DateTime(2018, 4, 11);
             int age = dateTime.ToAge(refDateTime);
             Assert.AreEqual(36, age);

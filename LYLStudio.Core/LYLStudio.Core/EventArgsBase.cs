@@ -12,12 +12,12 @@ namespace LYLStudio.Core
 
         public EventArgsBase()
         {
-            EventTime = DateTime.Now;            
+            EventTime = DateTime.Now;
         }
 
         public EventArgsBase(IResult result) : this()
         {
             EventResult = result;
-        }     
+        }
     }
 }

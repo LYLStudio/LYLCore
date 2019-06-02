@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LYLStudio.Core.Structures
+﻿namespace LYLStudio.Core.Structures
 {
     //todo
     public static class GroupEnumerable
-    {        
+    {
         //public static IList<INode<T>> BuildTree<T>(this IEnumerable<INode<T>> source, INode<T> root = null)
         //{
         //    var groups = source.GroupBy(i => i.ParentId);

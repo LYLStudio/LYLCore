@@ -6,5 +6,5 @@ namespace LYLStudio.Core.Threading
     {
         Action<T> Callback { get; }
         T Parameters { get; }
-    }      
+    }
 }
