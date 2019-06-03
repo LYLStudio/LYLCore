@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using LYLStudio.App.TestConsole.Models;
-using LYLStudio.Core.Data;
 using LYLStudio.Core.Data.EF;
 
 namespace LYLStudio.App.TestConsole.Services
 {
-    public class TestModelService : DataServiceBase<DataAccessResult, TestEntities>
+    public class OpenAccountModelService : DataServiceBase<DataAccessResult, OpenAccountEntities>
     {
-        private TestEntities _context = null;
-        public override TestEntities Context
+        private OpenAccountEntities _context = null;
+        public override OpenAccountEntities Context
         {
             get
             {
                 if (_context == null)
-                    _context = new TestEntities();
+                    _context = new OpenAccountEntities();
                 return _context;
             }
         }

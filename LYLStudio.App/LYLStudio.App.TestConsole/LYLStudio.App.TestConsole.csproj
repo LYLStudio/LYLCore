@@ -33,11 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\RefLibs\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\RefLibs\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="LYLStudio.Core">
       <HintPath>..\..\LYLStudio.Core\Build\Release\LYLStudio.Core.dll</HintPath>
@@ -52,7 +52,10 @@
       <HintPath>..\..\LYLStudio.Core\Build\Release\LYLStudio.Core.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +71,21 @@
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogItem.cs" />
+    <Compile Include="Models\OpenAccountModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenAccountModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OpenAccountModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenAccountModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OpenAccountModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenAccountModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\TestModel.Context.cs">
       <DependentUpon>TestModel.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -83,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>OpenAccountModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -91,6 +112,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\LoggingService.cs" />
+    <Compile Include="Services\OpenAccountModelService.cs" />
     <Compile Include="Services\TestModelService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,15 +121,33 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TestModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Models\OpenAccountModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OpenAccountModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\OpenAccountModel.edmx.diagram">
+      <DependentUpon>OpenAccountModel.edmx</DependentUpon>
+    </None>
     <None Include="Models\TestModel.edmx.diagram">
       <DependentUpon>TestModel.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Models\OpenAccountModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OpenAccountModel.Context.cs</LastGenOutput>
+      <DependentUpon>OpenAccountModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\OpenAccountModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OpenAccountModel.edmx</DependentUpon>
+      <LastGenOutput>OpenAccountModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\TestModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TestModel.edmx</DependentUpon>

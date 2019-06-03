@@ -28,7 +28,7 @@ namespace LYLStudio.App.TestConsole
             {
                 Callback = o =>
                 {
-                    using (var svc = new TestModelService(true))
+                    using (var svc = new TestModelService())
                     {
                         var result = svc.Create(new Account() { Id = 1, Name = "aaaa" });
                         logSvc.Log(logTarget, new LogItem($"{result.Id}|{result.IsSuccess}|{result.Message}") { Error = result.Error });
