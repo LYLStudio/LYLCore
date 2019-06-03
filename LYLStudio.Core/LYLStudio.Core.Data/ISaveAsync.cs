@@ -4,6 +4,6 @@ namespace LYLStudio.Core.Data
 {
     public interface ISaveAsync
     {
-        Task<int> SaveAsync();
+        Task SaveAsync();
     }
 }

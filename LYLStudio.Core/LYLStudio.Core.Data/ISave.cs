@@ -2,6 +2,6 @@
 {
     public interface ISave
     {
-        int Save();
+        void Save();
     }
 }

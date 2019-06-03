@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -16,18 +14,14 @@ namespace LYLStudio.Core.Data.EF
         public abstract TContext Context { get; }
         public abstract Action<string> Log { get; set; }
 
-        public bool IsCUDBaseMethodsSaveChangesByDefault { get; private set; }
-
         public event EventHandler<DataEventArgs> DataServiceEventOccurred;
-
         protected virtual void OnDataServiceEventOccurred(object sender, DataEventArgs eventArgs)
         {
             DataServiceEventOccurred?.Invoke(sender, eventArgs);
         }
 
-        protected DataServiceBase(bool isCUDBaseMethodsSaveChangesByDefault = false)
+        protected DataServiceBase()
         {
-            IsCUDBaseMethodsSaveChangesByDefault = isCUDBaseMethodsSaveChangesByDefault;
         }
 
         #region IDisposable Support
@@ -64,32 +58,13 @@ namespace LYLStudio.Core.Data.EF
 
             try
             {
-                result.Payload = Context.Set<T>().AddRange(entities);
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = Save() == entities.Count();
-                }
-            }
-            catch (DbUpdateException ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-
-                foreach (var item in ex.Entries.Select(o => (T)o.Entity))
-                    result.InnerResults.Add(new TResult() { Payload = item });
-            }
-            catch (DbEntityValidationException ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-
-                foreach (var item in ex.EntityValidationErrors.Select(o => o))
-                    result.InnerResults.Add(new TResult() { Payload = item });
+                Context.Set<T>().AddRange(entities);
+                Save();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -97,6 +72,8 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual TResult DeleteByKey<T>(params object[] keyValues) where T : class
         {
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
+
             TResult result = new TResult();
 
             try
@@ -105,16 +82,13 @@ namespace LYLStudio.Core.Data.EF
                 if (obj != null)
                 {
                     result.Payload = Context.Set<T>().Remove(obj);
-                    if (IsCUDBaseMethodsSaveChangesByDefault)
-                    {
-                        result.IsSuccess = Save() == 1;
-                    }
+                    Save();
+                    result.IsSuccess = true;
                 }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -122,20 +96,19 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual TResult Delete<T>(params T[] entities) where T : class
         {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+
             TResult result = new TResult();
 
             try
             {
-                result.Payload = Context.Set<T>().RemoveRange(entities);
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = Save() == entities.Count();
-                }
+                Context.Set<T>().RemoveRange(entities);
+                Save();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -148,17 +121,13 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 var dbSet = Context.Set<T>();
-                var count = dbSet.Where(predicate).Count();
-                result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = Save() == count;
-                }
+                dbSet.RemoveRange(dbSet.Where(predicate));
+                Save();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -166,100 +135,45 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual T Fetch<T>(params object[] keyValues) where T : class
         {
-            TResult result = new TResult();
-            T entity = default;
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            try
-            {
-                entity = Context.Set<T>().Find(keyValues);
-                result.Payload = entity;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entity;
+            return Context.Set<T>().Find(keyValues);
         }
 
         public virtual T Fetch<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            TResult result = new TResult();
-            T entity = default;
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            try
-            {
-                entity = Context.Set<T>().FirstOrDefault(predicate);
-                result.Payload = entity;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entity;
+            return Context.Set<T>().FirstOrDefault(predicate);
         }
 
         public virtual IEnumerable<T> FetchList<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            TResult result = new TResult();
-            IQueryable<T> entities = null;
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            try
-            {
-                entities = Context.Set<T>().Where(predicate);
-                result.Payload = entities;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entities;
+            return Context.Set<T>().Where(predicate);
         }
 
         public virtual IEnumerable<T> FetchAll<T>() where T : class
         {
-            TResult result = new TResult();
-            IQueryable<T> entities = null;
-
-            try
-            {
-                entities = Context.Set<T>().AsQueryable();
-                result.Payload = entities;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entities;
+            return Context.Set<T>().AsQueryable();
         }
 
         public virtual TResult Update<T>(T entity) where T : class
         {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
             TResult result = new TResult();
 
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = Save() == 1;
-                }
+                Save();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -267,36 +181,16 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual bool IsExist<T>(params object[] keyValues) where T : class
         {
-            TResult result = new TResult();
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            try
-            {
-                result.IsSuccess = Context.Set<T>().Find(keyValues) != null;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return result.IsSuccess;
+            return Context.Set<T>().Find(keyValues) != null;
         }
 
         public virtual bool IsExist<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            TResult result = new TResult();
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            try
-            {
-                result.IsSuccess = Context.Set<T>().FirstOrDefault() != null;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return result.IsSuccess;
+            return Context.Set<T>().FirstOrDefault() != null;
         }
 
         public virtual async Task<TResult> CreateAsync<T>(params T[] entities) where T : class
@@ -307,32 +201,13 @@ namespace LYLStudio.Core.Data.EF
 
             try
             {
-                result.Payload = Context.Set<T>().AddRange(entities);
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = await SaveAsync() == entities.Count();
-                }
-            }
-            catch (DbUpdateException ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-
-                foreach (var item in ex.Entries.Select(o => (T)o.Entity))
-                    result.InnerResults.Add(new TResult() { Payload = item });
-            }
-            catch (DbEntityValidationException ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-
-                foreach (var item in ex.EntityValidationErrors.Select(o => o))
-                    result.InnerResults.Add(new TResult() { Payload = item });
+                Context.Set<T>().AddRange(entities);
+                await SaveAsync();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -340,60 +215,33 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual async Task<T> FetchAsync<T>(params object[] keyValues) where T : class
         {
-            TResult result = new TResult();
-            T entity = default;
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            try
-            {
-                entity = await Context.Set<T>().FindAsync(keyValues);
-                result.Payload = entity;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entity;
+            return await Context.Set<T>().FindAsync(keyValues);
         }
 
         public virtual async Task<T> FetchAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            TResult result = new TResult();
-            T entity = default;
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            try
-            {
-                entity = await Context.Set<T>().FirstOrDefaultAsync();
-                result.Payload = entity;
-                result.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return entity;
+            return await Context.Set<T>().FirstOrDefaultAsync();
         }
 
         public virtual async Task<TResult> UpdateAsync<T>(T entity) where T : class
         {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
             TResult result = new TResult();
 
             try
             {
                 var state = Context.Entry(entity).State = EntityState.Modified;
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = await SaveAsync() == 1;
-                }
+                await SaveAsync();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -401,6 +249,8 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual async Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
         {
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
+
             TResult result = new TResult();
 
             try
@@ -408,17 +258,14 @@ namespace LYLStudio.Core.Data.EF
                 T obj = await Context.Set<T>().FindAsync(keyValues);
                 if (obj != null)
                 {
-                    result.Payload = Context.Set<T>().Remove(obj);
-                    if (IsCUDBaseMethodsSaveChangesByDefault)
-                    {
-                        result.IsSuccess = await SaveAsync() == 1;
-                    }
+                    Context.Set<T>().Remove(obj);
+                    await SaveAsync();
+                    result.IsSuccess = true;
                 }
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -426,20 +273,19 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual async Task<TResult> DeleteAsync<T>(params T[] entities) where T : class
         {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+
             TResult result = new TResult();
 
             try
             {
-                result.Payload = Context.Set<T>().RemoveRange(entities);
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = await SaveAsync() == entities.Count();
-                }
+                Context.Set<T>().RemoveRange(entities);
+                await SaveAsync();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -452,17 +298,13 @@ namespace LYLStudio.Core.Data.EF
             try
             {
                 var dbSet = Context.Set<T>();
-                var count = await dbSet.Where(predicate).CountAsync();
-                result.Payload = dbSet.RemoveRange(dbSet.Where(predicate));
-                if (IsCUDBaseMethodsSaveChangesByDefault)
-                {
-                    result.IsSuccess = await SaveAsync() == count;
-                }
+                dbSet.RemoveRange(dbSet.Where(predicate));
+                await SaveAsync();
+                result.IsSuccess = true;
             }
             catch (Exception ex)
             {
                 result.Error = ex;
-                result.Message = ex.Message;
             }
 
             return result;
@@ -470,49 +312,26 @@ namespace LYLStudio.Core.Data.EF
 
         public virtual async Task<bool> IsExistAsync<T>(params object[] keyValues) where T : class
         {
-            TResult result = new TResult();
+            if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            try
-            {
-                T obj = await Context.Set<T>().FindAsync(keyValues);
-                result.IsSuccess = obj != null;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return result.IsSuccess;
+            return await Context.Set<T>().FindAsync(keyValues) != null;
         }
 
         public virtual async Task<bool> IsExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            TResult result = new TResult();
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            try
-            {
-                T obj = await Context.Set<T>().FirstOrDefaultAsync();
-                result.IsSuccess = obj != null;
-            }
-            catch (Exception ex)
-            {
-                result.Error = ex;
-                result.Message = ex.Message;
-            }
-
-            return result.IsSuccess;
+            return await Context.Set<T>().FirstOrDefaultAsync() != null;
         }
 
-        public virtual int Save()
+        public virtual void Save()
         {
-            return Context.SaveChanges();
+            Context.SaveChanges();
         }
 
-        public virtual Task<int> SaveAsync()
+        public virtual async Task SaveAsync()
         {
-            return Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
     }
-
 }
