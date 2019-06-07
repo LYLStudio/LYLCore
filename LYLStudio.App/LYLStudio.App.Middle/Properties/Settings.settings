@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LYLStudio.App.Middle.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FILE_BASEPATH_LOG" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/App_Data/Logs/</Value>
+    </Setting>
+    <Setting Name="FILE_BASEPATH_PDF" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/App_Data/Temp/PDF/</Value>
+    </Setting>
+    <Setting Name="FILE_BASEPATH_MAIL_TEMPLATE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/App_Data/Template/Mail/</Value>
+    </Setting>
+    <Setting Name="TIMEOUT_VERFICATION" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">00:02:00</Value>
+    </Setting>
+    <Setting Name="FILE_LOCATION_CERTIFICATE_WHITELIST" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/App_Data/Certifacte/White.lst</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
