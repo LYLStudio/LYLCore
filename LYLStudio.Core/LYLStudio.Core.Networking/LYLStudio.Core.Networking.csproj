@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D094A106-B64E-4390-A5FD-85E0AEF848B6}</ProjectGuid>
+    <ProjectGuid>{624D0B71-73B1-4E7D-BC6C-FCF6FFA2D679}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LYLStudio.Core.Data</RootNamespace>
-    <AssemblyName>LYLStudio.Core.Data</AssemblyName>
+    <RootNamespace>LYLStudio.Core.Networking</RootNamespace>
+    <AssemblyName>LYLStudio.Core.Networking</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Build\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Build\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,27 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sync\ICreate.cs" />
-    <Compile Include="Async\ICreateAsync.cs" />
-    <Compile Include="Sync\IDataAccess.cs" />
-    <Compile Include="Async\IDataAccessAsync.cs" />
-    <Compile Include="Sync\IDelete.cs" />
-    <Compile Include="Async\IDeleteAsync.cs" />
-    <Compile Include="Sync\IExist.cs" />
-    <Compile Include="Async\IExistAsync.cs" />
-    <Compile Include="Sync\IFatch.cs" />
-    <Compile Include="Async\IFatchAsync.cs" />
-    <Compile Include="Sync\ISave.cs" />
-    <Compile Include="Async\ISaveAsync.cs" />
-    <Compile Include="Sync\IUpdate.cs" />
-    <Compile Include="Async\IUpdateAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LYLStudio.Core\LYLStudio.Core.csproj">
-      <Project>{58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98}</Project>
-      <Name>LYLStudio.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
