@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.TestConsole",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Middle", "LYLStudio.App.Middle\LYLStudio.App.Middle.csproj", "{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Models", "LYLStudio.App.Models\LYLStudio.App.Models.csproj", "{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Services", "LYLStudio.App.Services\LYLStudio.App.Services.csproj", "{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,22 @@ Global
 		{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}.Deploy.UAT|Any CPU.Build.0 = Deploy.UAT|Any CPU
 		{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Deploy.PROD|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Deploy.PROD|Any CPU.Build.0 = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Deploy.UAT|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Deploy.UAT|Any CPU.Build.0 = Debug|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF10D2DA-A5A9-4579-8495-7749A8EAB5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Deploy.PROD|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Deploy.PROD|Any CPU.Build.0 = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Deploy.UAT|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Deploy.UAT|Any CPU.Build.0 = Debug|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
