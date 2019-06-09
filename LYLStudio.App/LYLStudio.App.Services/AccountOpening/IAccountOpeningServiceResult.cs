@@ -3,10 +3,7 @@ using LYLStudio.App.Models;
 
 namespace LYLStudio.App.Services.AccountOpening
 {
-    /// <summary>
-    /// 開戶服務處理結果
-    /// </summary>
-    public interface IAccountOpeningServiceResult : IResult<IApplication>
+    public interface IAccountOpeningServiceResultBase : IResult
     {
         /// <summary>
         /// 開戶處理狀態
@@ -24,6 +21,15 @@ namespace LYLStudio.App.Services.AccountOpening
         /// 步驟完成狀態步驟清單
         /// </summary>
         IDictionary<StepType, bool> CompletedSteps { get; }
+    }
+
+
+    /// <summary>
+    /// 開戶服務處理結果
+    /// </summary>
+    public interface IAccountOpeningServiceResult<T> : IAccountOpeningServiceResultBase, IExtendData<T>
+    {
+        
     }
 
     /// <summary>

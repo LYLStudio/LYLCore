@@ -3,7 +3,7 @@
 namespace LYLStudio.App.Services
 {
     /// <summary>
-    /// 服務執行結果介面
+    /// 服務執行結果
     /// </summary>
     public interface IResult
     {
@@ -19,13 +19,13 @@ namespace LYLStudio.App.Services
     }
 
     /// <summary>
-    /// 服務執行結果介面
+    /// 附加指定資料
     /// </summary>
-    /// <typeparam name="T">指定服務回應資料型別</typeparam>
-    public interface IResult<T> : IResult
+    /// <typeparam name="T">資料型別</typeparam>
+    public interface IExtendData<T>
     {
         /// <summary>
-        /// 回傳服務泛型資料
+        /// 資料
         /// </summary>
         T Data { get; }
     }

@@ -5,14 +5,17 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶申請服務
     /// </summary>
-    public interface IAccountOpeningService
+    public interface IAccountOpeningService<TResult, T1, T2>
+        where TResult : IAccountOpeningServiceResultBase
+        where T1 : IBasicInfoBase
+        where T2 : IApplication
     {
-        IAccountOpeningServiceResult Query(IBasicInfoBase basicInfo);
+        TResult Query(T1 basicInfo);
 
-        IAccountOpeningServiceResult Apply(IApplication application);
+        TResult Apply(T2 application);
 
-        IAccountOpeningServiceResult Keep(IApplication application);
+        TResult Keep(T2 application);
 
-        IAccountOpeningServiceResult Cancel(IApplication application);
+        TResult Cancel(T2 application);
     }
 }

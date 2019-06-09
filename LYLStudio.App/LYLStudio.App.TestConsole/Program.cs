@@ -22,21 +22,28 @@ namespace LYLStudio.App.TestConsole
                 }
             };
             logSvc.Log(logTarget, new LogItem("START!!"));
-            var seqOperator = new SequenceOperator<string>(nameof(TestModelService));
-            seqOperator.OperationOccurred += SeqOperator_OperationOccurred;
-            seqOperator.Enqueue(new Anything<string>()
-            {
-                Callback = o =>
-                {
-                    using (var svc = new TestModelService())
-                    {
-                        var result = svc.Create(new Account() { Id = 1, Name = "aaaa" });
-                        logSvc.Log(logTarget, new LogItem($"{result.Id}|{result.IsSuccess}|{result.Message}") { Error = result.Error });
-                    }
+            //var seqOperator = new SequenceOperator<string>(nameof(TestModelService));
+            //seqOperator.OperationOccurred += SeqOperator_OperationOccurred;
+            //seqOperator.Enqueue(new Anything<string>()
+            //{
+            //    Callback = o =>
+            //    {
+            //        using (var svc = new TestModelService())
+            //        {
+            //            var result = svc.Create(new Account() { Id = 1, Name = "aaaa" });
+            //            logSvc.Log(logTarget, new LogItem($"{result.Id}|{result.IsSuccess}|{result.Message}") { Error = result.Error });
+            //        }
 
-                }
-            });
+            //    }
+            //});
 
+            //IdentityType identityType = IdentityType.NaturalPerson;
+
+            //var members = typeof(IdentityType).GetMember(identityType.ToString());
+            //var attributes = members[0].GetCustomAttributes(typeof(DBValueAttribute), false);
+            //var dbValue = (attributes[0] as DBValueAttribute).DbValue;
+
+            
 
             Console.ReadLine();
 
