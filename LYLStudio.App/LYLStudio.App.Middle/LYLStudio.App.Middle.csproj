@@ -17,8 +17,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44349</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -88,11 +87,10 @@
     <Compile Include="Services\ILogService.cs" />
     <Compile Include="Services\IMiddleService.cs" />
     <Compile Include="App_Start\Startup.cs" />
-    <Compile Include="Svc\AccountOpening\AccountOpeningMiddleServiceBase.cs" />
-    <Compile Include="Svc\AccountOpening\AccountOpeningService.cs" />
-    <Compile Include="Svc\AccountOpening\AccountOpeningServiceResult.cs" />
-    <Compile Include="Svc\AccountOpening\ApplicationOfNaturalPerson.cs" />
-    <Compile Include="Svc\AccountOpening\IService.cs" />
+    <Compile Include="Services\AccountOpening\IAccountOpeningMiddleService.cs" />
+    <Compile Include="Services\AccountOpening\NaturalPerson\AccountOpeningService.cs" />
+    <Compile Include="Services\AccountOpening\NaturalPerson\AccountOpeningServiceResult.cs" />
+    <Compile Include="Services\AccountOpening\NaturalPerson\ApplicationOfNaturalPerson.cs" />
     <Compile Include="Svc\AccountOpening\Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>
@@ -103,6 +101,7 @@
     <Folder Include="App_Data\Template\Mail\Deploy.SIT\" />
     <Folder Include="App_Data\Temp\PDF\" />
     <Folder Include="Models\" />
+    <Folder Include="Services\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

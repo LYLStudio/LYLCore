@@ -45,7 +45,7 @@
     <Compile Include="AccountOpening\IAccountOpeningServiceResult.cs" />
     <Compile Include="ILogItem.cs" />
     <Compile Include="IResult.cs" />
-    <Compile Include="IServiceTest.cs" />
+    <Compile Include="IServiceChecking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

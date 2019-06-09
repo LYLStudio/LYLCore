@@ -1,18 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LYLStudio.App.Services
 {
-    public interface IServiceTest
+    /// <summary>
+    /// 服務測試
+    /// </summary>
+    public interface IServiceChecking
     {
-        DateTime SendTime { get; }
-        DateTime? ReplyTime { get; }
-        ServiceStatus Status { get; }
-        string Message { get; }
+        /// <summary>
+        /// 回應時間
+        /// </summary>
+        DateTime? ReplyTime { get; set; }
+        /// <summary>
+        /// 服務狀態
+        /// </summary>
+        ServiceStatus Status { get; set; }
+        /// <summary>
+        /// 訊息
+        /// </summary>
+        string Message { get; set; }
     }
 
     /// <summary>

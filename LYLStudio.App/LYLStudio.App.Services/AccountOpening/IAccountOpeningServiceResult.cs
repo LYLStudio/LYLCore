@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using LYLStudio.App.Models;
 
 namespace LYLStudio.App.Services.AccountOpening
 {
+    /// <summary>
+    /// 開戶服務處理結果基底
+    /// </summary>
     public interface IAccountOpeningServiceResultBase : IResult
     {
         /// <summary>
@@ -23,13 +25,13 @@ namespace LYLStudio.App.Services.AccountOpening
         IDictionary<StepType, bool> CompletedSteps { get; }
     }
 
-
     /// <summary>
     /// 開戶服務處理結果
     /// </summary>
+    /// <typeparam name="T">附加資料型別</typeparam>
     public interface IAccountOpeningServiceResult<T> : IAccountOpeningServiceResultBase, IExtendData<T>
     {
-        
+
     }
 
     /// <summary>

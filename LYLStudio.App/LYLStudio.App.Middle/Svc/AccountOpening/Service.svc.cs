@@ -1,51 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using LYLStudio.App.Middle.Services;
+using LYLStudio.App.Middle.Services.AccountOpening;
+using LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson;
 
 namespace LYLStudio.App.Middle.Svc.AccountOpening
 {
+    public interface IService : IAccountOpeningMiddleService, IAccountOpeningService
+    {
+    }
+
     [ServiceContract]
     public class Service : IService
     {
+        private readonly IAccountOpeningService _accountOpeningService;
         public ILogService Logger { get; }
 
         public Service()
         {
-            
+            //初始化ILogService
+
+            //初始化IAccountOpeningService
+            _accountOpeningService = new AccountOpeningService();
+
+            //其他
         }
 
         [OperationContract]
         public AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application)
         {
-            throw new NotImplementedException();
+            return _accountOpeningService.Apply(application);
         }
 
         [OperationContract]
         public AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application)
         {
-            throw new NotImplementedException();
+            return _accountOpeningService.Cancel(application);
         }
 
         [OperationContract]
         public AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application)
         {
-            throw new NotImplementedException();
+            return _accountOpeningService.Keep(application);
         }
 
         [OperationContract]
         public AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
         {
-            throw new NotImplementedException();
+            return _accountOpeningService.Query(basicInfo);
         }
-
+        
         [OperationContract]
-        public ServiceTest ServiceCheck()
+        public AccountOpeningServiceChecking CheckService(CheckType checkType = CheckType.None)
         {
-            throw new NotImplementedException();
+            var result = new AccountOpeningServiceChecking
+            {
+                Message = checkType.ToString(),
+                ReplyTime = DateTime.Now
+            };
+
+            return result;
         }
     }
 }

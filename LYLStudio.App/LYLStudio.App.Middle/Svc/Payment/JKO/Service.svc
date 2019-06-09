@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="LYLStudio.App.Middle.Svc.Payment.JKO.Service" CodeBehind="Service.svc.cs" %>

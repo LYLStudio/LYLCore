@@ -1,15 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LYLStudio.App.Models;
 
-namespace LYLStudio.App.Middle.Svc.AccountOpening
+namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
 {
-    internal interface IApplicationOfNaturalPerson: IApplicationOfNaturalPerson<BasicInfoOfNaturalPerson, ContactInfo, ListOfInvestigationReport>
+    internal interface IApplicationOfNaturalPerson : IApplicationOfNaturalPerson<BasicInfoOfNaturalPerson, ContactInfo, ListOfInvestigationReport>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        DigitalDemandSavingsDepositType DigitalDemandSavingsDepositType { get; set; }
+    }
 
+    public enum DigitalDemandSavingsDepositType
+    {
+        /// <summary>
+        /// 非數位
+        /// </summary>
+        None,
+        /// <summary>
+        /// 第一類
+        /// </summary>
+        Class1,
+        /// <summary>
+        /// 第二類
+        /// </summary>
+        Class2,
+        /// <summary>
+        /// 第三類
+        /// </summary>
+        Class3
     }
 
     public class ApplicationOfNaturalPerson : IApplicationOfNaturalPerson
@@ -21,6 +41,12 @@ namespace LYLStudio.App.Middle.Svc.AccountOpening
         public DateTime? ApplyTime { get; set; }
         public ApprovedResultType? ApprovedResult { get; set; }
         public DateTime? ApprovedTime { get; set; }
+        public DigitalDemandSavingsDepositType DigitalDemandSavingsDepositType { get; set; }
+
+        public ApplicationOfNaturalPerson()
+        {
+        }
+
     }
 
     internal interface IApplicationOfNaturalPerson<T1, T2, T3> : IApplication
