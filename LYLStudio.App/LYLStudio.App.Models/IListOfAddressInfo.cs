@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace LYLStudio.App.Models
 {
     /// <summary>
-    /// 地址資訊
+    /// 地址資訊清單
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T"><see cref="IAddressInfo"/></typeparam>
     public interface IListOfAddressInfo<T>
          where T : IAddressInfo
     {
@@ -22,9 +22,9 @@ namespace LYLStudio.App.Models
     public interface IAddressInfo
     {
         /// <summary>
-        /// 地址類型
+        /// <see cref="AddressType"/>
         /// </summary>
-        AddressType AddressType { get; set; }
+        AddressTypeEnum AddressType { get; set; }
         /// <summary>
         /// 郵遞區號
         /// </summary>
@@ -39,7 +39,7 @@ namespace LYLStudio.App.Models
     /// 地址類型
     /// </summary>
     [Flags]
-    public enum AddressType
+    public enum AddressTypeEnum
     {
         /// <summary>
         /// 戶籍地址

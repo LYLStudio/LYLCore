@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace LYLStudio.App.Models
 {
+    /// <summary>
+    /// 識別文件資訊清單
+    /// </summary>
+    /// <typeparam name="T"><see cref="IIdentityDocument"/></typeparam>
     public interface IListOfIdentityDocument<T>
         where T : IIdentityDocument
     {
@@ -26,23 +30,23 @@ namespace LYLStudio.App.Models
         /// </summary>
         string OwnerId { get; set; }
         /// <summary>
-        /// 識別文件類型
+        /// <see cref="IdentityDocumentTypeEnum"/>
         /// </summary>
-        IdentityDocumentType DocumentType { get; set; }
+        IdentityDocumentTypeEnum DocumentType { get; set; }
         /// <summary>
         /// 簽發日期
         /// </summary>
         DateTime? IssuedDate { get; set; }
         /// <summary>
-        /// 簽發類型
+        /// <see cref="IssuedTypeEnum"/>"/>
         /// </summary>
-        IssuanceType? IssuanceType { get; set; }
+        IssuedTypeEnum? IssuedType { get; set; }
     }
 
     /// <summary>
     /// 身分識別文件類型
     /// </summary>
-    public enum IdentityDocumentType
+    public enum IdentityDocumentTypeEnum
     {
         /// <summary>
         /// 不明
@@ -73,7 +77,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 簽發類型
     /// </summary>
-    public enum IssuanceType
+    public enum IssuedTypeEnum
     {
         /// <summary>
         /// 不明

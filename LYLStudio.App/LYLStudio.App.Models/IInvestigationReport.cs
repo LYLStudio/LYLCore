@@ -2,30 +2,21 @@
 
 namespace LYLStudio.App.Models
 {
-    public interface IListOfInvestigationReport<T1, T2>
-        where T1 : IInvestigationReport<T2>
-        where T2 : ICaseRecord
-    {
-        /// <summary>
-        /// 調查報告清單
-        /// </summary>
-        IEnumerable<T1> InvestigationReports { get; }
-    }
-
     /// <summary>
     /// 調查報告
     /// </summary>
+    /// <typeparam name="T"><see cref="ICaseRecord"/></typeparam>
     public interface IInvestigationReport<T> : IListOfCaseRecord<T>
         where T : ICaseRecord
     {
         /// <summary>
-        /// 調查報告類型
+        /// <see cref="InvestigateTypeEnum"/>
         /// </summary>
-        InvestigationType InvestigationType { get; }
+        InvestigateTypeEnum InvestigateType { get; }
         /// <summary>
-        /// 調查結果
+        /// <see cref="InvestigateResultTypeEnum"/>
         /// </summary>
-        InvestigateResultType InvestigateResult { get; }
+        InvestigateResultTypeEnum InvestigateResult { get; }
         /// <summary>
         /// 調查結果描述
         /// </summary>
@@ -35,7 +26,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 調查類型
     /// </summary>
-    public enum InvestigationType
+    public enum InvestigateTypeEnum
     {
         /// <summary>
         /// 防制洗錢
@@ -52,7 +43,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 調查結果類型
     /// </summary>
-    public enum InvestigateResultType
+    public enum InvestigateResultTypeEnum
     {
         /// <summary>
         /// 正常

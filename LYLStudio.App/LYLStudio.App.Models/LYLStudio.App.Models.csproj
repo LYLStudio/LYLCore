@@ -49,7 +49,7 @@
     <Compile Include="IContactInfo.cs" />
     <Compile Include="IListOfEmailInfo.cs" />
     <Compile Include="IListOfIdentityDocument.cs" />
-    <Compile Include="IListOfInvestigationReport.cs" />
+    <Compile Include="IInvestigationReport.cs" />
     <Compile Include="IBasicInfoOfNaturalPerson.cs" />
     <Compile Include="IListOfPhoneInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,9 +5,9 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶申請服務
     /// </summary>
-    /// <typeparam name="TResult">服務結果</typeparam>
-    /// <typeparam name="T1">基本資料</typeparam>
-    /// <typeparam name="T2">申請書</typeparam>
+    /// <typeparam name="TResult"><see cref="IAccountOpeningServiceResultBase"/></typeparam>
+    /// <typeparam name="T1"><see cref="IBasicInfoBase"/></typeparam>
+    /// <typeparam name="T2"><see cref="IApplication"/></typeparam>
     public interface IAccountOpeningService<TResult, T1, T2>
         where TResult : IAccountOpeningServiceResultBase
         where T1 : IBasicInfoBase

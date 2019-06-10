@@ -6,7 +6,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// Email資訊清單
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T"><see cref="IEmailInfo"/></typeparam>
     public interface IListOfEmailInfo<T>
         where T : IEmailInfo
     {
@@ -22,9 +22,9 @@ namespace LYLStudio.App.Models
     public interface IEmailInfo
     {
         /// <summary>
-        /// <see cref="EmailUsageType"/>
+        /// <see cref="EmailUsageTypeEnum"/>
         /// </summary>
-        EmailUsageType UsageType { get; set; }
+        EmailUsageTypeEnum UsageType { get; set; }
         /// <summary>
         /// 電子郵件信箱
         /// </summary>        
@@ -35,7 +35,7 @@ namespace LYLStudio.App.Models
     /// Email用途類型
     /// </summary>
     [Flags]
-    public enum EmailUsageType
+    public enum EmailUsageTypeEnum
     {
         Unknown = 0x0000,
         Ntd,

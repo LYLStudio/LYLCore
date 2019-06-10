@@ -5,20 +5,29 @@ namespace LYLStudio.App.Middle.Services
 {
     /// <summary>
     /// 中間件服務介面
-    /// </summary>    
+    /// </summary>
+    /// <typeparam name="T"><see cref="IServiceChecking"/></typeparam>
     public interface IMiddleService<T>
         where T : IServiceChecking
     {
+        /// <summary>
+        /// 記錄器<see cref="ILogService"/>
+        /// </summary>
         ILogService Logger { get; }
 
-        T CheckService(CheckType checkType = CheckType.None);
+        /// <summary>
+        /// 檢查服務狀態
+        /// </summary>
+        /// <param name="checkType"><see cref="CheckTypeEnum"/></param>
+        /// <returns>服務檢查結果<see cref="IServiceChecking"/></returns>
+        T CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
     }
 
     /// <summary>
-    /// 系統檢查類型
+    /// 服務檢查類型
     /// </summary>
     [Flags]
-    public enum CheckType
+    public enum CheckTypeEnum
     {
         /// <summary>
         /// 不檢查

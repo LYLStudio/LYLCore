@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace LYLStudio.App.Models
 {
+    /// <summary>
+    /// 電話資訊清單
+    /// </summary>
+    /// <typeparam name="T"><see cref="IPhoneInfo"/></typeparam>
     public interface IListOfPhoneInfo<T>
         where T : IPhoneInfo
     {
@@ -18,9 +22,9 @@ namespace LYLStudio.App.Models
     public interface IPhoneInfo
     {
         /// <summary>
-        /// 電話類型
+        /// <see cref="PhoneTypeEnum"/>
         /// </summary>
-        PhoneType PhoneType { get; set; }
+        PhoneTypeEnum PhoneType { get; set; }
         /// <summary>
         /// 電話號碼
         /// </summary>
@@ -31,7 +35,7 @@ namespace LYLStudio.App.Models
     /// 電話類型
     /// </summary>
     [Flags]
-    public enum PhoneType
+    public enum PhoneTypeEnum
     {
         /// <summary>
         /// 住家

@@ -18,9 +18,9 @@ namespace LYLStudio.App.Models
         DateTime? ApplyTime { get; set; }
 
         /// <summary>
-        /// 核定結果
+        /// <see cref="ApprovedResultTypeEnum"/>
         /// </summary>
-        ApprovedResultType? ApprovedResult { get; set; }
+        ApprovedResultTypeEnum? ApprovedResult { get; set; }
 
         /// <summary>
         /// 核定時間
@@ -31,7 +31,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 申請書結果類型
     /// </summary>
-    public enum ApprovedResultType
+    public enum ApprovedResultTypeEnum
     {
         /// <summary>
         /// 拒絕

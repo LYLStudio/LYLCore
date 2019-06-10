@@ -76,6 +76,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,6 +85,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\AccountOpening.NaturalPerson\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
@@ -145,6 +151,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OpenAccountModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\AccountOpening.NaturalPerson\Service.wsdl" />
     <None Include="Models\OpenAccountModel.edmx.diagram">
       <DependentUpon>OpenAccountModel.edmx</DependentUpon>
     </None>
@@ -158,6 +171,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\AccountOpening.NaturalPerson\configuration91.svcinfo" />
+    <None Include="Connected Services\AccountOpening.NaturalPerson\configuration.svcinfo" />
+    <None Include="Connected Services\AccountOpening.NaturalPerson\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Models\OpenAccountModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OpenAccountModel.Context.cs</LastGenOutput>
@@ -186,10 +205,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LYLStudio.App.Middle\LYLStudio.App.Middle.csproj">
-      <Project>{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}</Project>
-      <Name>LYLStudio.App.Middle</Name>
-    </ProjectReference>
+    <WCFMetadataStorage Include="Connected Services\AccountOpening.NaturalPerson\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

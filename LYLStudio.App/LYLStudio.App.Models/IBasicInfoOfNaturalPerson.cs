@@ -15,7 +15,7 @@
         /// <summary>
         /// 性別
         /// </summary>
-        GenderType Gender { get; set; }
+        GenderTypeEnum Gender { get; set; }
         /// <summary>
         /// 畢業小學
         /// </summary>
@@ -25,7 +25,7 @@
     /// <summary>
     /// 性別
     /// </summary>
-    public enum GenderType
+    public enum GenderTypeEnum
     {
         Unknown,
         Male,

@@ -8,27 +8,27 @@ namespace LYLStudio.App.Services.AccountOpening
     public interface IAccountOpeningServiceResultBase : IResult
     {
         /// <summary>
-        /// 開戶處理狀態
+        /// <see cref="OpeningStatusEnum"/>
         /// </summary>
-        OpeningStatus Status { get; }
+        OpeningStatusEnum Status { get; }
         /// <summary>
-        /// 前一次步驟
+        /// 前一次步驟<see cref="StepTypeEnum"/>
         /// </summary>
-        StepType PreviousStep { get; }
+        StepTypeEnum PreviousStep { get; }
         /// <summary>
-        /// 下一步驟
+        /// 下一步驟<see cref="StepTypeEnum"/>
         /// </summary>
-        StepType NextStep { get; }
+        StepTypeEnum NextStep { get; }
         /// <summary>
-        /// 步驟完成狀態步驟清單
+        /// 步驟完成狀態清單
         /// </summary>
-        IDictionary<StepType, bool> CompletedSteps { get; }
+        IDictionary<StepTypeEnum, bool> CompletedSteps { get; }
     }
 
     /// <summary>
     /// 開戶服務處理結果
     /// </summary>
-    /// <typeparam name="T">附加資料型別</typeparam>
+    /// <typeparam name="T"><see cref="IExtendData{T}"/></typeparam>
     public interface IAccountOpeningServiceResult<T> : IAccountOpeningServiceResultBase, IExtendData<T>
     {
 
@@ -37,7 +37,7 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶申請狀態
     /// </summary>
-    public enum OpeningStatus
+    public enum OpeningStatusEnum
     {
         /// <summary>
         /// 申請中
@@ -56,7 +56,7 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶步驟類型
     /// </summary>
-    public enum StepType
+    public enum StepTypeEnum
     {
         /// <summary>
         /// 尚未操作

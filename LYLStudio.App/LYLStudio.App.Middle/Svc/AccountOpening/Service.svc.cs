@@ -6,11 +6,25 @@ using LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson;
 
 namespace LYLStudio.App.Middle.Svc.AccountOpening
 {
+    [ServiceContract]
     public interface IService : IAccountOpeningMiddleService, IAccountOpeningService
     {
-    }
+        [OperationContract]
+        AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application);
 
-    [ServiceContract]
+        [OperationContract]
+        AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application);
+
+        [OperationContract]
+        AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application);
+
+        [OperationContract]
+        AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
+
+        [OperationContract]
+        AccountOpeningServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
+    }
+    
     public class Service : IService
     {
         private readonly IAccountOpeningService _accountOpeningService;
@@ -25,36 +39,33 @@ namespace LYLStudio.App.Middle.Svc.AccountOpening
 
             //其他
         }
-
-        [OperationContract]
+        
         public AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application)
         {
             return _accountOpeningService.Apply(application);
         }
 
-        [OperationContract]
         public AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application)
         {
             return _accountOpeningService.Cancel(application);
         }
 
-        [OperationContract]
         public AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application)
         {
             return _accountOpeningService.Keep(application);
         }
 
-        [OperationContract]
         public AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
         {
             return _accountOpeningService.Query(basicInfo);
         }
-        
-        [OperationContract]
-        public AccountOpeningServiceChecking CheckService(CheckType checkType = CheckType.None)
+
+        public AccountOpeningServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None)
         {
+            //todo something check
             var result = new AccountOpeningServiceChecking
             {
+                Status = App.Services.ServiceStatusEnum.Unknown,
                 Message = checkType.ToString(),
                 ReplyTime = DateTime.Now
             };

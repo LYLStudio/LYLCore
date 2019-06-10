@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.TestConsole", "LYLStudio.App.TestConsole\LYLStudio.App.TestConsole.csproj", "{1B853CC6-4222-46F5-980D-07E1069F2177}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32D5F62B-72F3-479F-ADC6-975CEE1A1C88} = {32D5F62B-72F3-479F-ADC6-975CEE1A1C88}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Middle", "LYLStudio.App.Middle\LYLStudio.App.Middle.csproj", "{32D5F62B-72F3-479F-ADC6-975CEE1A1C88}"
 EndProject

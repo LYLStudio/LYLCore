@@ -20,9 +20,9 @@ namespace LYLStudio.App.Models
         /// </summary>
         DateTime LegalDate { get; set; }
         /// <summary>
-        /// 身分別
+        /// <see cref="IdentityTypeEnum"/>
         /// </summary>
-        IdentityType IdentityType { get; set; }
+        IdentityTypeEnum IdentityType { get; set; }
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 身分別
     /// </summary>
-    public enum IdentityType
+    public enum IdentityTypeEnum
     {
         /// <summary>
         /// 不明
