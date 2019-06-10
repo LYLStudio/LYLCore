@@ -31,7 +31,7 @@ namespace LYLStudio.App.Models
     public interface IBasicInfo<T> : IBasicInfoBase, IListOfIdentityDocument<T>
         where T : IIdentityDocument
     {
-        
+
     }
 
     /// <summary>

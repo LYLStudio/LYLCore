@@ -5,40 +5,40 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶申請服務
     /// </summary>
-    /// <typeparam name="TResult"></typeparam>
-    /// <typeparam name="T1"></typeparam>
-    /// <typeparam name="T2"></typeparam>
+    /// <typeparam name="TResult">服務結果</typeparam>
+    /// <typeparam name="T1">基本資料</typeparam>
+    /// <typeparam name="T2">申請書</typeparam>
     public interface IAccountOpeningService<TResult, T1, T2>
         where TResult : IAccountOpeningServiceResultBase
         where T1 : IBasicInfoBase
         where T2 : IApplication
     {
         /// <summary>
-        /// 
+        /// 查詢申請
         /// </summary>
-        /// <param name="basicInfo"></param>
-        /// <returns></returns>
+        /// <param name="basicInfo">基本資料</param>
+        /// <returns>服務結果</returns>
         TResult Query(T1 basicInfo);
 
         /// <summary>
-        /// 
+        /// 提交申請
         /// </summary>
-        /// <param name="application"></param>
-        /// <returns></returns>
+        /// <param name="application">申請書</param>
+        /// <returns>服務結果</returns>
         TResult Apply(T2 application);
 
         /// <summary>
-        /// 
+        /// 保留申請
         /// </summary>
-        /// <param name="application"></param>
-        /// <returns></returns>
+        /// <param name="application">申請書</param>
+        /// <returns>服務結果</returns>
         TResult Keep(T2 application);
 
         /// <summary>
-        /// 
+        /// 取消申請
         /// </summary>
-        /// <param name="application"></param>
-        /// <returns></returns>
+        /// <param name="application">申請書</param>
+        /// <returns>服務結果</returns>
         TResult Cancel(T2 application);
     }
 }

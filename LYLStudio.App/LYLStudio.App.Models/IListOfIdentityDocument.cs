@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LYLStudio.App.Models
 {
@@ -28,6 +29,14 @@ namespace LYLStudio.App.Models
         /// 識別文件類型
         /// </summary>
         IdentityDocumentType DocumentType { get; set; }
+        /// <summary>
+        /// 簽發日期
+        /// </summary>
+        DateTime? IssuedDate { get; set; }
+        /// <summary>
+        /// 簽發類型
+        /// </summary>
+        IssuanceType? IssuanceType { get; set; }
     }
 
     /// <summary>
@@ -59,5 +68,24 @@ namespace LYLStudio.App.Models
         /// 護照
         /// </summary>
         Passport,
+    }
+
+    /// <summary>
+    /// 簽發類型
+    /// </summary>
+    public enum IssuanceType
+    {
+        /// <summary>
+        /// 不明
+        /// </summary>
+        Unknown,
+        /// <summary>
+        /// 新簽
+        /// </summary>
+        New,
+        /// <summary>
+        /// 換發
+        /// </summary>
+        Renewed,
     }
 }

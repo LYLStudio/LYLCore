@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LYLStudio.App.Models
 {
@@ -12,7 +8,7 @@ namespace LYLStudio.App.Models
         public DBValueAttribute(string DbValue)
         {
             this.DbValue = DbValue;
-        }        
+        }
     }
 
     public class EnumMappingHelper
@@ -26,17 +22,17 @@ namespace LYLStudio.App.Models
             return dbValue;
         }
 
-        public static T GetEnum<T,A>(string dbValue, string propertyName) where A : Attribute
+        public static T GetEnum<T, A>(string dbValue, string propertyName) where A : Attribute
         {
             //todo
-            var result = default(T) ;
+            var result = default(T);
             var attributeType = typeof(A);
             if (default(T).GetType().IsEnum)
             {
                 var fields = default(T).GetType().GetFields();
                 //.Where(f => f.CustomAttributes.Contains(attributeType));
-                
-              
+
+
             }
 
             return result;
