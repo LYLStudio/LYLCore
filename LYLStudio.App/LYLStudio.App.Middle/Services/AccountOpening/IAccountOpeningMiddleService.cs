@@ -2,10 +2,7 @@
 using LYLStudio.App.Services;
 
 namespace LYLStudio.App.Middle.Services.AccountOpening
-{
-    /// <summary>
-    /// IAccountOpeningMiddleService
-    /// </summary>
+{    
     public interface IAccountOpeningMiddleService : IMiddleService<AccountOpeningServiceChecking>
     {
     }

@@ -23,7 +23,7 @@ namespace LYLStudio.App.Models
         /// <summary>
         /// 用途
         /// </summary>
-        PhoneTypeEnum UsageType { get; set; }
+        PhoneUsageTypeEnum UsageType { get; set; }
 
         /// <summary>
         /// 電話號碼
@@ -35,7 +35,7 @@ namespace LYLStudio.App.Models
     /// 電話使用類型
     /// </summary>
     [Flags]
-    public enum PhoneTypeEnum
+    public enum PhoneUsageTypeEnum
     {
         /// <summary>
         /// 住家

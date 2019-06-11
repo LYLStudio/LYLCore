@@ -23,7 +23,7 @@ namespace LYLStudio.App.Models
         /// <summary>
         /// 用途
         /// </summary>
-        AddressTypeEnum UsageType { get; set; }
+        AddressUsageTypeEnum UsageType { get; set; }
 
         /// <summary>
         /// 郵遞區號
@@ -40,7 +40,7 @@ namespace LYLStudio.App.Models
     /// 地址類型
     /// </summary>
     [Flags]
-    public enum AddressTypeEnum
+    public enum AddressUsageTypeEnum
     {
         /// <summary>
         /// 戶籍地址

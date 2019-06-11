@@ -35,6 +35,6 @@ namespace LYLStudio.App.Models
         /// <summary>
         /// 是否有效
         /// </summary>
-        bool IsValid { get; set; }
+        bool? IsValid { get; set; }
     }
 }

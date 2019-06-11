@@ -14,7 +14,7 @@
         /// <summary>
         /// 調查結果類型
         /// </summary>
-        InvestigateResultTypeEnum InvestigateResult { get; }
+        InvestigateResultTypeEnum? InvestigateResult { get; }
 
         /// <summary>
         /// 調查結果描述
@@ -48,6 +48,11 @@
     /// </summary>
     public enum InvestigateResultTypeEnum
     {
+        /// <summary>
+        /// 不明
+        /// </summary>
+        Unknown,
+
         /// <summary>
         /// 正常
         /// </summary>
