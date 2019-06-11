@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-
-namespace LYLStudio.App.Models
+﻿namespace LYLStudio.App.Models
 {
     /// <summary>
     /// 調查報告
     /// </summary>
-    /// <typeparam name="T"><see cref="ICaseRecord"/></typeparam>
-    public interface IInvestigationReport<T> : IListOfCaseRecord<T>
-        where T : ICaseRecord
+    /// <typeparam name="T"></typeparam>
+    public interface IInvestigationReport<T> : IListOfCaseRecord<T> where T : ICaseRecord
     {
         /// <summary>
-        /// <see cref="InvestigateTypeEnum"/>
+        /// 調查類型
         /// </summary>
         InvestigateTypeEnum InvestigateType { get; }
+
         /// <summary>
-        /// <see cref="InvestigateResultTypeEnum"/>
+        /// 調查結果類型
         /// </summary>
         InvestigateResultTypeEnum InvestigateResult { get; }
+
         /// <summary>
         /// 調查結果描述
         /// </summary>
@@ -32,12 +31,16 @@ namespace LYLStudio.App.Models
         /// 防制洗錢
         /// </summary>
         AML,
+
         /// <summary>
         /// 聯徵調查
         /// </summary>
         JCIC,
 
-        //todo: 其他調查項目?
+        /// <summary>
+        /// 內部黑名單
+        /// </summary>
+        InternalBlackList,
     }
 
     /// <summary>
@@ -49,12 +52,11 @@ namespace LYLStudio.App.Models
         /// 正常
         /// </summary>
         Normal,
+
         /// <summary>
         /// 警示
         /// </summary>
         Warning,
-
-        //todo: 其他結果?
     }
 
 }

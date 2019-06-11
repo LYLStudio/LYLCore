@@ -6,9 +6,8 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 電話資訊清單
     /// </summary>
-    /// <typeparam name="T"><see cref="IPhoneInfo"/></typeparam>
-    public interface IListOfPhoneInfo<T>
-        where T : IPhoneInfo
+    /// <typeparam name="T"></typeparam>
+    public interface IListOfPhoneInfo<T> where T : IPhoneInfo
     {
         /// <summary>
         /// 電話清單
@@ -22,9 +21,10 @@ namespace LYLStudio.App.Models
     public interface IPhoneInfo
     {
         /// <summary>
-        /// <see cref="PhoneTypeEnum"/>
+        /// 用途
         /// </summary>
-        PhoneTypeEnum PhoneType { get; set; }
+        PhoneTypeEnum UsageType { get; set; }
+
         /// <summary>
         /// 電話號碼
         /// </summary>
@@ -32,7 +32,7 @@ namespace LYLStudio.App.Models
     }
 
     /// <summary>
-    /// 電話類型
+    /// 電話使用類型
     /// </summary>
     [Flags]
     public enum PhoneTypeEnum
@@ -41,14 +41,17 @@ namespace LYLStudio.App.Models
         /// 住家
         /// </summary>
         Home = 0x0001,
+
         /// <summary>
         /// 公司
         /// </summary>
         Company = 0x0010,
+
         /// <summary>
         /// 傳真
         /// </summary>
         Fax = 0x0100,
+
         /// <summary>
         /// 行動電話
         /// </summary>
@@ -58,10 +61,12 @@ namespace LYLStudio.App.Models
         /// 住家與公司相同
         /// </summary>
         HomeAndCompany = Home | Company,
+
         /// <summary>
         /// 住家與傳真相同
         /// </summary>
         HomeAndFax = Home | Fax,
+
         /// <summary>
         /// 公司與傳真相同
         /// </summary>

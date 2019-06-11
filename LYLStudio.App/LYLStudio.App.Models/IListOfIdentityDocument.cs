@@ -22,25 +22,34 @@ namespace LYLStudio.App.Models
     public interface IIdentityDocument
     {
         /// <summary>
-        /// 證號
+        /// 證件編號
         /// </summary>
         string DocumentId { get; set; }
+
         /// <summary>
         /// 擁有者識別編號
         /// </summary>
         string OwnerId { get; set; }
+
         /// <summary>
-        /// <see cref="IdentityDocumentTypeEnum"/>
+        /// 證件類型
         /// </summary>
         IdentityDocumentTypeEnum DocumentType { get; set; }
+
         /// <summary>
         /// 簽發日期
         /// </summary>
         DateTime? IssuedDate { get; set; }
+
         /// <summary>
-        /// <see cref="IssuedTypeEnum"/>"/>
+        /// 簽發類型
         /// </summary>
         IssuedTypeEnum? IssuedType { get; set; }
+
+        /// <summary>
+        /// 簽發地點
+        /// </summary>
+        string IssuedPlace { get; set; }
     }
 
     /// <summary>
@@ -52,22 +61,27 @@ namespace LYLStudio.App.Models
         /// 不明
         /// </summary>
         Unknown,
+
         /// <summary>
         /// 身分證
         /// </summary>
         IdentificationCard,
+
         /// <summary>
         /// 健保卡
         /// </summary>
         HealthInsuranceCard,
+
         /// <summary>
         /// 駕照
         /// </summary>
         DriverLicense,
+
         /// <summary>
         /// 自然人憑證
         /// </summary>
         NaturalPerson,
+
         /// <summary>
         /// 護照
         /// </summary>
@@ -83,10 +97,17 @@ namespace LYLStudio.App.Models
         /// 不明
         /// </summary>
         Unknown,
+
         /// <summary>
         /// 新簽
         /// </summary>
         New,
+
+        /// <summary>
+        /// 補發
+        /// </summary>
+        Reissued,
+
         /// <summary>
         /// 換發
         /// </summary>

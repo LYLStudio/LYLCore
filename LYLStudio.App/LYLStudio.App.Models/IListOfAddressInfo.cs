@@ -6,9 +6,8 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 地址資訊清單
     /// </summary>
-    /// <typeparam name="T"><see cref="IAddressInfo"/></typeparam>
-    public interface IListOfAddressInfo<T>
-         where T : IAddressInfo
+    /// <typeparam name="T"></typeparam>
+    public interface IListOfAddressInfo<T> where T : IAddressInfo
     {
         /// <summary>
         /// 地址清單
@@ -22,13 +21,15 @@ namespace LYLStudio.App.Models
     public interface IAddressInfo
     {
         /// <summary>
-        /// <see cref="AddressType"/>
+        /// 用途
         /// </summary>
-        AddressTypeEnum AddressType { get; set; }
+        AddressTypeEnum UsageType { get; set; }
+
         /// <summary>
         /// 郵遞區號
         /// </summary>
         string ZipCode { get; set; }
+
         /// <summary>
         /// 地址全文
         /// </summary>
@@ -45,14 +46,17 @@ namespace LYLStudio.App.Models
         /// 戶籍地址
         /// </summary>
         Household = 0x0001,
+
         /// <summary>
         /// 居住/通訊地址
         /// </summary>
         Residence = 0x0010,
+
         /// <summary>
         /// 公司地址
         /// </summary>
         Company = 0x0100,
+
         /// <summary>
         /// 郵政信箱
         /// </summary>

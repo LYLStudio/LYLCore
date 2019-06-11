@@ -5,18 +5,18 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <summary>
     /// 開戶申請服務
     /// </summary>
-    /// <typeparam name="TResult"><see cref="IAccountOpeningServiceResultBase"/></typeparam>
-    /// <typeparam name="T1"><see cref="IBasicInfoBase"/></typeparam>
-    /// <typeparam name="T2"><see cref="IApplication"/></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
     public interface IAccountOpeningService<TResult, T1, T2>
         where TResult : IAccountOpeningServiceResultBase
         where T1 : IBasicInfoBase
         where T2 : IApplication
     {
         /// <summary>
-        /// 查詢申請
+        /// 查詢申請單
         /// </summary>
-        /// <param name="basicInfo">基本資料</param>
+        /// <param name="basicInfo">基本資訊</param>
         /// <returns>服務結果</returns>
         TResult Query(T1 basicInfo);
 

@@ -11,10 +11,12 @@ namespace LYLStudio.App.Services
         /// 回應時間
         /// </summary>
         DateTime? ReplyTime { get; set; }
+
         /// <summary>
-        /// <see cref="ServiceStatusEnum"/>
+        /// 服務狀態
         /// </summary>
         ServiceStatusEnum Status { get; set; }
+
         /// <summary>
         /// 訊息
         /// </summary>
@@ -22,7 +24,7 @@ namespace LYLStudio.App.Services
     }
 
     /// <summary>
-    /// 服務狀態
+    /// 服務狀態類型
     /// </summary>
     public enum ServiceStatusEnum
     {

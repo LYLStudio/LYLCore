@@ -8,9 +8,14 @@ namespace LYLStudio.App.Models
     public interface IApplication
     {
         /// <summary>
-        /// 開戶申請書編號
+        /// 申請書編號
         /// </summary>
         Guid Id { get; }
+
+        /// <summary>
+        /// 申請書名稱
+        /// </summary>
+        string Name { get; set; }
 
         /// <summary>
         /// 申請時間
@@ -18,7 +23,7 @@ namespace LYLStudio.App.Models
         DateTime? ApplyTime { get; set; }
 
         /// <summary>
-        /// <see cref="ApprovedResultTypeEnum"/>
+        /// 核定結果
         /// </summary>
         ApprovedResultTypeEnum? ApprovedResult { get; set; }
 
@@ -37,6 +42,7 @@ namespace LYLStudio.App.Models
         /// 拒絕
         /// </summary>
         Reject,
+        
         /// <summary>
         /// 成功
         /// </summary>

@@ -6,9 +6,8 @@ namespace LYLStudio.App.Models
     /// <summary>
     /// 案件記錄資訊清單
     /// </summary>
-    /// <typeparam name="T"><see cref="ICaseRecord"/></typeparam>
-    public interface IListOfCaseRecord<T>
-        where T : ICaseRecord
+    /// <typeparam name="T"></typeparam>
+    public interface IListOfCaseRecord<T> where T : ICaseRecord
     {
         /// <summary>
         /// 案件記錄清單
