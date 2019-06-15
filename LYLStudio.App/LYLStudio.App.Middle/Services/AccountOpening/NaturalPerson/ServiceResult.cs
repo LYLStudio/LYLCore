@@ -4,7 +4,7 @@ using LYLStudio.App.Services.AccountOpening;
 
 namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
 {
-    internal interface IAccountOpeningServiceResult : IAccountOpeningServiceResult<ApplicationOfNaturalPerson>
+    internal interface IServiceResult : IServiceResultBase<ApplicationOfNaturalPerson>
     {
 
     }
@@ -12,12 +12,12 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
     /// <summary>
     /// 開戶服務結果
     /// </summary>
-    public class AccountOpeningServiceResult : IAccountOpeningServiceResult
+    public class ServiceResult : IServiceResult
     {
         /// <summary>
         /// 執行結果編號
         /// </summary>
-        public Guid Id { get; }
+        public Guid Id { get; set; }
         /// <summary>
         /// 訊息
         /// </summary>
@@ -43,7 +43,7 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// </summary>
         public ApplicationOfNaturalPerson Data { get; set; }
 
-        public AccountOpeningServiceResult()
+        public ServiceResult()
         {
             Id = Guid.NewGuid();
             CompletedSteps = new Dictionary<StepTypeEnum, bool>()

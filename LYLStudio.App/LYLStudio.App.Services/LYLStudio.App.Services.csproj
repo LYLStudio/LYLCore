@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountOpening\IAccountOpeningService.cs" />
-    <Compile Include="AccountOpening\IAccountOpeningServiceResult.cs" />
-    <Compile Include="ILogItem.cs" />
+    <Compile Include="AccountOpening\IServiceBase.cs" />
+    <Compile Include="AccountOpening\IServiceResultBase.cs" />
+    <Compile Include="IExtendData.cs" />
+    <Compile Include="ILogServiceBase.cs" />
     <Compile Include="IResult.cs" />
-    <Compile Include="IServiceChecking.cs" />
+    <Compile Include="IServiceCheckingBase.cs" />
+    <Compile Include="IThreadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

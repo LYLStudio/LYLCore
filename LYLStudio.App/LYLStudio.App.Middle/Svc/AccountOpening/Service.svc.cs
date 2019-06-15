@@ -1,38 +1,43 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Web.Hosting;
 using LYLStudio.App.Middle.Services;
 using LYLStudio.App.Middle.Services.AccountOpening;
 using LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson;
+using LYLStudio.App.Middle.Services.Logging;
 
 namespace LYLStudio.App.Middle.Svc.AccountOpening
 {
     [ServiceContract]
-    public interface IService : IAccountOpeningMiddleService, IAccountOpeningService
+    public interface IService : IAccountOpeningService
     {
         [OperationContract]
-        AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application);
+        ServiceResult Apply(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application);
+        ServiceResult Cancel(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application);
+        ServiceResult Keep(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
+        ServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
 
         [OperationContract]
-        AccountOpeningServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
+        ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
     }
     
     public class Service : IService
     {
-        private readonly IAccountOpeningService _accountOpeningService;
-        public ILogService Logger { get; }
+                       
 
+        private readonly IAccountOpeningService _accountOpeningService;
+               
         public Service()
         {
-            //初始化ILogService
+            var logItem = new LogItem() { Message = "進入服務" };
+            LogHelper.Log(TargetEnum.All,logItem);
+            
 
             //初始化IAccountOpeningService
             _accountOpeningService = new AccountOpeningService();
@@ -40,37 +45,30 @@ namespace LYLStudio.App.Middle.Svc.AccountOpening
             //其他
         }
         
-        public AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application)
+        public ServiceResult Apply(ApplicationOfNaturalPerson application)
         {
+            
             return _accountOpeningService.Apply(application);
         }
 
-        public AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application)
+        public ServiceResult Cancel(ApplicationOfNaturalPerson application)
         {
             return _accountOpeningService.Cancel(application);
         }
 
-        public AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application)
+        public ServiceResult Keep(ApplicationOfNaturalPerson application)
         {
             return _accountOpeningService.Keep(application);
         }
 
-        public AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
+        public ServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
         {
             return _accountOpeningService.Query(basicInfo);
         }
 
-        public AccountOpeningServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None)
+        public ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None)
         {
-            //todo something check
-            var result = new AccountOpeningServiceChecking
-            {
-                Status = App.Services.ServiceStatusEnum.Unknown,
-                Message = checkType.ToString(),
-                ReplyTime = DateTime.Now
-            };
-
-            return result;
+            return _accountOpeningService.CheckService(checkType);
         }
     }
 }

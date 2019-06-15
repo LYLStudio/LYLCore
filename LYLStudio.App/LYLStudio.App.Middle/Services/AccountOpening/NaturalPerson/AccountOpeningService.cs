@@ -3,9 +3,18 @@ using LYLStudio.App.Services.AccountOpening;
 
 namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
 {
-    public interface IAccountOpeningService : IAccountOpeningService<AccountOpeningServiceResult, BasicInfoOfNaturalPerson, ApplicationOfNaturalPerson>
+    public abstract class AccountOpeningServiceBase : IServiceBase<ServiceResult, BasicInfoOfNaturalPerson, ApplicationOfNaturalPerson>, IMiddleService
     {
+        public abstract ServiceResult Apply(ApplicationOfNaturalPerson application);
+        public abstract ServiceResult Cancel(ApplicationOfNaturalPerson application);
+        public abstract ServiceResult Keep(ApplicationOfNaturalPerson application);
+        public abstract ServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
+        public abstract ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
+    }
 
+    public interface IAccountOpeningService : IServiceBase<ServiceResult, BasicInfoOfNaturalPerson, ApplicationOfNaturalPerson>, IMiddleService
+    {
+        
     }
 
     /// <summary>
@@ -18,12 +27,12 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// </summary>
         /// <param name="application"></param>
         /// <returns></returns>
-        public AccountOpeningServiceResult Apply(ApplicationOfNaturalPerson application)
+        public ServiceResult Apply(ApplicationOfNaturalPerson application)
         {
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Reject;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new AccountOpeningServiceResult();
+            var result = new ServiceResult();
             result.Data = application;
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
@@ -40,12 +49,12 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// </summary>
         /// <param name="application"></param>
         /// <returns></returns>
-        public AccountOpeningServiceResult Cancel(ApplicationOfNaturalPerson application)
+        public ServiceResult Cancel(ApplicationOfNaturalPerson application)
         {
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Success;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new AccountOpeningServiceResult();
+            var result = new ServiceResult();
             result.Data = application;
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
@@ -57,17 +66,29 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
             return result;
         }
 
+        public ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None)
+        {
+            var result = new ServiceChecking
+            {
+                Status = App.Services.ServiceStatusEnum.Unknown,
+                Message = checkType.ToString(),
+                ReplyTime = DateTime.Now
+            };
+
+            return result;
+        }
+
         /// <summary>
         /// 保留申請書
         /// </summary>
         /// <param name="application"></param>
         /// <returns></returns>
-        public AccountOpeningServiceResult Keep(ApplicationOfNaturalPerson application)
+        public ServiceResult Keep(ApplicationOfNaturalPerson application)
         {
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Reject;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new AccountOpeningServiceResult();
+            var result = new ServiceResult();
             result.Data = application;
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
@@ -84,14 +105,14 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// </summary>
         /// <param name="basicInfo"></param>
         /// <returns></returns>
-        public AccountOpeningServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
+        public ServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
         {
             var application = new ApplicationOfNaturalPerson();
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Success;
             application.ApprovedTime = DateTime.Now;
             application.BasicInfo = basicInfo;
 
-            var result = new AccountOpeningServiceResult();
+            var result = new ServiceResult();
             result.Data = application;
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;

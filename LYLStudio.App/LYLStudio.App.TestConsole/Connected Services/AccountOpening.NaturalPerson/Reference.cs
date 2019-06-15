@@ -42,7 +42,13 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.DigitalDemandSavingsDepositTypeEnum DigitalDemandSavingsDepositTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigationReport[] InvestigationReportsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -133,6 +139,19 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigationReport[] InvestigationReports {
             get {
                 return this.InvestigationReportsField;
@@ -141,6 +160,19 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
                 if ((object.ReferenceEquals(this.InvestigationReportsField, value) != true)) {
                     this.InvestigationReportsField = value;
                     this.RaisePropertyChanged("InvestigationReports");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -181,7 +213,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.IdentityTypeEnum IdentityTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime LegalDateField;
+        private System.Nullable<System.DateTime> LegalDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -262,7 +294,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime LegalDate {
+        public System.Nullable<System.DateTime> LegalDate {
             get {
                 return this.LegalDateField;
             }
@@ -417,6 +449,15 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CaseRecord[] CaseRecordsField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigateResultTypeEnum> InvestigateResultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigateTypeEnum InvestigateTypeField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -436,6 +477,45 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
                 if ((object.ReferenceEquals(this.CaseRecordsField, value) != true)) {
                     this.CaseRecordsField = value;
                     this.RaisePropertyChanged("CaseRecords");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigateResultTypeEnum> InvestigateResult {
+            get {
+                return this.InvestigateResultField;
+            }
+            set {
+                if ((this.InvestigateResultField.Equals(value) != true)) {
+                    this.InvestigateResultField = value;
+                    this.RaisePropertyChanged("InvestigateResult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.InvestigateTypeEnum InvestigateType {
+            get {
+                return this.InvestigateTypeField;
+            }
+            set {
+                if ((this.InvestigateTypeField.Equals(value) != true)) {
+                    this.InvestigateTypeField = value;
+                    this.RaisePropertyChanged("InvestigateType");
                 }
             }
         }
@@ -482,6 +562,9 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> IssuedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IssuedPlaceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.IssuedTypeEnum> IssuedTypeField;
@@ -534,6 +617,19 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
                 if ((this.IssuedDateField.Equals(value) != true)) {
                     this.IssuedDateField = value;
                     this.RaisePropertyChanged("IssuedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IssuedPlace {
+            get {
+                return this.IssuedPlaceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IssuedPlaceField, value) != true)) {
+                    this.IssuedPlaceField = value;
+                    this.RaisePropertyChanged("IssuedPlace");
                 }
             }
         }
@@ -622,7 +718,10 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         New = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Renewed = 2,
+        Reissued = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Renewed = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -636,7 +735,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AddressTypeEnum AddressTypeField;
+        private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AddressUsageTypeEnum UsageTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ZipCodeField;
@@ -652,14 +751,14 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AddressTypeEnum AddressType {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AddressUsageTypeEnum UsageType {
             get {
-                return this.AddressTypeField;
+                return this.UsageTypeField;
             }
             set {
-                if ((this.AddressTypeField.Equals(value) != true)) {
-                    this.AddressTypeField = value;
-                    this.RaisePropertyChanged("AddressType");
+                if ((this.UsageTypeField.Equals(value) != true)) {
+                    this.UsageTypeField = value;
+                    this.RaisePropertyChanged("UsageType");
                 }
             }
         }
@@ -763,7 +862,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         private string NumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.PhoneTypeEnum PhoneTypeField;
+        private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.PhoneUsageTypeEnum UsageTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -789,14 +888,14 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.PhoneTypeEnum PhoneType {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.PhoneUsageTypeEnum UsageType {
             get {
-                return this.PhoneTypeField;
+                return this.UsageTypeField;
             }
             set {
-                if ((this.PhoneTypeField.Equals(value) != true)) {
-                    this.PhoneTypeField = value;
-                    this.RaisePropertyChanged("PhoneType");
+                if ((this.UsageTypeField.Equals(value) != true)) {
+                    this.UsageTypeField = value;
+                    this.RaisePropertyChanged("UsageType");
                 }
             }
         }
@@ -813,8 +912,8 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddressTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
-    public enum AddressTypeEnum : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddressUsageTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
+    public enum AddressUsageTypeEnum : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Household = 1,
@@ -835,31 +934,22 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
     public enum EmailUsageTypeEnum : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 0,
+        Main = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ntd = 1,
+        NotificationOfTransaction = 16,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Fund = 2,
+        NotificationOfActivity = 256,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Fe = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Gold = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ecc = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        All = 7,
+        Reconciliation = 4096,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PhoneTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
-    public enum PhoneTypeEnum : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="PhoneUsageTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
+    public enum PhoneUsageTypeEnum : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Home = 1,
@@ -900,7 +990,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsValidField;
+        private System.Nullable<bool> IsValidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime RecordTimeField;
@@ -942,7 +1032,7 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsValid {
+        public System.Nullable<bool> IsValid {
             get {
                 return this.IsValidField;
             }
@@ -977,12 +1067,40 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvestigateResultTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
+    public enum InvestigateResultTypeEnum : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Normal = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Warning = 2,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvestigateTypeEnum", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models")]
+    public enum InvestigateTypeEnum : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AML = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JCIC = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InternalBlackList = 2,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountOpeningServiceResult", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpen" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceResult", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpen" +
         "ing.NaturalPerson")]
     [System.SerializableAttribute()]
-    public partial class AccountOpeningServiceResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ServiceResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -992,6 +1110,9 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
@@ -1037,6 +1158,19 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
                 if ((object.ReferenceEquals(this.DataField, value) != true)) {
                     this.DataField = value;
                     this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -1163,10 +1297,9 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountOpeningServiceChecking", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpen" +
-        "ing")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceChecking", Namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services")]
     [System.SerializableAttribute()]
-    public partial class AccountOpeningServiceChecking : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ServiceChecking : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1261,34 +1394,34 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Apply", ReplyAction="http://tempuri.org/IService/ApplyResponse")]
-        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Apply(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Apply(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Apply", ReplyAction="http://tempuri.org/IService/ApplyResponse")]
-        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> ApplyAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> ApplyAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Cancel", ReplyAction="http://tempuri.org/IService/CancelResponse")]
-        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Cancel(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Cancel(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Cancel", ReplyAction="http://tempuri.org/IService/CancelResponse")]
-        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> CancelAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> CancelAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Keep", ReplyAction="http://tempuri.org/IService/KeepResponse")]
-        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Keep(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Keep(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Keep", ReplyAction="http://tempuri.org/IService/KeepResponse")]
-        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> KeepAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
+        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> KeepAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Query", ReplyAction="http://tempuri.org/IService/QueryResponse")]
-        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Query(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo);
+        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Query(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Query", ReplyAction="http://tempuri.org/IService/QueryResponse")]
-        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> QueryAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo);
+        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> QueryAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CheckService", ReplyAction="http://tempuri.org/IService/CheckServiceResponse")]
-        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking CheckService(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType);
+        LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceChecking CheckService(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CheckService", ReplyAction="http://tempuri.org/IService/CheckServiceResponse")]
-        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking> CheckServiceAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType);
+        System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceChecking> CheckServiceAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1318,43 +1451,43 @@ namespace LYLStudio.App.TestConsole.AccountOpening.NaturalPerson {
                 base(binding, remoteAddress) {
         }
         
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Apply(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Apply(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.Apply(application);
         }
         
-        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> ApplyAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> ApplyAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.ApplyAsync(application);
         }
         
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Cancel(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Cancel(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.Cancel(application);
         }
         
-        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> CancelAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> CancelAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.CancelAsync(application);
         }
         
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Keep(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Keep(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.Keep(application);
         }
         
-        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> KeepAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
+        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> KeepAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ApplicationOfNaturalPerson application) {
             return base.Channel.KeepAsync(application);
         }
         
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult Query(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo) {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult Query(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo) {
             return base.Channel.Query(basicInfo);
         }
         
-        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult> QueryAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo) {
+        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult> QueryAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.BasicInfoOfNaturalPerson basicInfo) {
             return base.Channel.QueryAsync(basicInfo);
         }
         
-        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking CheckService(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType) {
+        public LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceChecking CheckService(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType) {
             return base.Channel.CheckService(checkType);
         }
         
-        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking> CheckServiceAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType) {
+        public System.Threading.Tasks.Task<LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceChecking> CheckServiceAsync(LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.CheckTypeEnum checkType) {
             return base.Channel.CheckServiceAsync(checkType);
         }
     }

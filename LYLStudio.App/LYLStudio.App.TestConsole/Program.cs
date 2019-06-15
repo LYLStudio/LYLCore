@@ -72,10 +72,11 @@ namespace LYLStudio.App.TestConsole
             };
 
             var svc = new ServiceClient();
+            
             var result =await svc.QueryAsync(application.BasicInfo);
-            Console.WriteLine(result.Message);
+            Console.WriteLine($"{result.Id}:{result.Status}|||{result.Data.Id}: {result.Data}");
             result = await svc.ApplyAsync(application);
-            Console.WriteLine(result.Message);
+            Console.WriteLine($"{result.Message}");
             result = await svc.KeepAsync(application);
             Console.WriteLine(result.Message);
             result = await svc.CancelAsync(application);

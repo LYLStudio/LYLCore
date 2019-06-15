@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f73b6771-59ec-44e9-ae5f-fb4b8f2ab6d2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0dd47ace-6549-4cee-b6c3-a5f1b55a7cf8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:52892/Svc/AccountOpening/Service.svc?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="961bc22c-320c-4988-a9ba-860918f4af60" SourceId="1" SourceUrl="http://localhost:52892/Svc/AccountOpening/Service.svc?singleWsdl" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="9f6c1759-6032-42d4-b90d-62049343b2a9" SourceId="1" SourceUrl="http://localhost:52892/Svc/AccountOpening/Service.svc?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

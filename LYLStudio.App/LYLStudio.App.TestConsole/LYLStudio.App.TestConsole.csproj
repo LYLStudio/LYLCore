@@ -151,10 +151,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OpenAccountModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceChecking.datasource">
+    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceChecking.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.AccountOpeningServiceResult.datasource">
+    <None Include="Connected Services\AccountOpening.NaturalPerson\LYLStudio.App.TestConsole.AccountOpening.NaturalPerson.ServiceResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\AccountOpening.NaturalPerson\Service.wsdl" />

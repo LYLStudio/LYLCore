@@ -3,9 +3,18 @@
 namespace LYLStudio.App.Services.AccountOpening
 {
     /// <summary>
+    /// 開戶服務處理結果，含自訂物件
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IServiceResultBase<T> : IServiceResultBase, IExtendData<T>
+    {
+
+    }
+
+    /// <summary>
     /// 開戶服務處理結果
     /// </summary>
-    public interface IAccountOpeningServiceResultBase : IResult
+    public interface IServiceResultBase : IResult
     {
         /// <summary>
         /// 開戶申請狀態
@@ -26,15 +35,6 @@ namespace LYLStudio.App.Services.AccountOpening
         /// 步驟狀態清單
         /// </summary>
         IDictionary<StepTypeEnum, bool> CompletedSteps { get; }
-    }
-
-    /// <summary>
-    /// 開戶服務處理結果，含自訂物件
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IAccountOpeningServiceResult<T> : IAccountOpeningServiceResultBase, IExtendData<T>
-    {
-
     }
 
     /// <summary>

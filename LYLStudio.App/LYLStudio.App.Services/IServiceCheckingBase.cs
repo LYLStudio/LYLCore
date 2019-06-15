@@ -3,9 +3,9 @@
 namespace LYLStudio.App.Services
 {
     /// <summary>
-    /// 服務測試
+    /// 服務檢查基底介面
     /// </summary>
-    public interface IServiceChecking
+    public interface IServiceCheckingBase
     {
         /// <summary>
         /// 回應時間

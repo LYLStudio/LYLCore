@@ -8,8 +8,8 @@ namespace LYLStudio.App.Services.AccountOpening
     /// <typeparam name="TResult"></typeparam>
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
-    public interface IAccountOpeningService<TResult, T1, T2>
-        where TResult : IAccountOpeningServiceResultBase
+    public interface IServiceBase<TResult, T1, T2>
+        where TResult : IServiceResultBase
         where T1 : IBasicInfoBase
         where T2 : IApplication
     {

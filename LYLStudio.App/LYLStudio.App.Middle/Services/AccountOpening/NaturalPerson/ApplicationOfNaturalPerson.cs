@@ -254,7 +254,7 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// <summary>
         /// 識別文件清單
         /// </summary>
-        public IEnumerable<IdentityDocument> IdentityDocuments { get; }
+        public IEnumerable<IdentityDocument> IdentityDocuments { get; set; }
         /// <summary>
         /// 性別
         /// </summary>

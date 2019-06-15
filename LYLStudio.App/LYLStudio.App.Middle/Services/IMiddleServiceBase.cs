@@ -3,24 +3,42 @@ using LYLStudio.App.Services;
 
 namespace LYLStudio.App.Middle.Services
 {
-    /// <summary>
-    /// 中間件服務介面
-    /// </summary>
-    /// <typeparam name="T"><see cref="IServiceChecking"/></typeparam>
-    public interface IMiddleService<T>
-        where T : IServiceChecking
+    public interface IMiddleService : IMiddleServiceBase<ServiceChecking>
     {
-        /// <summary>
-        /// 記錄器<see cref="ILogService"/>
-        /// </summary>
-        ILogService Logger { get; }
+    }
 
+    /// <summary>
+    /// 中間件服務基底介面
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IMiddleServiceBase<T> 
+        where T : IServiceCheckingBase
+    {        
         /// <summary>
         /// 檢查服務狀態
         /// </summary>
-        /// <param name="checkType"><see cref="CheckTypeEnum"/></param>
-        /// <returns>服務檢查結果<see cref="IServiceChecking"/></returns>
+        /// <param name="checkType"></param>
+        /// <returns></returns>
         T CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
+    }
+
+    /// <summary>
+    /// 開戶服務檢查
+    /// </summary>
+    public class ServiceChecking : IServiceCheckingBase
+    {
+        /// <summary>
+        /// 回應時間
+        /// </summary>
+        public DateTime? ReplyTime { get; set; }
+        /// <summary>
+        /// 服務狀態
+        /// </summary>
+        public ServiceStatusEnum Status { get; set; }
+        /// <summary>
+        /// 訊息
+        /// </summary>
+        public string Message { get; set; }
     }
 
     /// <summary>
