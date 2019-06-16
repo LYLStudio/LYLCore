@@ -68,12 +68,14 @@ namespace LYLStudio.App.Middle.Services.Logging
         private static void LogToTextFile(params LogItem[] logItems )
         {
             var now = DateTime.Now;
-            var textFileLocation = HostingEnvironment.MapPath($@"{Properties.Settings.Default.FILE_BASEPATH_LOG}{now.ToString("yyyyMMdd")}\{now.ToString("HH")}.log");
-            string folder = Path.GetDirectoryName(textFileLocation);
+            var logFile = $@"{Properties.Settings.Default.FILE_BASEPATH_LOG}{now.ToString("yyyyMMdd")}\{now.ToString("HH")}.log";
+            var logFileLocation = HostingEnvironment.MapPath(logFile);
+
+            string folder = Path.GetDirectoryName(logFileLocation);
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
 
-            Loggers[TargetEnum.TextFile].Log(textFileLocation, logItems);
+            Loggers[TargetEnum.TextFile].Log(logFileLocation, logItems);
         }
 
         private static void LogToDatabase(params LogItem[] logItems)
