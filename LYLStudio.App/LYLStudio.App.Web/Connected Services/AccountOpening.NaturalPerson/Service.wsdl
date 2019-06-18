@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services" />
+      <xs:element name="Apply">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="application" nillable="true" type="q1:ApplicationOfNaturalPerson" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="ApplyResult" nillable="true" type="q2:ServiceResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Cancel">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="application" nillable="true" type="q3:ApplicationOfNaturalPerson" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CancelResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="CancelResult" nillable="true" type="q4:ServiceResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Keep">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="application" nillable="true" type="q5:ApplicationOfNaturalPerson" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="KeepResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="KeepResult" nillable="true" type="q6:ServiceResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Query">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="basicInfo" nillable="true" type="q7:BasicInfoOfNaturalPerson" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" minOccurs="0" name="QueryResult" nillable="true" type="q8:ServiceResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CheckService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services" minOccurs="0" name="checkType" type="q9:CheckTypeEnum" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CheckServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services" minOccurs="0" name="CheckServiceResult" nillable="true" type="q10:ServiceChecking" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" />
+      <xs:complexType name="ApplicationOfNaturalPerson">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ApplyTime" nillable="true" type="xs:dateTime" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="ApprovedResult" nillable="true" type="q1:ApprovedResultTypeEnum" />
+          <xs:element minOccurs="0" name="ApprovedTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="BasicInfo" nillable="true" type="tns:BasicInfoOfNaturalPerson" />
+          <xs:element minOccurs="0" name="ContactInfo" nillable="true" type="tns:ContactInfo" />
+          <xs:element minOccurs="0" name="DigitalDemandSavingsDepositType" type="tns:DigitalDemandSavingsDepositTypeEnum" />
+          <xs:element minOccurs="0" name="Id" type="ser:guid" />
+          <xs:element minOccurs="0" name="InvestigationReports" nillable="true" type="tns:ArrayOfInvestigationReport" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ApplicationOfNaturalPerson" nillable="true" type="tns:ApplicationOfNaturalPerson" />
+      <xs:complexType name="BasicInfoOfNaturalPerson">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ElementarySchoolName" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="Gender" type="q2:GenderTypeEnum" />
+          <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IdentityDocuments" nillable="true" type="tns:ArrayOfIdentityDocument" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="IdentityType" type="q3:IdentityTypeEnum" />
+          <xs:element minOccurs="0" name="LegalDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="BasicInfoOfNaturalPerson" nillable="true" type="tns:BasicInfoOfNaturalPerson" />
+      <xs:complexType name="ArrayOfIdentityDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="IdentityDocument" nillable="true" type="tns:IdentityDocument" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfIdentityDocument" nillable="true" type="tns:ArrayOfIdentityDocument" />
+      <xs:complexType name="IdentityDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DocumentId" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="DocumentType" type="q4:IdentityDocumentTypeEnum" />
+          <xs:element minOccurs="0" name="IssuedDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IssuedPlace" nillable="true" type="xs:string" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="IssuedType" nillable="true" type="q5:IssuedTypeEnum" />
+          <xs:element minOccurs="0" name="OwnerId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="IdentityDocument" nillable="true" type="tns:IdentityDocument" />
+      <xs:complexType name="ContactInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Addresses" nillable="true" type="tns:ArrayOfAddressInfo" />
+          <xs:element minOccurs="0" name="Emails" nillable="true" type="tns:ArrayOfEmailInfo" />
+          <xs:element minOccurs="0" name="Phones" nillable="true" type="tns:ArrayOfPhoneInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ContactInfo" nillable="true" type="tns:ContactInfo" />
+      <xs:complexType name="ArrayOfAddressInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="AddressInfo" nillable="true" type="tns:AddressInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfAddressInfo" nillable="true" type="tns:ArrayOfAddressInfo" />
+      <xs:complexType name="AddressInfo">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="UsageType" type="q6:AddressUsageTypeEnum" />
+          <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AddressInfo" nillable="true" type="tns:AddressInfo" />
+      <xs:complexType name="ArrayOfEmailInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="EmailInfo" nillable="true" type="tns:EmailInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfEmailInfo" nillable="true" type="tns:ArrayOfEmailInfo" />
+      <xs:complexType name="EmailInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="UsageType" type="q7:EmailUsageTypeEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EmailInfo" nillable="true" type="tns:EmailInfo" />
+      <xs:complexType name="ArrayOfPhoneInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PhoneInfo" nillable="true" type="tns:PhoneInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPhoneInfo" nillable="true" type="tns:ArrayOfPhoneInfo" />
+      <xs:complexType name="PhoneInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="UsageType" type="q8:PhoneUsageTypeEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PhoneInfo" nillable="true" type="tns:PhoneInfo" />
+      <xs:simpleType name="DigitalDemandSavingsDepositTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None" />
+          <xs:enumeration value="Class1" />
+          <xs:enumeration value="Class2" />
+          <xs:enumeration value="Class3" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="DigitalDemandSavingsDepositTypeEnum" nillable="true" type="tns:DigitalDemandSavingsDepositTypeEnum" />
+      <xs:complexType name="ArrayOfInvestigationReport">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="InvestigationReport" nillable="true" type="tns:InvestigationReport" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfInvestigationReport" nillable="true" type="tns:ArrayOfInvestigationReport" />
+      <xs:complexType name="InvestigationReport">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CaseRecords" nillable="true" type="tns:ArrayOfCaseRecord" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="InvestigateResult" nillable="true" type="q9:InvestigateResultTypeEnum" />
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" minOccurs="0" name="InvestigateType" type="q10:InvestigateTypeEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="InvestigationReport" nillable="true" type="tns:InvestigationReport" />
+      <xs:complexType name="ArrayOfCaseRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CaseRecord" nillable="true" type="tns:CaseRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfCaseRecord" nillable="true" type="tns:ArrayOfCaseRecord" />
+      <xs:complexType name="CaseRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CaseId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsValid" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RecordTime" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CaseRecord" nillable="true" type="tns:CaseRecord" />
+      <xs:complexType name="ServiceResult">
+        <xs:sequence>
+          <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CompletedSteps" nillable="true" type="q11:ArrayOfKeyValueOfStepTypeEnumboolean8CWrotO3" />
+          <xs:element minOccurs="0" name="Data" nillable="true" type="tns:ApplicationOfNaturalPerson" />
+          <xs:element minOccurs="0" name="Id" type="ser:guid" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" minOccurs="0" name="NextStep" type="q12:StepTypeEnum" />
+          <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" minOccurs="0" name="PreviousStep" type="q13:StepTypeEnum" />
+          <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" minOccurs="0" name="Status" type="q14:OpeningStatusEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ServiceResult" nillable="true" type="tns:ServiceResult" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:simpleType name="ApprovedResultTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Reject" />
+          <xs:enumeration value="Success" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ApprovedResultTypeEnum" nillable="true" type="tns:ApprovedResultTypeEnum" />
+      <xs:simpleType name="GenderTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="Male" />
+          <xs:enumeration value="Female" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="GenderTypeEnum" nillable="true" type="tns:GenderTypeEnum" />
+      <xs:simpleType name="IdentityDocumentTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="IdentificationCard" />
+          <xs:enumeration value="HealthInsuranceCard" />
+          <xs:enumeration value="DriverLicense" />
+          <xs:enumeration value="NaturalPerson" />
+          <xs:enumeration value="Passport" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="IdentityDocumentTypeEnum" nillable="true" type="tns:IdentityDocumentTypeEnum" />
+      <xs:simpleType name="IssuedTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="New" />
+          <xs:enumeration value="Reissued" />
+          <xs:enumeration value="Renewed" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="IssuedTypeEnum" nillable="true" type="tns:IssuedTypeEnum" />
+      <xs:simpleType name="IdentityTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="NaturalPerson" />
+          <xs:enumeration value="JuridicalPerson" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="IdentityTypeEnum" nillable="true" type="tns:IdentityTypeEnum" />
+      <xs:simpleType name="AddressUsageTypeEnum">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Household" />
+              <xs:enumeration value="Residence">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Company">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="PostBox">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4096</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="AddressUsageTypeEnum" nillable="true" type="tns:AddressUsageTypeEnum" />
+      <xs:simpleType name="EmailUsageTypeEnum">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Main" />
+              <xs:enumeration value="NotificationOfTransaction">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="NotificationOfActivity">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Reconciliation">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4096</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="EmailUsageTypeEnum" nillable="true" type="tns:EmailUsageTypeEnum" />
+      <xs:simpleType name="PhoneUsageTypeEnum">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Home" />
+              <xs:enumeration value="Company">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Fax">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Cellphone">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4096</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="HomeAndCompany">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">17</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="HomeAndFax">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">257</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="CompanyAndFax">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">272</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="PhoneUsageTypeEnum" nillable="true" type="tns:PhoneUsageTypeEnum" />
+      <xs:simpleType name="InvestigateResultTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="Normal" />
+          <xs:enumeration value="Warning" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InvestigateResultTypeEnum" nillable="true" type="tns:InvestigateResultTypeEnum" />
+      <xs:simpleType name="InvestigateTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AML" />
+          <xs:enumeration value="JCIC" />
+          <xs:enumeration value="InternalBlackList" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InvestigateTypeEnum" nillable="true" type="tns:InvestigateTypeEnum" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" />
+      <xs:complexType name="ArrayOfKeyValueOfStepTypeEnumboolean8CWrotO3">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfStepTypeEnumboolean8CWrotO3">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" name="Key" type="q1:StepTypeEnum" />
+                <xs:element name="Value" type="xs:boolean" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfStepTypeEnumboolean8CWrotO3" nillable="true" type="tns:ArrayOfKeyValueOfStepTypeEnumboolean8CWrotO3" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services.AccountOpening" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="StepTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None" />
+          <xs:enumeration value="SubmitBasicInfo" />
+          <xs:enumeration value="SubmitContactInfo" />
+          <xs:enumeration value="SubmitQuestionnaire" />
+          <xs:enumeration value="UploadDocument" />
+          <xs:enumeration value="Done" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="StepTypeEnum" nillable="true" type="tns:StepTypeEnum" />
+      <xs:simpleType name="OpeningStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Applying" />
+          <xs:enumeration value="Reject" />
+          <xs:enumeration value="Success" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="OpeningStatusEnum" nillable="true" type="tns:OpeningStatusEnum" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Middle.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services" />
+      <xs:simpleType name="CheckTypeEnum">
+        <xs:list>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="None">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Storage">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="Networking">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="ByServiceFeature">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="All">
+                <xs:annotation>
+                  <xs:appinfo>
+                    <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">273</EnumerationValue>
+                  </xs:appinfo>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:list>
+      </xs:simpleType>
+      <xs:element name="CheckTypeEnum" nillable="true" type="tns:CheckTypeEnum" />
+      <xs:complexType name="ServiceChecking">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReplyTime" nillable="true" type="xs:dateTime" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services" minOccurs="0" name="Status" type="q1:ServiceStatusEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ServiceChecking" nillable="true" type="tns:ServiceChecking" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LYLStudio.App.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="ServiceStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown" />
+          <xs:enumeration value="Available" />
+          <xs:enumeration value="Unreachable" />
+          <xs:enumeration value="UnderMaintenance" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ServiceStatusEnum" nillable="true" type="tns:ServiceStatusEnum" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IService_Apply_InputMessage">
+    <wsdl:part name="parameters" element="tns:Apply" />
+  </wsdl:message>
+  <wsdl:message name="IService_Apply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_Cancel_InputMessage">
+    <wsdl:part name="parameters" element="tns:Cancel" />
+  </wsdl:message>
+  <wsdl:message name="IService_Cancel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_Keep_InputMessage">
+    <wsdl:part name="parameters" element="tns:Keep" />
+  </wsdl:message>
+  <wsdl:message name="IService_Keep_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KeepResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_Query_InputMessage">
+    <wsdl:part name="parameters" element="tns:Query" />
+  </wsdl:message>
+  <wsdl:message name="IService_Query_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_CheckService_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckService" />
+  </wsdl:message>
+  <wsdl:message name="IService_CheckService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckServiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService">
+    <wsdl:operation name="Apply">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Apply" message="tns:IService_Apply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ApplyResponse" message="tns:IService_Apply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Cancel" message="tns:IService_Cancel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CancelResponse" message="tns:IService_Cancel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Keep">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Keep" message="tns:IService_Keep_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/KeepResponse" message="tns:IService_Keep_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Query" message="tns:IService_Query_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/QueryResponse" message="tns:IService_Query_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/CheckService" message="tns:IService_CheckService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/CheckServiceResponse" message="tns:IService_CheckService_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Apply">
+      <soap:operation soapAction="http://tempuri.org/IService/Apply" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cancel">
+      <soap:operation soapAction="http://tempuri.org/IService/Cancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Keep">
+      <soap:operation soapAction="http://tempuri.org/IService/Keep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <soap:operation soapAction="http://tempuri.org/IService/Query" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckService">
+      <soap:operation soapAction="http://tempuri.org/IService/CheckService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="BasicHttpBinding_IService" binding="tns:BasicHttpBinding_IService">
+      <soap:address location="http://localhost:52892/Svc/AccountOpening/Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
