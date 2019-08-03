@@ -104,7 +104,6 @@
     <Folder Include="App_Data\Template\Mail\Deploy.PROD\" />
     <Folder Include="App_Data\Template\Mail\Deploy.SIT\" />
     <Folder Include="App_Data\Temp\PDF\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -207,5 +207,11 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AccountOpening.NaturalPerson\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LYLStudio.App.Services\LYLStudio.App.Services.csproj">
+      <Project>{5db0c6f8-f824-42dc-bf56-4fa336ea93d4}</Project>
+      <Name>LYLStudio.App.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

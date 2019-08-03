@@ -8,7 +8,7 @@ using LYLStudio.Core.Data.EF;
 
 namespace LYLStudio.App.TestConsole.Services
 {
-    public class OpenAccountModelService : DataServiceBase<DataAccessResult, OpenAccountEntities>
+    public class OpenAccountModelService : DataServiceBase<OpenAccountEntities>
     {
         private OpenAccountEntities _context = null;
         public override OpenAccountEntities Context

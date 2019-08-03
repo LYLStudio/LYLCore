@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="AccountOpening\IServiceBase.cs" />
     <Compile Include="AccountOpening\IServiceResultBase.cs" />
+    <Compile Include="Communication\IClient.cs" />
+    <Compile Include="Communication\Server.cs" />
+    <Compile Include="IExecutableExceptionHandle.cs" />
     <Compile Include="IExtendData.cs" />
     <Compile Include="ILogServiceBase.cs" />
     <Compile Include="IResult.cs" />

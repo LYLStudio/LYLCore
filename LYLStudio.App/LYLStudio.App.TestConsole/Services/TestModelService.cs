@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using LYLStudio.App.TestConsole.Models;
+using LYLStudio.Core;
 using LYLStudio.Core.Data;
 using LYLStudio.Core.Data.EF;
 
 namespace LYLStudio.App.TestConsole.Services
 {
-    public class TestModelService : DataServiceBase<DataAccessResult, TestEntities>
+    public class TestModelService : DataServiceBase<TestEntities>        
     {
         private TestEntities _context = null;
         public override TestEntities Context

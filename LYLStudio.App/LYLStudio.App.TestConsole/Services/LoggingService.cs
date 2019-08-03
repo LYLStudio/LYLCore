@@ -39,7 +39,7 @@ namespace LYLStudio.App.TestConsole.Services
                 IAnything<ILogItem[]> anything = new Anything<ILogItem[]>()
                 {
                     Parameters = logItems,
-                    Callback = async (o) =>
+                    AnythingAction = async (o) =>
                     {
                         var items = o;
                         FileIOHelper.CheckAndCreateDirectory(target);

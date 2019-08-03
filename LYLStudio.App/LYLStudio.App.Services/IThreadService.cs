@@ -30,4 +30,22 @@ namespace LYLStudio.App.Services
         /// </summary>
         Action<T> Callback { get; set; }
     }
+
+    public interface IAnything<T, TResult>
+    {
+        T Parameter { get; set; }
+        Func<T, TResult> Callback { get; set; }
+    }
+
+    public class TestAnything : IAnything<string>
+    {
+        public string Parameter { get; set; }
+        public Action<string> Callback { get; set; }
+    }
+
+    public class TestAnything1 : IAnything<string, int>
+    {
+        public string Parameter { get; set; }
+        public Func<string, int> Callback { get; set; }
+    }
 }
