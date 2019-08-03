@@ -1,6 +1,6 @@
 ﻿namespace LYLStudio.Core.Data.EF
 {
-    public class DataAccessResult : ResultBase
+    public class DataAccessResult<T> : ResultBase<T>
     {
         public DataAccessResult() : base()
         {

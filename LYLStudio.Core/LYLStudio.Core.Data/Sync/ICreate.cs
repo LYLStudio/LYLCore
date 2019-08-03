@@ -1,8 +1,7 @@
 ﻿namespace LYLStudio.Core.Data
 {
-    public interface ICreate<TResult>
-        where TResult : IResult, new()
+    public interface ICreate       
     {
-        TResult Create<T>(params T[] entities) where T : class;
+        IResult Create<T>(params T[] entities) where T : class;
     }
 }

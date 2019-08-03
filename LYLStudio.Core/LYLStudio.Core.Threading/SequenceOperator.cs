@@ -54,7 +54,7 @@ namespace LYLStudio.Core.Threading
                         if (_queueList[ThreadPriority.Highest].TryDequeue(out IAnything<T> anything))
                         {
                             payload = anything.Parameters;
-                            anything.Callback(anything.Parameters);
+                            anything.AnythingAction(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
@@ -69,7 +69,7 @@ namespace LYLStudio.Core.Threading
                         if (_queueList[ThreadPriority.AboveNormal].TryDequeue(out IAnything<T> anything))
                         {
                             payload = anything.Parameters;
-                            anything.Callback(anything.Parameters);
+                            anything.AnythingAction(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
@@ -84,7 +84,7 @@ namespace LYLStudio.Core.Threading
                         if (_queueList[ThreadPriority.Normal].TryDequeue(out IAnything<T> anything))
                         {
                             payload = anything.Parameters;
-                            anything.Callback(anything.Parameters);
+                            anything.AnythingAction(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
@@ -99,7 +99,7 @@ namespace LYLStudio.Core.Threading
                         if (_queueList[ThreadPriority.BelowNormal].TryDequeue(out IAnything<T> anything))
                         {
                             payload = anything.Parameters;
-                            anything.Callback(anything.Parameters);
+                            anything.AnythingAction(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
@@ -114,7 +114,7 @@ namespace LYLStudio.Core.Threading
                         if (_queueList[ThreadPriority.Lowest].TryDequeue(out IAnything<T> anything))
                         {
                             payload = anything.Parameters;
-                            anything.Callback(anything.Parameters);
+                            anything.AnythingAction(anything.Parameters);
                         }
                     }
                     catch (Exception ex)
@@ -133,7 +133,7 @@ namespace LYLStudio.Core.Threading
 
         private void ErrorProcess(Exception ex, T payload = default(T))
         {
-            IResult result = new ThreadResult(true)
+            IResult result = new ThreadResult<T>(true)
             {
                 Message = ex.Message,
                 Error = ex,

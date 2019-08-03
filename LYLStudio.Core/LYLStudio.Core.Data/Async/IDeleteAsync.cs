@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace LYLStudio.Core.Data
 {
-    public interface IDeleteAsync<TResult> where TResult : IResult, new()
+    public interface IDeleteAsync
     {
-        Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class;
-        Task<TResult> DeleteAsync<T>(params T[] entities) where T : class;
-        Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class;
+        Task<IResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class;
+        Task<IResult> DeleteAsync<T>(params T[] entities) where T : class;
+        Task<IResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class;
     }
 }

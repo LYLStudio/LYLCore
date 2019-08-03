@@ -2,9 +2,8 @@
 
 namespace LYLStudio.Core.Data
 {
-    public interface IUpdateAsync<TResult>
-        where TResult : IResult, new()
+    public interface IUpdateAsync
     {
-        Task<TResult> UpdateAsync<T>(T entity) where T : class;
+        Task<IResult> UpdateAsync<T>(T entity) where T : class;
     }
 }

@@ -2,8 +2,7 @@
 
 namespace LYLStudio.Core.Data.EF
 {
-    public interface IDataService<TResult, TContext> : IDisposable, IDataAccess<TResult>, IDataAccessAsync<TResult>
-        where TResult : IResult, new()
+    public interface IDataService<TContext> : IDisposable, IDataAccess, IDataAccessAsync        
     {
         TContext Context { get; }
 

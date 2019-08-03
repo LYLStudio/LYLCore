@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace LYLStudio.Core.Data.EF
 {
-    public abstract class DataServiceBase<TResult, TContext> : IDataService<TResult, TContext>
-    where TResult : IResult, new()
-    where TContext : DbContext
+    public abstract class DataServiceBase<TContext> : IDataService<TContext>
+        where TContext : DbContext
     {
         public abstract TContext Context { get; }
         public abstract Action<string> Log { get; set; }
@@ -50,11 +49,11 @@ namespace LYLStudio.Core.Data.EF
         }
         #endregion
 
-        public virtual TResult Create<T>(params T[] entities) where T : class
+        public virtual IResult Create<T>(params T[] entities) where T : class
         {
             if (entities == null) throw new ArgumentNullException(nameof(entities));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -70,18 +69,18 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual TResult DeleteByKey<T>(params object[] keyValues) where T : class
+        public virtual IResult DeleteByKey<T>(params object[] keyValues) where T : class
         {
             if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
                 T obj = Context.Set<T>().Find(keyValues);
                 if (obj != null)
                 {
-                    result.Payload = Context.Set<T>().Remove(obj);
+                    (result as DataAccessResult<T>).Payload = Context.Set<T>().Remove(obj);
                     Save();
                     result.IsSuccess = true;
                 }
@@ -94,11 +93,11 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual TResult Delete<T>(params T[] entities) where T : class
+        public virtual IResult Delete<T>(params T[] entities) where T : class
         {
             if (entities == null) throw new ArgumentNullException(nameof(entities));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -114,9 +113,9 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual TResult Delete<T>(Expression<Func<T, bool>> predicate = null) where T : class
+        public virtual IResult Delete<T>(Expression<Func<T, bool>> predicate = null) where T : class
         {
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -159,11 +158,11 @@ namespace LYLStudio.Core.Data.EF
             return Context.Set<T>().AsQueryable();
         }
 
-        public virtual TResult Update<T>(T entity) where T : class
+        public virtual IResult Update<T>(T entity) where T : class
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -193,11 +192,11 @@ namespace LYLStudio.Core.Data.EF
             return Context.Set<T>().FirstOrDefault() != null;
         }
 
-        public virtual async Task<TResult> CreateAsync<T>(params T[] entities) where T : class
+        public virtual async Task<IResult> CreateAsync<T>(params T[] entities) where T : class
         {
             if (entities == null) throw new ArgumentNullException(nameof(entities));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -227,11 +226,11 @@ namespace LYLStudio.Core.Data.EF
             return await Context.Set<T>().FirstOrDefaultAsync();
         }
 
-        public virtual async Task<TResult> UpdateAsync<T>(T entity) where T : class
+        public virtual async Task<IResult> UpdateAsync<T>(T entity) where T : class
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -247,11 +246,11 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual async Task<TResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
+        public virtual async Task<IResult> DeleteByKeyAsync<T>(params object[] keyValues) where T : class
         {
             if (keyValues == null) throw new ArgumentNullException(nameof(keyValues));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -271,11 +270,11 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual async Task<TResult> DeleteAsync<T>(params T[] entities) where T : class
+        public virtual async Task<IResult> DeleteAsync<T>(params T[] entities) where T : class
         {
             if (entities == null) throw new ArgumentNullException(nameof(entities));
 
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {
@@ -291,9 +290,9 @@ namespace LYLStudio.Core.Data.EF
             return result;
         }
 
-        public virtual async Task<TResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
+        public virtual async Task<IResult> DeleteAsync<T>(Expression<Func<T, bool>> predicate = null) where T : class
         {
-            TResult result = new TResult();
+            IResult result = new DataAccessResult<T>();
 
             try
             {

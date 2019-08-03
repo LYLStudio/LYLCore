@@ -3,11 +3,10 @@ using System.Linq.Expressions;
 
 namespace LYLStudio.Core.Data
 {
-    public interface IDelete<TResult>
-        where TResult : IResult, new()
+    public interface IDelete
     {
-        TResult DeleteByKey<T>(params object[] keyValues) where T : class;
-        TResult Delete<T>(params T[] entities) where T : class;
-        TResult Delete<T>(Expression<Func<T, bool>> predicate = null) where T : class;
+        IResult DeleteByKey<T>(params object[] keyValues) where T : class;
+        IResult Delete<T>(params T[] entities) where T : class;
+        IResult Delete<T>(Expression<Func<T, bool>> predicate = null) where T : class;
     }
 }

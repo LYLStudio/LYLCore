@@ -1,8 +1,7 @@
 ﻿namespace LYLStudio.Core.Data
 {
-    public interface IUpdate<TResult>
-        where TResult : IResult, new()
+    public interface IUpdate
     {
-        TResult Update<T>(T entity) where T : class;
+        IResult Update<T>(T entity) where T : class;
     }
 }
