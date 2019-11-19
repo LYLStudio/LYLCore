@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("LYLStudio.Core")]
+[assembly: AssemblyTitle("LYLStudio.TestLibsApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LL-IT.NET")]
-[assembly: AssemblyProduct("LYLStudio.Core")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("LYLStudio.TestLibsApp")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,17 +20,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98")]
+[assembly: Guid("fc6f3591-ce2a-46ec-a785-629dce19e179")]
 
-// 組件的版本資訊由下列四個值所組成: 
+// 組件的版本資訊由下列四個值所組成:
 //
 //      主要版本
 //      次要版本
 //      組建編號
-//      修訂編號
+//      修訂
 //
-// 您可以指定所有的值，或將組建編號或修訂編號設為預設值
-//方法是使用 '*'，如下所示:
+// 您可以指定所有的值，也可以使用 '*' 將組建和修訂編號
+// 設為預設，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

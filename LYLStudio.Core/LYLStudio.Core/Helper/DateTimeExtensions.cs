@@ -1,25 +1,20 @@
-﻿using System;
-
-namespace LYLStudio.Core
+﻿namespace LYLStudio.Core
 {
+    using System;
+
     public static class DateTimeExtensions
     {
-        public static string ToTimeFormated(this DateTime dateTime, string format = "HHmmss")
+        public static string FormatT(this DateTime dateTime, string separator = "")
         {
-            return dateTime.ToString(format);
+            return dateTime.ToString($"HH{separator}mm{separator}");
         }
 
-        public static string ToDateFormated(this DateTime dateTime, string format = "yyyyMMdd")
+        public static string FormatD(this DateTime dateTime, string separator = "")
         {
-            return dateTime.ToString(format);
+            return dateTime.ToString($"yyyy{separator}MM{separator}dd");
         }
 
-        public static string ToLogFormat(this DateTime dateTime, string format = "yyyyMMddHHmmss.fffffff")
-        {
-            return dateTime.ToString(format);
-        }
-
-        public static string ToFastFormat(this DateTime dateTime, FastFormatType fastFormatType)
+        public static string ToFormat(this DateTime dateTime, FastFormatType fastFormatType = FastFormatType.ISO8601)
         {
             string result;
 
@@ -34,34 +29,21 @@ namespace LYLStudio.Core
                 case FastFormatType.DT15:
                     result = dateTime.ToString("yyyyMMddTHHmmss");
                     break;
+                case FastFormatType.ISO8601:
                 default:
-                    result = dateTime.ToString();
+                    result = dateTime.ToString("O");
                     break;
             }
 
             return result;
         }
 
-        public static int ToAge(this DateTime dateTime, DateTime? referDateTime = null)
-        {
-            DateTime dt = referDateTime ?? DateTime.Now;
-
-            int age = dt.Year - dateTime.Year;
-            if (dt.Month < dateTime.Month
-                || (dt.Month == dateTime.Month && dt.Day < dateTime.Day))
-            {
-                age--;
-            }
-
-            return age;
-        }
-
         public enum FastFormatType
         {
+            ISO8601,
             T6,
             D8,
             DT15,
         }
     }
-
 }

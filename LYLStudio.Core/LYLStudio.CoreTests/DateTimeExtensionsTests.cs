@@ -1,4 +1,5 @@
 ﻿using System;
+using LYLStudio.Core.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LYLStudio.Core.Tests
@@ -11,7 +12,7 @@ namespace LYLStudio.Core.Tests
         {
             DateTime dateTime = DateTime.Now;
             string manual = dateTime.ToString("HHmmss");
-            string extension = dateTime.ToTimeFormated();
+            string extension = dateTime.FormatT();
 
             Assert.AreEqual(manual, extension);
             //Assert.Fail();
@@ -22,18 +23,7 @@ namespace LYLStudio.Core.Tests
         {
             DateTime dateTime = DateTime.UtcNow;
             string manual = dateTime.ToString("yyyyMMdd");
-            string extension = dateTime.ToDateFormated();
-
-            Assert.AreEqual(manual, extension);
-            //Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void ToLogFormatTest()
-        {
-            DateTime dateTime = DateTime.Now;
-            string manual = dateTime.ToString("yyyyMMddHHmmss.fff");
-            string extension = dateTime.ToLogFormat();
+            string extension = dateTime.FormatD();
 
             Assert.AreEqual(manual, extension);
             //Assert.Fail();
@@ -44,7 +34,7 @@ namespace LYLStudio.Core.Tests
         {
             DateTime dateTime = DateTime.Now;
             string manual = dateTime.ToString("yyyyMMddTHHmmss");
-            string extension = dateTime.ToFastFormat(DateTimeExtensions.FastFormatType.DT15);
+            string extension = dateTime.ToFormat(DateTimeExtensions.FastFormatType.DT15);
 
             Assert.AreEqual(manual, extension);
             //Assert.Fail();

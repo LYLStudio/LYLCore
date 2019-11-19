@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core.Utility", "Core.Utilit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.Core.Net", "LYLStudio.Core.Net\LYLStudio.Core.Net.csproj", "{0996EA0B-4A0D-42C6-86CA-7E1B29BFEFA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.TestLibsApp", "LYLStudio.TestLibsApp\LYLStudio.TestLibsApp.csproj", "{FC6F3591-CE2A-46EC-A785-629DCE19E179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{0996EA0B-4A0D-42C6-86CA-7E1B29BFEFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0996EA0B-4A0D-42C6-86CA-7E1B29BFEFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0996EA0B-4A0D-42C6-86CA-7E1B29BFEFA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6F3591-CE2A-46EC-A785-629DCE19E179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6F3591-CE2A-46EC-A785-629DCE19E179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6F3591-CE2A-46EC-A785-629DCE19E179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6F3591-CE2A-46EC-A785-629DCE19E179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

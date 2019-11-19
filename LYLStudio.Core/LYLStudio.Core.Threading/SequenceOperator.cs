@@ -53,8 +53,8 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.Highest].TryDequeue(out IAnything<T> anything))
                         {
-                            payload = anything.Parameters;
-                            anything.AnythingAction(anything.Parameters);
+                            payload = anything.Parameter;
+                            anything.Callback(anything.Parameter);
                         }
                     }
                     catch (Exception ex)
@@ -68,8 +68,8 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.AboveNormal].TryDequeue(out IAnything<T> anything))
                         {
-                            payload = anything.Parameters;
-                            anything.AnythingAction(anything.Parameters);
+                            payload = anything.Parameter;
+                            anything.Callback(anything.Parameter);
                         }
                     }
                     catch (Exception ex)
@@ -83,8 +83,8 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.Normal].TryDequeue(out IAnything<T> anything))
                         {
-                            payload = anything.Parameters;
-                            anything.AnythingAction(anything.Parameters);
+                            payload = anything.Parameter;
+                            anything.Callback(anything.Parameter);
                         }
                     }
                     catch (Exception ex)
@@ -98,8 +98,8 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.BelowNormal].TryDequeue(out IAnything<T> anything))
                         {
-                            payload = anything.Parameters;
-                            anything.AnythingAction(anything.Parameters);
+                            payload = anything.Parameter;
+                            anything.Callback(anything.Parameter);
                         }
                     }
                     catch (Exception ex)
@@ -113,8 +113,8 @@ namespace LYLStudio.Core.Threading
                     {
                         if (_queueList[ThreadPriority.Lowest].TryDequeue(out IAnything<T> anything))
                         {
-                            payload = anything.Parameters;
-                            anything.AnythingAction(anything.Parameters);
+                            payload = anything.Parameter;
+                            anything.Callback(anything.Parameter);
                         }
                     }
                     catch (Exception ex)
@@ -147,7 +147,7 @@ namespace LYLStudio.Core.Threading
         {
             if (_isDisposed)
             {
-                ErrorProcess(new Exception("Instance Disposed"), anything.Parameters);
+                ErrorProcess(new Exception("Instance Disposed"), anything.Parameter);
                 return;
             }
 
@@ -158,7 +158,7 @@ namespace LYLStudio.Core.Threading
             }
             catch (Exception ex)
             {
-                ErrorProcess(ex, anything.Parameters);
+                ErrorProcess(ex, anything.Parameter);
             }
         }
 

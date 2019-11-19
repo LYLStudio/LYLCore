@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace LYLStudio.Core.Configuration
+﻿namespace LYLStudio.Core.Configuration
 {
+    using System.Collections.Generic;
+
     public interface IConfigurator<T>
         where T : IConfigItem
     {

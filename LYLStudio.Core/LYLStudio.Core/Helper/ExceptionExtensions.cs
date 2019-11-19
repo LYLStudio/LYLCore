@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace LYLStudio.Core
+﻿namespace LYLStudio.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class ExceptionExtensions
     {
         public static string GetAllMessages(this Exception exception)

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace LYLStudio.Core.Logging
+﻿namespace LYLStudio.Core.Logging
 {
+    using System;
+
     public interface ILogItem
     {
         DateTime Time { get; }

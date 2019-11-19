@@ -1,46 +1,46 @@
-﻿using System;
-
-namespace LYLStudio.Core.Threading
+﻿namespace LYLStudio.Core.Threading
 {
+    using System;
+
     public class Anything<T> : IAnything<T>
     {
-        public T Parameters { get; set; }
-        public Action<T> AnythingAction { get; set; }
+        public T Parameter { get; set; }
+        public Action<T> Callback { get; set; }
         
         public Anything()
         {
 
         }
 
-        public Anything(T parameters) : this()
+        public Anything(T parameter) : this()
         {
-            Parameters = parameters;
+            Parameter = parameter;
         }
 
-        public Anything(T parameters, Action<T> action) : this(parameters)
+        public Anything(T parameter, Action<T> callback) : this(parameter)
         {
-            AnythingAction = action;
+            Callback = callback;
         }      
     }
 
     public class Anything<T, IResult> : IAnything<T, IResult>
     {
-        public T Parameters { get; set; }
-        public Func<T, IResult> AnythingFunc { get; set; }
+        public T Parameter { get; set; }
+        public Func<T, IResult> Callback { get; set; }
 
         public Anything()
         {
 
         }
 
-        public Anything(T parameters) : this()
+        public Anything(T parameter) : this()
         {
-            Parameters = parameters;
+            Parameter = parameter;
         }
 
-        public Anything(T parameters, Func<T, IResult> func): this(parameters)
+        public Anything(T parameter, Func<T, IResult> callback): this(parameter)
         {
-            AnythingFunc = func;
+            Callback = callback;
         }
     }
 }

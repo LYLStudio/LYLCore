@@ -43,18 +43,19 @@
   <ItemGroup>
     <Compile Include="Configuration\IConfigItem.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
+    <Compile Include="Helper\AgeExtensions.cs" />
     <Compile Include="Helper\DateTimeExtensions.cs" />
     <Compile Include="Helper\FileIOHelper.cs" />
     <Compile Include="Helper\MathCompareExtensions.cs" />
     <Compile Include="EventArgsBase.cs" />
     <Compile Include="Helper\ExceptionExtensions.cs" />
     <Compile Include="Helper\BinaryStringHelper.cs" />
+    <Compile Include="IAnything.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILogItem.cs" />
     <Compile Include="Logging\LoggerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultBase.cs" />
     <Compile Include="Structures\GroupEnumerable.cs" />
     <Compile Include="Structures\INode.cs" />
   </ItemGroup>

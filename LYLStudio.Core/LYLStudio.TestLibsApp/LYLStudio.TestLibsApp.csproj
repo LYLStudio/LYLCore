@@ -4,28 +4,30 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LYLStudio.Core.Threading</RootNamespace>
-    <AssemblyName>LYLStudio.Core.Threading</AssemblyName>
+    <ProjectGuid>{FC6F3591-CE2A-46EC-A785-629DCE19E179}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LYLStudio.TestLibsApp</RootNamespace>
+    <AssemblyName>LYLStudio.TestLibsApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Build\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Build\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,19 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Anything.cs" />
-    <Compile Include="DistributeOperator.cs" />
-    <Compile Include="Interfaces\IDistributeOperator.cs" />
-    <Compile Include="Interfaces\IOperator.cs" />
-    <Compile Include="OperatorEventArgs.cs" />
-    <Compile Include="SequenceOperator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThreadResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LYLStudio.Core.Threading\LYLStudio.Core.Threading.csproj">
+      <Project>{45DE7042-15C7-4066-A57E-6FACBDDFD0C5}</Project>
+      <Name>LYLStudio.Core.Threading</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LYLStudio.Core\LYLStudio.Core.csproj">
       <Project>{58aae7c0-2dc1-4b7a-97be-9ec15bd6ed98}</Project>
       <Name>LYLStudio.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LYLStudio.Utilities\LYLStudio.Utilities.csproj">
+      <Project>{B8D8221E-259C-4110-8D0B-79DFB42CCAF6}</Project>
+      <Name>LYLStudio.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

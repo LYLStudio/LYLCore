@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-
-namespace LYLStudio.Core
+﻿namespace LYLStudio.Core
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+
     public class BinaryStringHelper
     {
         /// <summary>
@@ -46,12 +46,40 @@ namespace LYLStudio.Core
         /// </summary>
         /// <param name="hex">HEX string</param>
         /// <returns>byte array</returns>
-        public static byte[] StringToByteArray(string hex)
+        public static byte[] HexStringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
                              .Where(x => x % 2 == 0)
                              .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                              .ToArray();
+        }
+    }
+}
+
+namespace LYLStudio.Core.Helper
+{
+    public static class BinaryStringExtensions
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        public static byte[] ToByteArray(this string hex)
+        {
+            return BinaryStringHelper.HexStringToByteArray(hex);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="bytesPerLine"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string ToHexString(this byte[] buffer, int bytesPerLine = 16, string separator = "")
+        {
+            return BinaryStringHelper.ByteArrayToHexString(buffer, bytesPerLine, separator);
         }
     }
 }
