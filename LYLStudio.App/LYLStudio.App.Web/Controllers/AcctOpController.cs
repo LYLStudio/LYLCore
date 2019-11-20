@@ -10,11 +10,13 @@ namespace LYLStudio.App.Web.Controllers
     public class AcctOpController : Controller
     {
         // GET: AcctOp
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Index(BasicInfoViewModel model)
         {

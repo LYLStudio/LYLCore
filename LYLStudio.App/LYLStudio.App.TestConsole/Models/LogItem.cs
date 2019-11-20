@@ -1,6 +1,6 @@
 ﻿using System;
 
-using LYLStudio.Core.Logging;
+using LStudio.Core.Logging;
 
 namespace LYLStudio.App.TestConsole.Models
 {

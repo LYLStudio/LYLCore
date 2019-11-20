@@ -14,12 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Models", "LYL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Services", "LYLStudio.App.Services\LYLStudio.App.Services.csproj", "{5DB0C6F8-F824-42DC-BF56-4FA336EA93D4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RefLibs", "RefLibs", "{9D20F8E9-34E5-469C-8D6E-10C9CACD64EC}"
-	ProjectSection(SolutionItems) = preProject
-		..\RefLibs\LYLStudio.Core.dll = ..\RefLibs\LYLStudio.Core.dll
-		..\RefLibs\LYLStudio.Core.Threading.dll = ..\RefLibs\LYLStudio.Core.Threading.dll
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LYLStudio.App.Web", "LYLStudio.App.Web\LYLStudio.App.Web.csproj", "{E9B6967E-7A34-4FDB-90CF-35ED8B44C469}"
 	ProjectSection(ProjectDependencies) = postProject
 		{32D5F62B-72F3-479F-ADC6-975CEE1A1C88} = {32D5F62B-72F3-479F-ADC6-975CEE1A1C88}

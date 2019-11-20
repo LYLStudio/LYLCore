@@ -14,7 +14,7 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
 
     public interface IAccountOpeningService : IServiceBase<ServiceResult, BasicInfoOfNaturalPerson, ApplicationOfNaturalPerson>, IMiddleService
     {
-        
+
     }
 
     /// <summary>
@@ -32,8 +32,10 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Reject;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new ServiceResult();
-            result.Data = application;
+            var result = new ServiceResult
+            {
+                Data = application
+            };
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
             else if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Success)
@@ -54,8 +56,10 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Success;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new ServiceResult();
-            result.Data = application;
+            var result = new ServiceResult
+            {
+                Data = application
+            };
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
             else if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Success)
@@ -88,8 +92,10 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
             application.ApprovedResult = Models.ApprovedResultTypeEnum.Reject;
             application.ApprovedTime = DateTime.Now;
 
-            var result = new ServiceResult();
-            result.Data = application;
+            var result = new ServiceResult
+            {
+                Data = application
+            };
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
             else if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Success)
@@ -107,13 +113,17 @@ namespace LYLStudio.App.Middle.Services.AccountOpening.NaturalPerson
         /// <returns></returns>
         public ServiceResult Query(BasicInfoOfNaturalPerson basicInfo)
         {
-            var application = new ApplicationOfNaturalPerson();
-            application.ApprovedResult = Models.ApprovedResultTypeEnum.Success;
-            application.ApprovedTime = DateTime.Now;
-            application.BasicInfo = basicInfo;
+            var application = new ApplicationOfNaturalPerson
+            {
+                ApprovedResult = Models.ApprovedResultTypeEnum.Success,
+                ApprovedTime = DateTime.Now,
+                BasicInfo = basicInfo
+            };
 
-            var result = new ServiceResult();
-            result.Data = application;
+            var result = new ServiceResult
+            {
+                Data = application
+            };
             if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Reject)
                 result.Status = OpeningStatusEnum.Reject;
             else if (application.ApprovedResult == Models.ApprovedResultTypeEnum.Success)

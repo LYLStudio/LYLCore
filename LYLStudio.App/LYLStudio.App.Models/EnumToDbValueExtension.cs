@@ -2,7 +2,7 @@
 
 namespace LYLStudio.App.Models
 {
-    public class DBValueAttribute : Attribute
+    public sealed class DBValueAttribute : Attribute
     {
         public string DbValue { get; }
         public DBValueAttribute(string DbValue)
@@ -11,7 +11,7 @@ namespace LYLStudio.App.Models
         }
     }
 
-    public class EnumMappingHelper
+    public static class EnumMappingHelper
     {
 
         public static string GetDBValue<T>(T enumeration)
@@ -26,7 +26,7 @@ namespace LYLStudio.App.Models
         {
             //todo
             var result = default(T);
-            var attributeType = typeof(A);
+            _ = typeof(A);
             if (default(T).GetType().IsEnum)
             {
                 var fields = default(T).GetType().GetFields();

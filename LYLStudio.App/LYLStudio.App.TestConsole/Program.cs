@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
+using LStudio.Core;
+using LStudio.Core.Data.EF;
+using LStudio.Core.Logging;
+using LStudio.Core.Threading;
+using LYLStudio.App.Services;
+using LYLStudio.App.Services.Communication;
+using LYLStudio.App.TestConsole.AccountOpening.NaturalPerson;
 using LYLStudio.App.TestConsole.Models;
 using LYLStudio.App.TestConsole.Services;
-using LYLStudio.Core;
-using LYLStudio.Core.Logging;
-using LYLStudio.Core.Threading;
-using LYLStudio.App.TestConsole.AccountOpening.NaturalPerson;
-using System.Collections.Generic;
-using LYLStudio.App.Services.Communication;
-using System.Net;
-using LYLStudio.App.Services;
 
 namespace LYLStudio.App.TestConsole
 {
@@ -47,32 +49,43 @@ namespace LYLStudio.App.TestConsole
     //    }
     //}
 
-    class Program
+    internal class Program
     {
-        static readonly string logTarget = Path.Combine(Properties.Settings.Default.LOG_PATH, $"{DateTime.Today.ToDateFormated()}.log");
-        static readonly LogginService logSvc = new LogginService(new SequenceOperator<ILogItem[]>(nameof(LogginService)));
-        static async System.Threading.Tasks.Task Main(string[] args)
+        private static readonly string logTarget = Path.Combine(Properties.Settings.Default.LOG_PATH, $"{DateTime.Today.FormatD()}.log");
+        private static readonly LogginService logSvc = new LogginService(new SequenceOperator<ILogItem[]>(nameof(LogginService)));
+
+        private static void Main(string[] args)
         {
+            if (!(args is null))
+            {
+                //todo something
+                Console.WriteLine("");
+            }
+
             logSvc.Callback = (target, log) =>
             {
                 foreach (var item in log)
                 {
-                    Console.WriteLine($"{item.Time.ToLogFormat()},{item.Message},{item.Error?.GetAllMessages()}");
+                    Console.WriteLine($"{item.Time.ToLogTime()},{item.Message}");
                 }
             };
             logSvc.Log(logTarget, new LogItem("START!!"));
-            var seqOperator = new SequenceOperator<string>(nameof(TestModelService));
+            var dataManager = new DataServiceManager();
+            dataManager.DbLog = (log) => { Debug.WriteLine(log); };
+            dataManager.AddDbContext(new DbContextFactory("TestEntities", "TestEntities"));
+            var db = dataManager.GetContext("TestEntities");
+
+            var seqOperator = new SequenceOperator<string>(nameof(dataManager));
             seqOperator.OperationOccurred += SeqOperator_OperationOccurred;
             seqOperator.Enqueue(new Anything<string>()
             {
-                AnythingAction = o =>
+                Callback = o =>
                 {
-                    using (var svc = new TestModelService())
-                    {
-                        var result = svc.Create(new Account() { Id = 1, Name = "aaaa" });
-                        logSvc.Log(logTarget, new LogItem($"{result.Id}|{result.IsSuccess}|{result.Message}") { Error = result.Error });
-                    }
+                    var dd = DateTime.Now.ToLogTime();
+                    var r1 = db.Create(new Account() { Id = 2, Data = dd, Name = dd });
+                    var r2 = db.Save();
 
+                    logSvc.Log(logTarget, new LogItem($"{r1.Id}|{r1.IsSuccess}|{r1.Message}") { Error = r1.ResultException });
                 }
             });
 
@@ -103,9 +116,7 @@ namespace LYLStudio.App.TestConsole
                 {
 
                 },
-                InvestigationReports = new InvestigationReport[]
-                {
-                },
+                InvestigationReports = Array.Empty<InvestigationReport>(),
             };
 
             //var svc = new ServiceClient();
@@ -119,7 +130,16 @@ namespace LYLStudio.App.TestConsole
             //result = await svc.CancelAsync(application);
             //Console.WriteLine(result.Message);
 
-            logSvc.Log(logTarget, new LogItem("END!!"));
+
+
+            try
+            {
+                Console.ReadLine();
+            }
+            finally
+            {
+                logSvc.Log(logTarget, new LogItem("END!!"));
+            }
 
             Console.ReadLine();
         }
@@ -128,7 +148,7 @@ namespace LYLStudio.App.TestConsole
         {
             if (e.HasError)
             {
-                logSvc.Log(logTarget, new LogItem($"{nameof(SeqOperator_OperationOccurred)}") { Error = e.EventResult.Error });
+                logSvc.Log(logTarget, new LogItem($"{nameof(SeqOperator_OperationOccurred)}") { Error = e.EventResult.ResultException });
             }
         }
     }

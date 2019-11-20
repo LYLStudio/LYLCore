@@ -17,7 +17,7 @@ namespace LYLStudio.App.Middle.Services.Logging
 
         public Action<string, IEnumerable<LogItem>> Callback { get; set; }
 
-        public LogServiceBase()
+        protected LogServiceBase()
         {
             _threadService = new ThreadService(nameof(LogServiceBase));
             _threadService.ExceptionOccurred += ExceptionOccurred;
@@ -29,23 +29,7 @@ namespace LYLStudio.App.Middle.Services.Logging
         {
             System.Diagnostics.Debug.WriteLine(e);
             LogExceptionOccurred?.Invoke(sender, e);
-        }
-
-        public void Dispose()
-        {
-            _threadService.Stop();
-            _threadService.Dispose();
-
-            if (Callback != null)
-            {
-                foreach (var deleg in Callback.GetInvocationList())
-                {
-                    Callback -= (Action<string, IEnumerable<LogItem>>)deleg;
-                }
-
-                Callback = null;
-            }
-        }
+        }       
 
         protected class ThreadService : IThreadService<Anything>
         {
@@ -187,10 +171,57 @@ namespace LYLStudio.App.Middle.Services.Logging
 
         }
 
-        protected class Anything : IAnything<LogItem[]>
+        protected class Anything : IAnything<List<LogItem>>
         {
-            public LogItem[] Parameter { get; set; }
-            public Action<LogItem[]> Callback { get; set; }
+            public List<LogItem> Parameter { get; set; }
+            public Action<List<LogItem>> Callback { get; set; }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // 偵測多餘的呼叫
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _threadService.Stop();
+                    _threadService.Dispose();
+
+                    if (Callback != null)
+                    {
+                        foreach (var deleg in Callback.GetInvocationList())
+                        {
+                            Callback -= (Action<string, IEnumerable<LogItem>>)deleg;
+                        }
+
+                        Callback = null;
+                    }
+                }
+
+                // TODO: 釋放 Unmanaged 資源 (Unmanaged 物件) 並覆寫下方的完成項。
+                // TODO: 將大型欄位設為 null。
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: 僅當上方的 Dispose(bool disposing) 具有會釋放 Unmanaged 資源的程式碼時，才覆寫完成項。
+        // ~LogServiceBase()
+        // {
+        //   // 請勿變更這個程式碼。請將清除程式碼放入上方的 Dispose(bool disposing) 中。
+        //   Dispose(false);
+        // }
+
+        // 加入這個程式碼的目的在正確實作可處置的模式。
+        public void Dispose()
+        {
+            // 請勿變更這個程式碼。請將清除程式碼放入上方的 Dispose(bool disposing) 中。
+            Dispose(true);
+            // TODO: 如果上方的完成項已被覆寫，即取消下行的註解狀態。
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
