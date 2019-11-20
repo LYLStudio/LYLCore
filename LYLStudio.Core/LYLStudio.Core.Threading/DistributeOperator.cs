@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace LYLStudio.Core.Threading
+﻿namespace LYLStudio.Core.Threading
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+
     public class DistributeOperator<T> : IDistributeOperator<T>
     {
         private int _distributeNumber;
@@ -51,14 +51,38 @@ namespace LYLStudio.Core.Threading
         public void Stop()
         {
             if (SequenceOperators == null || SequenceOperators.Count == 0) throw new ArgumentNullException(nameof(SequenceOperators));
-
             foreach (var item in SequenceOperators)
             {
                 item.Value.OperationOccurred -= SequenceOperator_OperationOccurred;
                 item.Value.Stop();
             }
-
-            SequenceOperators.Clear();
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // 偵測多餘的呼叫
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Stop();
+                    SequenceOperators?.Clear();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        // 加入這個程式碼的目的在正確實作可處置的模式。
+        public void Dispose()
+        {
+            // 請勿變更這個程式碼。請將清除程式碼放入上方的 Dispose(bool disposing) 中。
+            Dispose(true);
+            // TODO: 如果上方的完成項已被覆寫，即取消下行的註解狀態。
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

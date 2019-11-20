@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace LYLStudio.Utilities.Security
+﻿namespace LYLStudio.Utilities
 {
-    public class EncryptionHelper
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    public class SecurityHelper
     {
         //private static byte[] keyAndIvBytes;
 
@@ -47,25 +47,30 @@ namespace LYLStudio.Utilities.Security
             return ByteArrayToHexString(AesEncrypt(plaintext, keyAndIv));
         }
 
-        public static string AesDecrypt(Byte[] inputBytes, KeyAndIv keyAndIv)
+        public static string AesDecrypt(byte[] inputBytes, KeyAndIv keyAndIv)
         {
             if (inputBytes == null) throw new NotImplementedException(nameof(inputBytes));
             if (keyAndIv == null) throw new NotImplementedException(nameof(keyAndIv));
 
 
-            Byte[] outputBytes = inputBytes;
+            byte[] outputBytes = inputBytes;
 
             string plaintext = string.Empty;
 
             using (MemoryStream memoryStream = new MemoryStream(outputBytes))
             {
-                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, GetCryptoAlgorithm().CreateDecryptor(keyAndIv.Key, keyAndIv.IV), CryptoStreamMode.Read))
+                var algorithm = GetCryptoAlgorithm();
+                var crypto = algorithm.CreateDecryptor(keyAndIv.Key, keyAndIv.IV);
+
+                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, crypto, CryptoStreamMode.Read))
                 {
                     using (StreamReader srDecrypt = new StreamReader(cryptoStream))
                     {
                         plaintext = srDecrypt.ReadToEnd();
                     }
                 }
+
+                algorithm.Dispose();
             }
 
             return plaintext;
@@ -81,13 +86,18 @@ namespace LYLStudio.Utilities.Security
             byte[] result = null;
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, GetCryptoAlgorithm().CreateEncryptor(keyAndIv.Key, keyAndIv.IV), CryptoStreamMode.Write))
+                var algorithm = GetCryptoAlgorithm();
+                var crypto = algorithm.CreateEncryptor(keyAndIv.Key, keyAndIv.IV);
+
+                using (CryptoStream cryptoStream = new CryptoStream(memoryStream, crypto, CryptoStreamMode.Write))
                 {
                     cryptoStream.Write(inputBytes, 0, inputBytes.Length);
                     cryptoStream.FlushFinalBlock();
 
                     result = memoryStream.ToArray();
                 }
+
+                algorithm.Dispose();
             }
 
             return result;
@@ -96,7 +106,7 @@ namespace LYLStudio.Utilities.Security
 
         private static RijndaelManaged GetCryptoAlgorithm()
         {
-            RijndaelManaged algorithm = new RijndaelManaged
+            return new RijndaelManaged
             {
                 //set the mode, padding and block size
                 Padding = PaddingMode.PKCS7,
@@ -104,7 +114,6 @@ namespace LYLStudio.Utilities.Security
                 KeySize = 256,
                 BlockSize = 128
             };
-            return algorithm;
         }
     }
 }

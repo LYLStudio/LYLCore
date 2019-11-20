@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace LYLStudio.Core.Threading
+﻿namespace LYLStudio.Core.Threading
 {
-    public class SequenceOperator<T> : IOperator<T>, IDisposable
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Threading;
+
+    public class SequenceOperator<T> : IOperator<T>
     {
         private bool _isDisposed = false;
         private AutoResetEvent _resetEvent;
@@ -45,7 +45,7 @@ namespace LYLStudio.Core.Threading
         {
             while (true && !_isDisposed)
             {
-                T payload = default(T);
+                T payload = default;
 
                 if (!_queueList[ThreadPriority.Highest].IsEmpty)
                 {
@@ -131,7 +131,7 @@ namespace LYLStudio.Core.Threading
             }
         }
 
-        private void ErrorProcess(Exception ex, T payload = default(T))
+        private void ErrorProcess(Exception ex, T payload = default)
         {
             IResult result = new ThreadResult<T>(true)
             {

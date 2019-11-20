@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace LYLStudio.Utilities.ObjectOperation
+﻿namespace LYLStudio.Core.Helper
 {
-    public class ClassHelper
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    public class ObjectHelper
     {
         /// <summary>
         /// 可複製來自不同物件同屬性名稱之屬性值
@@ -161,7 +161,7 @@ namespace LYLStudio.Utilities.ObjectOperation
             System.Reflection.PropertyInfo propertyInfo = type.GetProperty(propertyName);
 
             //find the property type
-            Type propertyType = propertyInfo.PropertyType;
+            _ = propertyInfo.PropertyType;
 
             //Convert.ChangeType does not handle conversion to nullable types
             //if the property type is nullable, we need to get the underlying type of the property

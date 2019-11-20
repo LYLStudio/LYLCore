@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
-
-namespace LYLStudio.Utilities.ObjectOperation
+﻿namespace LYLStudio.Core.Helper
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    
     public static class ObjectExtensions
     {
         /// <summary>
@@ -23,7 +22,7 @@ namespace LYLStudio.Utilities.ObjectOperation
             where TSrc : class
             where TDest : class
         {
-            ClassHelper.CopyPropeties(src, dest, skipSrcNull, skipDestNull, excludeProeprties);
+            ObjectHelper.CopyPropeties(src, dest, skipSrcNull, skipDestNull, excludeProeprties);
         }
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace LYLStudio.Utilities.ObjectOperation
             where TSrc : class
             where TDest : class
         {
-            ClassHelper.CopyPropeties(src, dest, skipSrcNull, skipDestNull, excludeProeprties);
+            ObjectHelper.CopyPropeties(src, dest, skipSrcNull, skipDestNull, excludeProeprties);
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace LYLStudio.Utilities.ObjectOperation
         public static void OverridePropertiesTo<TSrc, TDest>(this TSrc src, TDest dest)
             where TDest : class, TSrc
         {
-            ClassHelper.OverrideProperties(src, dest);
+            ObjectHelper.OverrideProperties(src, dest);
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace LYLStudio.Utilities.ObjectOperation
         public static void OverridePropertiesFrom<TDest, TSrc>(this TDest dest, TSrc src)
             where TDest : class, TSrc
         {
-            ClassHelper.OverrideProperties(src, dest);
+            ObjectHelper.OverrideProperties(src, dest);
         }
 
         /// <summary>
@@ -77,7 +76,7 @@ namespace LYLStudio.Utilities.ObjectOperation
         /// <param name="callback">Callback函式</param>
         public static void ForEachProperty<T>(this T obj, Action<KeyValuePair<object, object>> callback)
         {
-            ClassHelper.ForEachProperty(obj, callback);
+            ObjectHelper.ForEachProperty(obj, callback);
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace LYLStudio.Utilities.ObjectOperation
         /// <param name="callback">Callback函式</param>
         public static void ForEachProperty<T>(this T obj, Action<PropertyInfo, KeyValuePair<object, object>> callback)
         {
-            ClassHelper.ForEachProperty(obj, callback);
+            ObjectHelper.ForEachProperty(obj, callback);
         }
 
 
@@ -104,13 +103,12 @@ namespace LYLStudio.Utilities.ObjectOperation
         {
             using (MemoryStream memory = new MemoryStream())
             {
-                XmlSerializer xs = new XmlSerializer(model.GetType());
+                System.Xml.Serialization.XmlSerializer xs = new System.Xml.Serialization.XmlSerializer(model.GetType());
                 xs.Serialize(memory, model);
                 var array = memory.ToArray();
                 return array;
             }
         }
-
 
         //public static TDest CloneByJson<TDest, TSrc>(this TSrc source)
         //{

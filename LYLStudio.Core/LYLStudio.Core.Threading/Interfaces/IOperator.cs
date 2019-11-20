@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading;
-
-namespace LYLStudio.Core.Threading
+﻿namespace LYLStudio.Core.Threading
 {
-    public interface IOperator<T>
+    using System;
+    using System.Threading;
+
+    public interface IOperator<T> : IDisposable
     {
         string Id { get; }
 

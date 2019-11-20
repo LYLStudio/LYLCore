@@ -6,7 +6,7 @@
     {
         public static string FormatT(this DateTime dateTime, string separator = "")
         {
-            return dateTime.ToString($"HH{separator}mm{separator}");
+            return dateTime.ToString($"HH{separator}mm{separator}ss");
         }
 
         public static string FormatD(this DateTime dateTime, string separator = "")

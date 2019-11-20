@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-
-namespace LYLStudio.Utilities.Compression
+﻿namespace LYLStudio.Utilities
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
+
     public static class CompressionHelper
     {
         /// <summary>
@@ -151,7 +150,7 @@ namespace LYLStudio.Utilities.Compression
                     //Throws an error if the file exists
                     if (archiveExists)
                     {
-                        throw new IOException(String.Format("The zip file {0} already exists.", archiveFullName));
+                        throw new IOException(string.Format("The zip file {0} already exists.", archiveFullName));
                     }
                     break;
                 case ArchiveAction.Ignore:
