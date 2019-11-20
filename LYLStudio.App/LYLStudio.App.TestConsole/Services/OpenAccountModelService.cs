@@ -21,5 +21,11 @@ namespace LYLStudio.App.TestConsole.Services
             }
         }
         public override Action<string> Log { get; set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _context?.Dispose();
+        }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LYLStudio.App.Services.Communication
 {
@@ -15,16 +12,17 @@ namespace LYLStudio.App.Services.Communication
     // is continued until the client disconnects.
     public class Server
     {
-        private int m_numConnections;   // the maximum number of connections the sample is designed to handle simultaneously 
-        private int m_receiveBufferSize;// buffer size to use for each socket I/O operation 
-        BufferManager m_bufferManager;  // represents a large reusable set of buffers for all socket operations
-        const int opsToPreAlloc = 2;    // read, write (don't alloc buffer space for accepts)
-        Socket listenSocket;            // the socket used to listen for incoming connection requests
-                                        // pool of reusable SocketAsyncEventArgs objects for write, read and accept socket operations
-        SocketAsyncEventArgsPool m_readWritePool;
-        int m_totalBytesRead;           // counter of the total # bytes received by the server
-        int m_numConnectedSockets;      // the total number of clients connected to the server 
-        Semaphore m_maxNumberAcceptedClients;
+        private readonly int m_numConnections;   // the maximum number of connections the sample is designed to handle simultaneously 
+        private readonly int m_receiveBufferSize;// buffer size to use for each socket I/O operation 
+        private readonly BufferManager m_bufferManager;  // represents a large reusable set of buffers for all socket operations
+        private const int opsToPreAlloc = 2;    // read, write (don't alloc buffer space for accepts)
+        private Socket listenSocket;            // the socket used to listen for incoming connection requests
+                                                // pool of reusable SocketAsyncEventArgs objects for write, read and accept socket operations
+
+        private readonly SocketAsyncEventArgsPool m_readWritePool;
+        private int m_totalBytesRead;           // counter of the total # bytes received by the server
+        private int m_numConnectedSockets;      // the total number of clients connected to the server 
+        private readonly Semaphore m_maxNumberAcceptedClients;
 
         // Create an uninitialized server instance.  
         // To start the server listening for connection requests
@@ -91,7 +89,7 @@ namespace LYLStudio.App.Services.Communication
             listenSocket.Listen(100);
 
             // post accepts on the listening socket
-             StartAccept(null);
+            StartAccept(null);
 
             //Console.WriteLine("{0} connected sockets with one outstanding receive posted to each....press any key", m_outstandingReadCount);
             Console.WriteLine("Press any key to terminate the server process....");
@@ -127,7 +125,7 @@ namespace LYLStudio.App.Services.Communication
         // This method is the callback method associated with Socket.AcceptAsync 
         // operations and is invoked when an accept operation is complete
         //
-        void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs e)
+        private void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs e)
         {
             ProcessAccept(e);
         }
@@ -157,7 +155,7 @@ namespace LYLStudio.App.Services.Communication
         // This method is called whenever a receive or send operation is completed on a socket 
         //
         // <param name="e">SocketAsyncEventArg associated with the completed receive operation</param>
-        void IO_Completed(object sender, SocketAsyncEventArgs e)
+        private void IO_Completed(object sender, SocketAsyncEventArgs e)
         {
             // determine which type of operation just completed and call the associated handler
             switch (e.LastOperation)
@@ -252,15 +250,15 @@ namespace LYLStudio.App.Services.Communication
 
     }
 
-    class AsyncUserToken
+    internal class AsyncUserToken
     {
         public Socket Socket { get; set; }
     }
 
     // Represents a collection of reusable SocketAsyncEventArgs objects.  
-    class SocketAsyncEventArgsPool
+    internal class SocketAsyncEventArgsPool
     {
-        Stack<SocketAsyncEventArgs> m_pool;
+        private readonly Stack<SocketAsyncEventArgs> m_pool;
 
         // Initializes the object pool to the specified size
         //
@@ -309,13 +307,13 @@ namespace LYLStudio.App.Services.Communication
     // fragmenting heap memory.
     // 
     // The operations exposed on the BufferManager class are not thread safe.
-    class BufferManager
+    internal class BufferManager
     {
-        int m_numBytes;                 // the total number of bytes controlled by the buffer pool
-        byte[] m_buffer;                // the underlying byte array maintained by the Buffer Manager
-        Stack<int> m_freeIndexPool;     // 
-        int m_currentIndex;
-        int m_bufferSize;
+        private readonly int m_numBytes;                 // the total number of bytes controlled by the buffer pool
+        private byte[] m_buffer;                // the underlying byte array maintained by the Buffer Manager
+        private readonly Stack<int> m_freeIndexPool;     // 
+        private int m_currentIndex;
+        private readonly int m_bufferSize;
 
         public BufferManager(int totalBytes, int bufferSize)
         {

@@ -15,7 +15,7 @@ namespace LYLStudio.App.Middle.Services.Logging.TextFile
                 {
                     var anything = new Anything
                     {
-                        Parameter = logs.ToArray(),
+                        Parameter = logs.ToList(),
                         Callback = (i) =>
                         {
                             using (var sw = new StreamWriter(loc, true))

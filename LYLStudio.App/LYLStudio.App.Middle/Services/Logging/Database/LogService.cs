@@ -20,7 +20,7 @@ namespace LYLStudio.App.Middle.Services.Logging.Database
                 {
                     var anything = new Anything
                     {
-                        Parameter = logs.ToArray(),
+                        Parameter = logs.ToList(),
                         Callback = (i) =>
                         {
                            //TODO: 

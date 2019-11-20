@@ -12,19 +12,19 @@ namespace LYLStudio.App.Middle.Svc.AccountOpening
     public interface IService : IAccountOpeningService
     {
         [OperationContract]
-        ServiceResult Apply(ApplicationOfNaturalPerson application);
+        new ServiceResult Apply(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        ServiceResult Cancel(ApplicationOfNaturalPerson application);
+        new ServiceResult Cancel(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        ServiceResult Keep(ApplicationOfNaturalPerson application);
+        new ServiceResult Keep(ApplicationOfNaturalPerson application);
 
         [OperationContract]
-        ServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
+        new ServiceResult Query(BasicInfoOfNaturalPerson basicInfo);
 
         [OperationContract]
-        ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
+        new ServiceChecking CheckService(CheckTypeEnum checkType = CheckTypeEnum.None);
     }
     
     public class Service : IService

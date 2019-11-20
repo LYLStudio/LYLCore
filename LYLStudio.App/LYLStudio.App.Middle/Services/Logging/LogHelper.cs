@@ -6,7 +6,7 @@ using System.IO;
 
 namespace LYLStudio.App.Middle.Services.Logging
 {
-    public class LogHelper
+    public static class LogHelper
     {
         private static Dictionary<TargetEnum, ILogService> _loggers = null;
         public static Dictionary<TargetEnum, ILogService> Loggers

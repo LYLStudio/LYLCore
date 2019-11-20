@@ -49,15 +49,21 @@ namespace LYLStudio.App.TestConsole
 
     class Program
     {
-        static readonly string logTarget = Path.Combine(Properties.Settings.Default.LOG_PATH, $"{DateTime.Today.ToDateFormated()}.log");
+        static readonly string logTarget = Path.Combine(Properties.Settings.Default.LOG_PATH, $"{DateTime.Today.FormatD()}.log");
         static readonly LogginService logSvc = new LogginService(new SequenceOperator<ILogItem[]>(nameof(LogginService)));
-        static async System.Threading.Tasks.Task Main(string[] args)
+        static void Main(string[] args)
         {
+            if (!(args is null))
+            {
+                //todo something
+                Console.WriteLine("");
+            }
+
             logSvc.Callback = (target, log) =>
             {
                 foreach (var item in log)
                 {
-                    Console.WriteLine($"{item.Time.ToLogFormat()},{item.Message},{item.Error?.GetAllMessages()}");
+                    Console.WriteLine($"{item.Time.ToFormat()},{item.Message},{item.Error?.GetAllMessages()}");
                 }
             };
             logSvc.Log(logTarget, new LogItem("START!!"));
@@ -65,7 +71,7 @@ namespace LYLStudio.App.TestConsole
             seqOperator.OperationOccurred += SeqOperator_OperationOccurred;
             seqOperator.Enqueue(new Anything<string>()
             {
-                AnythingAction = o =>
+                Callback = o =>
                 {
                     using (var svc = new TestModelService())
                     {
@@ -103,9 +109,7 @@ namespace LYLStudio.App.TestConsole
                 {
 
                 },
-                InvestigationReports = new InvestigationReport[]
-                {
-                },
+                InvestigationReports = Array.Empty<InvestigationReport>(),
             };
 
             //var svc = new ServiceClient();
