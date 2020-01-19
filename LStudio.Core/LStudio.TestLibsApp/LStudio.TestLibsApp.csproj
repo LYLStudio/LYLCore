@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncryptionTest\Encryption.cs" />
+    <Compile Include="EncryptionTest\TestRun.cs" />
     <Compile Include="Models\RecordA.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>

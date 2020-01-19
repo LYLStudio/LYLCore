@@ -17,6 +17,11 @@
             Parameter = parameter;
         }
 
+        public Anything(Action<T> callback) : this()
+        {
+            Callback = callback;
+        }
+
         public Anything(T parameter, Action<T> callback) : this(parameter)
         {
             Callback = callback;
@@ -36,6 +41,11 @@
         public Anything(T parameter) : this()
         {
             Parameter = parameter;
+        }
+
+        public Anything(Func<T,TResult> callback) : this()
+        {
+            Callback = callback;
         }
 
         public Anything(T parameter, Func<T, TResult> callback): this(parameter)

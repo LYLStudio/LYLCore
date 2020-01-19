@@ -1,66 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+
 using LStudio.Core;
 using LStudio.Core.Data.EF;
 using LStudio.Core.Threading;
 using LStudio.TestLibsApp.Models;
 
 namespace LStudio.TestLibsApp
-{
-    internal class Program
+{    
+    class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
-            if (!(args is null) && args.Length > 0) { }
+            var encryptionPerformance = new EncryptionTest.TestRun();
+            encryptionPerformance.RunTestCase1();
 
-            var data = DateTime.Now;
-            var dataString = data.ToLogTime();
+            Console.ReadLine();
 
-            DataServiceManager svc = new DataServiceManager
-            {
-                DbLog = log => { Debug.WriteLine(log); }
-            };
+            encryptionPerformance.Dispose();
+            
+            //if (!(args is null) && args.Length > 0) { }
 
-            try
-            {
-                var test = "TestEntities";
-                svc.AddDbContext(new DbContextFactory(test, test));
-                var db = svc.GetContext(test);
-                svc.Commit(() =>
-                {
-                    var createResult = db.Create(new RecordA() { Id = data.ToLogTime(), Name = data.ToLogTime(), CreateTime = data });
-                    
-                },db.Context);
+            //var data = DateTime.Now;
+            //var dataString = data.ToLogTime();
 
-                var q = db.Fetch<RecordA>(o => o.Id.Equals(dataString, StringComparison.InvariantCulture));
-                q.ForEachProperty(nv =>
-                {
-                    Debug.Write($"{nv.Name}: {nv.Value}");
-                });
+            //DataServiceManager svc = new DataServiceManager
+            //{
+            //    DbLog = log => { Debug.WriteLine(log); }
+            //};
 
-                var deleteResult = (DataAccessResult<RecordA>)db.Delete(q);
-                if (!deleteResult.IsSaveChanged)
-                {
-                    db.Save();
-                    //svc.Commit(null, db.Context);
-                }
+            //try
+            //{
+            //    var test = "TestEntities";
+            //    svc.AddDbContext(new DbContextFactory(test, test));
+            //    var db = svc.GetContext(test);
+            //    svc.Commit(() =>
+            //    {
+            //        var createResult = db.Create(new RecordA() { Id = data.ToLogTime(), Name = data.ToLogTime(), CreateTime = data });
 
-                var isExist = db.IsExist<RecordA>(dataString);
-                Debug.WriteLine($"{nameof(isExist)}: {isExist}");
-                //svc.Commit(() => {
-                //    db.Save();
-                //});
-            }
-            catch (Exception ex)
-            {
+            //    },db.Context);
 
-            }
-            finally
-            {
-                svc.Dispose();
-            }
+            //    var q = db.Fetch<RecordA>(o => o.Id.Equals(dataString, StringComparison.InvariantCulture));
+            //    q.ForEachProperty(nv =>
+            //    {
+            //        Debug.Write($"{nv.Name}: {nv.Value}");
+            //    });
+
+            //    var deleteResult = (DataAccessResult<RecordA>)db.Delete(q);
+            //    if (!deleteResult.IsSaveChanged)
+            //    {
+            //        db.Save();
+            //        //svc.Commit(null, db.Context);
+            //    }
+
+            //    var isExist = db.IsExist<RecordA>(dataString);
+            //    Debug.WriteLine($"{nameof(isExist)}: {isExist}");
+            //    //svc.Commit(() => {
+            //    //    db.Save();
+            //    //});
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+            //finally
+            //{
+            //    svc.Dispose();
+            //}
 
             //IOperator<string> op1 = new SequenceOperator<string>("ttt1", sleep: 1000);
             //IOperator<string> op2 = new SequenceOperator<string>("ttt2", sleep: 100);
@@ -112,6 +121,8 @@ namespace LStudio.TestLibsApp
             //tmpResult.Add(new SampleResult(parentId: result.Id));
             //result.ForEachProperty(ProperitesDebugInfo);
         }
+
+       
 
         private static void Svc_DataServiceEventOccurred(object sender, Core.Data.EF.DataEventArgs e)
         {

@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Validation;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
@@ -61,6 +63,10 @@
                     (result as DataAccessResult<T>).Payload = Context.Set<T>().Remove(obj);
                     result.IsSuccess = true;
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
             }
             catch (Exception ex)
             {
@@ -226,9 +232,29 @@
                 result.Payload = Context.SaveChanges();
                 result.IsSuccess = result.IsSaveChanged = true;
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                result.ResultException = ex;
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (DbUpdateException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (NotSupportedException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
             }
 
             return result;
@@ -243,10 +269,48 @@
                 result.Payload = await Context.SaveChangesAsync().ConfigureAwait(false);
                 result.IsSuccess = result.IsSaveChanged = true;
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                result.ResultException = ex;
+                return PublishExceptionInfo(ex, ex.Message);
             }
+            catch (DbUpdateException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (NotSupportedException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return PublishExceptionInfo(ex, ex.Message);
+            }
+
+            return result;
+        }
+
+        private IResult PublishExceptionInfo<T>(T exception, string message)
+        {
+            var result = new DataAccessResult<T>()
+            {
+                Payload = exception,
+                Message = message
+            };
+
+            var eventArgs = new DataEventArgs()
+            {
+                EventResult = result
+            };
+
+            OnDataServiceEventOccurred(this, eventArgs);
 
             return result;
         }
