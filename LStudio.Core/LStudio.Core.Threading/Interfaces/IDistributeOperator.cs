@@ -6,6 +6,6 @@ namespace LStudio.Core.Threading
     {
         IDictionary<int, IOperator<T>> SequenceOperators { get; }
 
-        void Initialize(int threadCount = 2);        
+        void Initialize(int threadCount = 2);
     }
 }

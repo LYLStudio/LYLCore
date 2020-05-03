@@ -185,7 +185,7 @@
                 {
                     _resetEvent?.Dispose();
                     _resetEvent = null;
-                }                
+                }
             }
         }
 

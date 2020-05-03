@@ -13,6 +13,6 @@
 
         event EventHandler<OperatorEventArgs> OperationOccurred;
 
-        void Enqueue(IAnything<T> anything, ThreadPriority priority = ThreadPriority.Normal);        
+        void Enqueue(IAnything<T> anything, ThreadPriority priority = ThreadPriority.Normal);
     }
 }

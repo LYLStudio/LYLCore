@@ -71,7 +71,7 @@
                 {
                     Stop();
                     SequenceOperators?.Clear();
-                    SequenceOperators = null; 
+                    SequenceOperators = null;
                 }
                 _disposedValue = true;
             }
